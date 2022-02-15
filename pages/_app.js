@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:title" content="Mag🔥Lit" />
         <meta
           property="og:description"
-          content="Encrypted & Privacy Respecting Magnet/HTTP(s) Link Shortener"
+          content="A Free and Open Source Encrypted Privacy Respecting Magnet/HTTP(s) Link Shortener"
         />
         <meta property="og:url" content="https://maglit.ml/" />
         <meta property="og:type" content="website" />
@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
         />
         <meta
           property="twitter:description"
-          content="Encrypted & Privacy Respecting Magnet/HTTP(s) Link Shortener"
+          content="A Free and Open Source Encrypted Privacy Respecting Magnet/HTTP(s) Link Shortener"
         />
         <meta property="twitter:url" content="https://maglit.ml/" />
         <meta
