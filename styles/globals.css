@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate {
+    @apply transition-all duration-500 ease-in-out;
+  }
+}
