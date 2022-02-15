@@ -62,7 +62,7 @@ const Navbar = () => {
           <p className="font-medium">Contact</p>
         </a>
         <a
-          href="https://github.com/maglit/maglit"
+          href="https://github.com/NayamAmarshe/MagLit"
           className="animate flex flex-col items-center justify-center hover:text-black/50 focus:text-black/50"
           target="_blank"
           rel="noreferrer"
