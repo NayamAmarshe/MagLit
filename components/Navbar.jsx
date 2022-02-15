@@ -18,14 +18,15 @@ const Navbar = () => {
       } `}
     >
       <button
-        className="animate fixed top-5 right-5 z-50 text-xl text-slate-400 hover:text-red-500 focus:text-red-500 md:text-3xl"
+        className="animate absolute top-5 right-5 z-50 text-xl text-slate-400 hover:text-red-500 focus:text-red-500 md:text-3xl"
         onClick={() => {
           setNavbarOpen(!navbarOpen);
         }}
       >
         <BsFillXCircleFill />
       </button>
-      <div className="mt-20 mb-10 flex flex-col items-center justify-center gap-5 md:mb-20 md:mt-20 md:gap-10">
+      <p className="mt-20 text-center text-lg font-bold">FAQ</p>
+      <div className="mb-10 flex h-[70vh] flex-col items-center gap-5 overflow-y-scroll md:mb-20 md:gap-10">
         <MenuCard
           heading="The hell is this? 🤔"
           content="MagLit is an encrypted and privacy respecting Link Shortener service

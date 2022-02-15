@@ -44,6 +44,7 @@ function MyApp({ Component, pageProps }) {
           property="twitter:image"
           content="https://maglit.ml/twitter-image.png"
         />
+        <meta name="theme-color" content="#fcd34d" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CounterAnalytics />
