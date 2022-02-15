@@ -1,10 +1,13 @@
 # Mag🔥Lit
 
-Mag🔥Lit - A super fast and easy-to-use private encrypted Magnet/HTTP(s) Link Shortener
+Mag🔥Lit - A super fast and easy-to-use free and open source private encrypted Magnet/HTTP(s) Link Shortener
+
+### https://maglit.ml
 
 ## Features
 
 ✅ 100% Easy to use\
+✅ 100% Free and Open Source\
 ✅ 100% Encrypted\
 ✅ 100% Private\
 ✅ 0% Personal Data stored
