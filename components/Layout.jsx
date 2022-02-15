@@ -1,8 +1,9 @@
 import { useRecoilState } from "recoil";
 import { navbarState } from "../atoms/navbarAtom";
 import { BsFillGridFill } from "react-icons/bs";
-import React from "react";
+import Script from "next/script";
 import Navbar from "./Navbar";
+import React from "react";
 
 const Layout = ({ children }) => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
@@ -28,6 +29,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
       <script
+        defer
         data-name="BMC-Widget"
         data-cfasync="false"
         src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
