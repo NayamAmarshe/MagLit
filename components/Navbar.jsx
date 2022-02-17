@@ -18,14 +18,14 @@ const Navbar = () => {
       } `}
     >
       <button
-        className="animate absolute top-5 right-5 z-50 text-xl text-slate-400 hover:text-red-500 focus:text-red-500 md:text-3xl"
+        className="animate absolute top-5 right-5 z-30 text-xl text-slate-400 hover:text-red-500 focus:text-red-500 md:text-3xl"
         onClick={() => {
           setNavbarOpen(!navbarOpen);
         }}
       >
         <BsFillXCircleFill />
       </button>
-      <p className="mt-20 text-center text-lg font-bold">FAQ</p>
+      <p className="mt-20 text-center text-2xl font-bold">FAQ</p>
       <div className="mb-10 flex h-[70vh] flex-col items-center gap-5 overflow-y-scroll md:mb-20 md:gap-10">
         <MenuCard
           heading="The hell is this? 🤔"

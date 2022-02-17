@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
         <button
           className={`${
             navbarOpen ? "scale-0" : "scale-100"
-          } animate absolute top-5 right-5 z-10 text-xl text-slate-400 hover:text-blue-500 focus:text-blue-500 md:text-3xl`}
+          } animate absolute top-5 right-5 z-10 rounded-sm bg-slate-50 text-xl text-slate-400 hover:text-blue-500 focus:text-blue-500 md:text-3xl`}
           onClick={() => {
             setNavbarOpen(!navbarOpen);
           }}
