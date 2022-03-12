@@ -17,8 +17,11 @@ const ScrollingCards = () => {
     },
   });
 
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const handleScroll = (e) => {
+    if (e.target.id === "parent" && e.deltaY < 0) {
+      setCardsOpen(false);
+    }
+  };
 
   return (
     <div
@@ -27,6 +30,7 @@ const ScrollingCards = () => {
           ? "translate-y-0 backdrop-blur-lg"
           : "translate-y-full backdrop-blur-none"
       } `}
+      onWheel={handleScroll}
       {...handlers}
       id="parent"
     >
