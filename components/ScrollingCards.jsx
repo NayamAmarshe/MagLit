@@ -43,12 +43,12 @@ const ScrollingCards = () => {
         <BsFillXCircleFill />
       </button>
       <h3 className="pb-10 text-2xl font-bold text-slate-600">Lit🔥Links</h3>
-      <div
-        id="child"
-        className="z-30 row-span-1 grid h-2/3 w-11/12 gap-12 overflow-y-auto overflow-x-hidden rounded-xl p-2 pb-10 text-center sm:w-auto"
-      >
-        {links.length !== 0 ? (
-          links.map((link, linkIndex) => {
+      {links.length !== 0 ? (
+        <div
+          id="child"
+          className="z-30 row-span-1 grid h-2/3 w-11/12 gap-12 overflow-y-auto overflow-x-hidden rounded-xl p-2 pb-10 text-center sm:w-auto"
+        >
+          {links.map((link, linkIndex) => {
             let color = Math.floor(Math.random() * colorsList.length);
             return (
               <div
@@ -60,16 +60,16 @@ const ScrollingCards = () => {
                 </a>
               </div>
             );
-          })
-        ) : (
-          <div className="rounded-lg bg-red-400 p-5 text-center text-white">
-            <h4 className="text-xl font-semibold leading-none">
-              No links found.
-            </h4>
-            <br /> Your maglit links appear here.
-          </div>
-        )}
-      </div>
+          })}
+        </div>
+      ) : (
+        <div className="rounded-lg bg-red-400 p-5 text-center text-white">
+          <h4 className="text-xl font-semibold leading-none">
+            No links found.
+          </h4>
+          <br /> Your maglit links appear here.
+        </div>
+      )}
     </div>
   );
 };
