@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply h-full;
+  }
+  body {
+    @apply h-full;
+  }
+}
 @layer utilities {
   .animate {
     @apply transition-all duration-500 ease-in-out;
+  }
+  .text-input {
+    @apply animate xs:w-full w-11/12 rounded-2xl p-5 outline-none hover:shadow-md focus:shadow-lg md:w-full;
   }
 }

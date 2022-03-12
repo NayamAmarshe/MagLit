@@ -7,9 +7,16 @@ import { useRecoilState } from "recoil";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
+import { BsFillGridFill } from "react-icons/bs";
+import { useSwipeable } from "react-swipeable";
 
 const RedirectPage = ({ slug }) => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
+  const handlers = useSwipeable({
+    onSwipedLeft: (e) => {
+      setNavbarOpen(true);
+    },
+  });
 
   const router = useRouter();
   const [password, setPassword] = useState("");
@@ -31,7 +38,20 @@ const RedirectPage = ({ slug }) => {
       className={`${
         navbarOpen ? "scale-90" : "scale-100"
       } animate flex h-screen flex-col items-center justify-center space-y-10 bg-slate-50`}
+      {...handlers}
     >
+      {/* MENU LINK */}
+      <button
+        className={`${
+          navbarOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
+        } animate absolute top-5 right-5 z-10 rounded-sm bg-slate-50 text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
+        onClick={() => {
+          setNavbarOpen(!navbarOpen);
+        }}
+      >
+        <BsFillGridFill />
+      </button>
+
       <ToastContainer
         position="top-center"
         autoClose={3000}

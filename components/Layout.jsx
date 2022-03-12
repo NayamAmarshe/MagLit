@@ -4,13 +4,13 @@ import { BsFillGridFill } from "react-icons/bs";
 import { useRecoilState } from "recoil";
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
+import ScrollingCards from "./ScrollingCards";
 
 const Layout = ({ children }) => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 500);
@@ -23,25 +23,12 @@ const Layout = ({ children }) => {
           <GridLoader loading={loading} size={15} color={"#ff8100"} />
         </div>
       ) : (
-        <div
-          className={`${
-            navbarOpen ? "bg-yell overflow-x-hidden" : "overflow-hidden"
-          } animate relative bg-slate-50`}
-        >
+        <div className="animate relative overflow-hidden bg-slate-50">
           <Navbar />
-          <main>
-            <button
-              className={`${
-                navbarOpen ? "scale-0" : "scale-100"
-              } animate absolute top-5 right-5 z-10 rounded-sm bg-slate-50 text-xl text-slate-400 hover:text-blue-500 focus:text-blue-500 md:text-3xl`}
-              onClick={() => {
-                setNavbarOpen(!navbarOpen);
-              }}
-            >
-              <BsFillGridFill />
-            </button>
-            {children}
-          </main>
+          {/* LINKS CARDS */}
+          <ScrollingCards />
+
+          <main>{children}</main>
           <script
             defer
             data-name="BMC-Widget"

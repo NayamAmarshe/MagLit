@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }) {
           property="og:description"
           content="A Free and Open Source Encrypted Privacy Respecting Magnet/HTTP(s) Link Shortener"
         />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta property="og:url" content="https://maglit.ml/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://maglit.ml/og-image.png" />

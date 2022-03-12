@@ -5,12 +5,12 @@ const Form = ({ password, setPassword, handleSubmit }) => {
       className="mt-auto mb-auto flex flex-col items-center justify-center md:h-full"
     >
       <div className="flex flex-col items-center justify-center space-y-4">
-        <p className="animate text-slate-300 hover:text-slate-500">
+        <p className="animate xs:text-base text-center text-sm text-slate-300 hover:text-slate-500">
           This maglit link is password protected
         </p>
         <input
           type="text"
-          className="animate rounded-2xl border-2 border-orange-200 bg-orange-100 p-5 text-orange-500 outline-none hover:shadow-md hover:shadow-orange-200 focus:border-orange-100 focus:shadow-lg focus:shadow-orange-300"
+          className="text-input bg-orange-100 p-5 text-orange-500 ring-2 ring-orange-200 hover:shadow-md hover:shadow-orange-200 focus:border-orange-100 focus:shadow-lg focus:shadow-orange-300"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"

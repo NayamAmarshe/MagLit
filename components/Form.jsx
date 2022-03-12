@@ -12,12 +12,12 @@ const Form = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-auto mb-auto flex h-full flex-col items-center justify-center"
+      className="flex h-full flex-col items-center justify-center"
     >
-      <div className="flex flex-col items-center justify-center space-y-4">
+      <div className="flex flex-col items-center justify-center gap-y-4">
         <input
           type="text"
-          className="animate rounded-2xl border-2 border-slate-200 bg-slate-100 p-5 text-slate-500 outline-none hover:shadow-md hover:shadow-slate-200 focus:border-slate-100 focus:shadow-lg focus:shadow-slate-300"
+          className="text-input bg-slate-100 p-5 text-slate-500 ring-2 ring-slate-200 hover:shadow-md hover:shadow-slate-200 focus:border-slate-100 focus:shadow-lg focus:shadow-slate-300"
           value={magnetLink}
           onChange={(e) => setMagnetLink(e.target.value)}
           placeholder="Enter your link"
@@ -39,15 +39,15 @@ const Form = ({
           </button>
         )}
         <div
-          className={
+          className={`${
             !locked
               ? "animate h-0 -translate-y-7 opacity-0"
               : "animate h-20 translate-y-0 opacity-100"
-          }
+          } flex items-center justify-center`}
         >
           <input
             type="text"
-            className="animate rounded-2xl border-2 border-orange-200 bg-orange-100 p-5 text-orange-500 outline-none hover:shadow-md hover:shadow-orange-200 focus:border-orange-100 focus:shadow-lg focus:shadow-orange-300"
+            className="text-input bg-orange-100 p-5 text-orange-500 ring-2 ring-orange-200 hover:shadow-md hover:shadow-orange-200 focus:border-orange-100 focus:shadow-lg focus:shadow-orange-300"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"

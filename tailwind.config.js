@@ -5,10 +5,16 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    {
+      pattern: /bg-|shadow-/,
+      variants: ["hover"],
+    },
+  ],
   theme: {
     extend: {
-      colors: {
-        green: colors.green,
+      screens: {
+        xs: "345px",
       },
     },
   },
