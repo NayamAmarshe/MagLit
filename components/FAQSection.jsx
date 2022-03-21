@@ -13,10 +13,10 @@ const FAQSection = () => {
           heading="The hell is this? 🤔"
           content={[
             "MagLit is an encrypted and privacy respecting Link Shortener service that supports not only your regular website links but also Magnet Links which are extensively used to download and share torrents.",
-            <br></br>,
-            <br></br>,
-            <i>
-              <b>
+            <br key={1}></br>,
+            <br key={2}></br>,
+            <i key={3}>
+              <b key={4}>
                 MagLit admins cannot ever see what links you light up once you
                 encrypt them using your own secret key.
               </b>
@@ -29,8 +29,8 @@ const FAQSection = () => {
         <MenuCard
           heading="Is it open-source? 🌚"
           content={[
-            <b>Yes 100%</b>,
-            <br></br>,
+            <b key={1}>Yes 100%</b>,
+            <br key={2}></br>,
             "MagLit is a totally free and open source service licensed under AGPLv3. All your requests are proxied through a server and no personal data is ever stored. You can check out the source code on GitHub if you want 😉",
           ]}
           bgColor="bg-purple-100/40"
@@ -41,7 +41,11 @@ const FAQSection = () => {
           heading="My adblock detected a tracker! 🤥"
           content={[
             "Don't worry, MagLit uses",
-            <a className="font-bold text-blue-400" href="https://counter.dev">
+            <a
+              key={1}
+              className="font-bold text-blue-400"
+              href="https://counter.dev"
+            >
               {" "}
               Counter.Dev Analytics <br></br>
             </a>,
@@ -55,9 +59,10 @@ const FAQSection = () => {
           heading="Like the project? 👍"
           content={[
             "You can buy me a coffee by tipping some",
-            <b> BATs </b>,
+            <b key={1}> BATs </b>,
             "from your Brave Browser or",
             <a
+              key={2}
               href="https://buymeacoffee.com/maglit"
               className="text-blue-400 font-bold"
             >

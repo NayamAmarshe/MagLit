@@ -32,7 +32,7 @@ export default function Home() {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
     setLinks(linksInStorage);
     console.log("🚀 => useEffect => linksInStorage", linksInStorage);
-  }, []);
+  }, [localStorage]);
 
   // !FUNCTIONS
   const generateSlug = async () => {
