@@ -55,7 +55,12 @@ const ScrollingCards = () => {
                 key={linkIndex}
                 className={`animate mx-auto my-auto flex w-11/12 items-center justify-center truncate rounded-xl ${colorsList[color]} bg-opacity-40 p-5 shadow-lg ${shadowList[color]} hover:bg-cyan-100/40 hover:shadow-cyan-200`}
               >
-                <a className="truncate text-slate-700" href={link}>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  className="truncate text-slate-700"
+                  href={link}
+                >
                   {link}
                 </a>
               </div>
