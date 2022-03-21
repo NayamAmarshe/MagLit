@@ -13,7 +13,7 @@
     "crypto-js": "^4.1.1",
     "firebase": "^9.6.2",
     "monkey-typewriter": "^1.0.14",
-    "next": "12.0.7",
+    "next": "12.1.0",
     "prettier-plugin-sort-imports": "^1.6.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
