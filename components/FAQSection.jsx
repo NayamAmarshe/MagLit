@@ -45,6 +45,8 @@ const FAQSection = () => {
               key={1}
               className="font-bold text-blue-400"
               href="https://counter.dev"
+              target="_blank"
+              rel="noreferrer"
             >
               {" "}
               Counter.Dev Analytics <br></br>
@@ -63,6 +65,8 @@ const FAQSection = () => {
             "from your Brave Browser or",
             <a
               key={2}
+              target="_blank"
+              rel="noreferrer"
               href="https://buymeacoffee.com/maglit"
               className="text-blue-400 font-bold"
             >
