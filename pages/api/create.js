@@ -6,9 +6,7 @@ const regex =
 
 export default async function handler(req, res) {
   const { slug, link, password } = req.body;
-  console.log("🚀 => handler => password", password);
-  console.log("🚀 => handler => link", link);
-  console.log("🚀 => handler => slug", slug);
+
   const collectionName =
     process.env.NODE_ENV === "production" ? "links" : "testLinks";
 

@@ -31,13 +31,11 @@ export default function Home() {
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
     setLinks(linksInStorage);
-    console.log("🚀 => useEffect => linksInStorage", linksInStorage);
   }, [localStorage]);
 
   // !FUNCTIONS
   const generateSlug = async () => {
     let slug = Monkey.word();
-    console.log("🚀 => generateSlug => slug", slug);
     await axios
       .post(BASE_URL + "/api/available", { slug: slug })
       .then((response) => {
@@ -90,7 +88,6 @@ export default function Home() {
       return;
     }
     const slug = await generateSlug();
-    console.log("🚀 => handleSubmit => slug", slug);
 
     const loadingToast = toast.loading("Hold on, lighting up your link...");
     await axios
