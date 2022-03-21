@@ -1,14 +1,14 @@
-import PasswordForm from "../components/PasswordForm";
 import { toast, ToastContainer } from "react-toastify";
+import PasswordForm from "../components/PasswordForm";
 import { navbarState } from "../atoms/navbarAtom";
-import MainLogo from "../components/MainLogo";
-import { BASE_URL } from "../utils/config";
-import { useRecoilState } from "recoil";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import axios from "axios";
 import { BsFillGridFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
+import MainLogo from "../components/MainLogo";
+import { BASE_URL } from "../utils/config";
+import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { useState } from "react";
+import axios from "axios";
 
 const RedirectPage = ({ slug }) => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
@@ -37,8 +37,7 @@ const RedirectPage = ({ slug }) => {
     <div
       className={`${
         navbarOpen ? "scale-90" : "scale-100"
-      } animate flex h-screen flex-col items-center justify-center space-y-10 bg-slate-50`}
-      {...handlers}
+      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50`}
     >
       {/* MENU LINK */}
       <button
@@ -63,7 +62,8 @@ const RedirectPage = ({ slug }) => {
         draggable
         pauseOnHover
       />
-      <div>
+
+      <div className="flex w-full flex-col gap-y-10 items-center justify-center">
         <MainLogo />
         <PasswordForm
           password={password}

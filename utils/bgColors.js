@@ -1,6 +1,4 @@
 const colorsList = [
-  "bg-zinc-200",
-  "bg-stone-100",
   "bg-red-100",
   "bg-orange-100",
   "bg-amber-100",
@@ -21,8 +19,6 @@ const colorsList = [
 ];
 
 const shadowList = [
-  "shadow-zinc-200",
-  "shadow-stone-200",
   "shadow-red-200",
   "shadow-orange-200",
   "shadow-amber-200",
