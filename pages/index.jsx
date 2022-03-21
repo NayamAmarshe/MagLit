@@ -1,53 +1,52 @@
-import { toast, ToastContainer } from "react-toastify";
-import MainLogo from "../components/MainLogo";
-import { BASE_URL } from "../utils/config";
-import { FiCopy } from "react-icons/fi";
-import { RiArrowUpSLine } from "react-icons/ri";
-import Form from "../components/Form";
-import snakeNames from "snake-names";
-import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { navbarState } from "../atoms/navbarAtom";
-import ScrollingCards from "../components/ScrollingCards";
 import { cardsOpenState } from "../atoms/cardsOpenState";
+import { toast, ToastContainer } from "react-toastify";
+import { navbarState } from "../atoms/navbarAtom";
 import { linksState } from "../atoms/linksState";
+import { RiArrowUpSLine } from "react-icons/ri";
 import { BsFillGridFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
+import MainLogo from "../components/MainLogo";
+import * as Monkey from "monkey-typewriter";
+import { BASE_URL } from "../utils/config";
+import { FiCopy } from "react-icons/fi";
+import { useRecoilState } from "recoil";
+import Form from "../components/Form";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Home() {
+  // !GLOBAL
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
   const [links, setLinks] = useRecoilState(linksState);
 
-  const handlers = useSwipeable({
-    onSwipedUp: (e) => {
-      setCardsOpen(true);
-    },
-    onSwipedLeft: (e) => {
-      setNavbarOpen(true);
-    },
-  });
-
+  // !LOCAL
   const [magnetLink, setMagnetLink] = useState("");
   const [outputLink, setOutputLink] = useState("");
   const [password, setPassword] = useState("");
   const [locked, setLocked] = useState(false);
-  const [touchStartY, setTouchStartY] = useState(0);
-  const [touchStartX, setTouchStartX] = useState(0);
-  const [touchEndY, setTouchEndY] = useState(0);
-  const [touchEndX, setTouchEndX] = useState(0);
 
+  // !EFFECT
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
     setLinks(linksInStorage);
     console.log("🚀 => useEffect => linksInStorage", linksInStorage);
   }, []);
 
-  const generateRandomName = () => {
-    const randomName = snakeNames.badassRandom() + snakeNames.cuteRandom();
-    return randomName;
+  // !FUNCTIONS
+  const generateSlug = async () => {
+    let slug = Monkey.word();
+    console.log("🚀 => generateSlug => slug", slug);
+    await axios
+      .post(BASE_URL + "/api/available", { slug: slug })
+      .then((response) => {
+        if (response.status !== 200) {
+          return generateSlug();
+        }
+      });
+
+    return slug;
   };
 
   const copyToClipboard = () => {
@@ -67,6 +66,16 @@ export default function Home() {
     }
   };
 
+  // !HANDLER FUNCTIONS
+  const handlers = useSwipeable({
+    onSwipedUp: (e) => {
+      setCardsOpen(true);
+    },
+    onSwipedLeft: (e) => {
+      setNavbarOpen(true);
+    },
+  });
+
   const handleScroll = (e) => {
     console.log(e.deltaY);
     if (e.deltaY > 0) {
@@ -77,10 +86,12 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (locked && password === "") {
-      toast.warn("Please enter a password or unlock the link");
+      toast.warn("Please enter a password to unlock the link");
       return;
     }
-    const slug = generateRandomName().toLowerCase();
+    const slug = await generateSlug();
+    console.log("🚀 => handleSubmit => slug", slug);
+
     const loadingToast = toast.loading("Hold on, lighting up your link...");
     await axios
       .post(BASE_URL + "/api/create", {
@@ -103,8 +114,10 @@ export default function Home() {
           draggable: true,
           pauseOnHover: true,
         });
+
         setOutputLink(BASE_URL + "/" + slug);
 
+        // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
         linksInStorage.push(BASE_URL + "/" + slug);
         localStorage.setItem("links", JSON.stringify(linksInStorage));
