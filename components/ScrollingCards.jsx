@@ -14,6 +14,9 @@ const ScrollingCards = () => {
     onSwipedDown: (e) => {
       if (e.event.target.id === "parent") setCardsOpen(false);
     },
+    onSwipedLeft: (e) => {
+      if (e.event.target.id === "parent") setCardsOpen(false);
+    },
   });
 
   const handleScroll = (e) => {
