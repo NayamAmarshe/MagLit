@@ -3,7 +3,6 @@ import { db } from "../../utils/firebase";
 
 export default async function handler(req, res) {
   const { slug } = req.body;
-  console.log("🚀 => handler => slug", slug);
   const collectionName =
     process.env.NODE_ENV === "production" ? "links" : "testLinks";
 

@@ -57,7 +57,7 @@ const Form = ({
       </div>
       <input
         type="submit"
-        className="animate z-10 mt-5 rounded-2xl bg-slate-200 p-5 text-slate-500 hover:cursor-pointer hover:bg-cyan-200 hover:text-cyan-700 hover:shadow-lg hover:shadow-cyan-300 focus:bg-cyan-200 focus:text-cyan-700 focus:shadow-lg focus:shadow-cyan-300"
+        className="animate z-10 mt-5 rounded-2xl bg-slate-200 p-5 text-slate-500 hover:cursor-pointer hover:bg-cyan-200 hover:text-cyan-700 hover:shadow-lg hover:shadow-cyan-300 "
         value="Light It Up 🔥"
       />
     </form>

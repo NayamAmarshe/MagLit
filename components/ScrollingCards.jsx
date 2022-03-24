@@ -4,7 +4,6 @@ import { BsFillXCircleFill } from "react-icons/bs";
 import { linksState } from "../atoms/linksState";
 import { useSwipeable } from "react-swipeable";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
 import React from "react";
 
 const ScrollingCards = () => {
@@ -46,14 +45,14 @@ const ScrollingCards = () => {
       {links.length !== 0 ? (
         <div
           id="child"
-          className="z-30 row-span-1 grid h-2/3 w-11/12 gap-12 content-center overflow-y-auto overflow-x-hidden rounded-xl p-2 pb-10 text-center sm:w-auto"
+          className="z-30 h-2/3 w-11/12 gap-12 overflow-y-auto overflow-x-hidden rounded-xl p-2 pb-10 text-center sm:w-auto"
         >
           {links.map((link, linkIndex) => {
             let color = Math.floor(Math.random() * colorsList.length);
             return (
               <div
                 key={linkIndex}
-                className={`animate mx-auto my-auto flex w-11/12 items-center justify-center truncate rounded-xl ${colorsList[color]} bg-opacity-40 p-5 shadow-lg ${shadowList[color]} hover:bg-cyan-100/40 hover:shadow-cyan-200`}
+                className={`animate mx-auto my-auto flex w-11/12 items-center justify-center truncate rounded-xl ${colorsList[color]} bg-opacity-40 p-5 my-5 shadow-lg ${shadowList[color]} hover:bg-cyan-100/40 hover:shadow-cyan-200`}
               >
                 <a
                   target="_blank"

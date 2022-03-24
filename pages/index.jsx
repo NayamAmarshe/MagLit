@@ -1,9 +1,9 @@
+import { BsFillGridFill, BsArchiveFill } from "react-icons/bs";
 import { cardsOpenState } from "../atoms/cardsOpenState";
 import { toast, ToastContainer } from "react-toastify";
 import { navbarState } from "../atoms/navbarAtom";
 import { linksState } from "../atoms/linksState";
 import { RiArrowUpSLine } from "react-icons/ri";
-import { BsFillGridFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
 import MainLogo from "../components/MainLogo";
 import * as Monkey from "monkey-typewriter";
@@ -66,7 +66,7 @@ export default function Home() {
 
   // !HANDLER FUNCTIONS
   const handlers = useSwipeable({
-    onSwipedUp: (e) => {
+    onSwipedRight: (e) => {
       setCardsOpen(true);
     },
     onSwipedLeft: (e) => {
@@ -75,7 +75,6 @@ export default function Home() {
   });
 
   const handleScroll = (e) => {
-    console.log(e.deltaY);
     if (e.deltaY > 0) {
       setCardsOpen(true);
     }
@@ -83,13 +82,15 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (locked && password === "") {
       toast.warn("Please enter a password to unlock the link");
       return;
     }
-    const slug = await generateSlug();
 
     const loadingToast = toast.loading("Hold on, lighting up your link...");
+    const slug = await generateSlug();
+
     await axios
       .post(BASE_URL + "/api/create", {
         slug,
@@ -97,6 +98,14 @@ export default function Home() {
         link: magnetLink,
       })
       .then((response) => {
+        setOutputLink(BASE_URL + "/" + slug);
+        // SAVE LINK IN LOCAL STORAGE
+        const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
+        linksInStorage.push(BASE_URL + "/" + slug);
+        localStorage.setItem("links", JSON.stringify(linksInStorage));
+        // SET LINKS STATE
+        setLinks(linksInStorage);
+        // SHOW TOAST
         toast.update(loadingToast, {
           render: response.data.message,
           type: "success",
@@ -111,15 +120,6 @@ export default function Home() {
           draggable: true,
           pauseOnHover: true,
         });
-
-        setOutputLink(BASE_URL + "/" + slug);
-
-        // SAVE LINK IN LOCAL STORAGE
-        const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
-        linksInStorage.push(BASE_URL + "/" + slug);
-        localStorage.setItem("links", JSON.stringify(linksInStorage));
-        setLinks(linksInStorage);
-
         copyToClipboard();
       })
       .catch((error) => {
@@ -191,13 +191,25 @@ export default function Home() {
 
       {/* LIT LINKS BUTTON */}
       <button
-        className="absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400"
+        className="absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 invisible sm:visible"
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
       >
         <RiArrowUpSLine className="text-3xl" />
         Lit Links
+      </button>
+      <button
+        className={`${
+          navbarOpen || cardsOpen
+            ? "scale-0 opacity-0"
+            : "scale-100 opacity-100"
+        } animate absolute top-5 left-5 z-10 rounded-sm bg-slate-50 text-xl text-slate-400 hover:text-blue-500 md:text-3xl visible sm:invisible`}
+        onClick={() => {
+          setCardsOpen(!cardsOpen);
+        }}
+      >
+        <BsArchiveFill />
       </button>
 
       {/* TOASTIFY */}
@@ -211,6 +223,7 @@ export default function Home() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        limit={2}
       />
     </div>
   );

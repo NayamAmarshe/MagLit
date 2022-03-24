@@ -7,7 +7,7 @@ module.exports = {
   ],
   safelist: [
     {
-      pattern: /bg-|shadow-/,
+      pattern: /bg-|shadow-|opacity-/,
       variants: ["hover"],
     },
   ],

@@ -61,6 +61,7 @@ const RedirectPage = ({ slug }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        limit={2}
       />
 
       <div className="flex w-full flex-col gap-y-10 items-center justify-center">
