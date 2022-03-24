@@ -14,13 +14,16 @@
   .animate {
     @apply transition-all duration-500 ease-in-out;
   }
-  .text-input {
-    @apply animate xs:w-full w-11/12 rounded-2xl p-5 outline-none hover:shadow-md focus:shadow-lg md:w-full bg-slate-100 text-slate-500 ring-2 ring-slate-200 hover:shadow-slate-200 focus:border-slate-100 focus:shadow-slate-300;
+  .input-box {
+    @apply animate xs:w-full w-11/12 rounded-2xl p-5 outline-none hover:shadow-md focus:shadow-lg md:w-full;
   }
   .submit-button {
     @apply animate z-10 mt-5 rounded-2xl bg-slate-200 p-5 text-slate-500 hover:cursor-pointer hover:bg-cyan-200 hover:text-cyan-700 hover:shadow-lg hover:shadow-cyan-300;
   }
+  .text-input {
+    @apply input-box bg-slate-100 text-slate-500 ring-2 ring-slate-200 hover:shadow-slate-200 focus:border-slate-100 focus:shadow-slate-300;
+  }
   .password-input {
-    @apply text-input bg-orange-100 p-5 text-orange-500 ring-2 ring-orange-200 hover:shadow-md hover:shadow-orange-200 focus:border-orange-100 focus:shadow-lg focus:shadow-orange-300;
+    @apply input-box bg-orange-100 text-orange-500 ring-2 ring-orange-200  hover:shadow-orange-200 focus:border-orange-100 focus:shadow-orange-300;
   }
 }

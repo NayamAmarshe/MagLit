@@ -27,6 +27,7 @@ const Form = ({
         {/* LOCK BUTTON */}
         {locked ? (
           <button
+            type="button"
             onClick={() => setLocked(!locked)}
             className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
           >
@@ -34,6 +35,7 @@ const Form = ({
           </button>
         ) : (
           <button
+            type="button"
             onClick={() => setLocked(!locked)}
             className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
           >
