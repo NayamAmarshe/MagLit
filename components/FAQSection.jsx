@@ -41,7 +41,7 @@ const FAQSection = () => {
           heading="How can I help? 😁"
           content={[
             "1. You can submit PRs on GitHub to improve MagLit's codebase or ",
-            <br></br>,
+            <br key={0}></br>,
             "2. You can buy me a coffee by tipping some",
             <b key={1}> BATs </b>,
             "from your Brave Browser or use",
