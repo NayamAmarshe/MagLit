@@ -55,7 +55,11 @@ const Navbar = () => {
           <p className="font-medium">GitHub</p>
         </a>
       </div>
-      <p className="text-slate-500 mb-1">Made with ⌨ and 100% FOSS</p>
+      {/* FOOTER */}
+      <p className="text-slate-500 mb-1">Made with ⌨ and 🖱</p>
+      <p className="text-slate-500 mb-1 text-sm">
+        Copyright © {new Date().getFullYear()} <b>MagLit</b>
+      </p>
     </div>
   );
 };
