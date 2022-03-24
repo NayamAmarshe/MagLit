@@ -161,7 +161,6 @@ export default function Home() {
       >
         <BsFillGridFill />
       </button>
-
       {/* MAIN CONTENT */}
       <div className="fixed top-0 flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-col gap-y-10 ">
@@ -188,8 +187,8 @@ export default function Home() {
           <FiCopy className="right-10" />
         </button>
       </div>
-
       {/* LIT LINKS BUTTON */}
+      {/* DESKTOP */}
       <button
         className="absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 invisible sm:visible"
         onClick={() => {
@@ -199,6 +198,7 @@ export default function Home() {
         <RiArrowUpSLine className="text-3xl" />
         Lit Links
       </button>
+      {/* MOBILE */}
       <button
         className={`${
           navbarOpen || cardsOpen
@@ -211,7 +211,6 @@ export default function Home() {
       >
         <BsArchiveFill />
       </button>
-
       {/* TOASTIFY */}
       <ToastContainer
         position="top-center"

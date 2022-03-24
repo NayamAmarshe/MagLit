@@ -38,6 +38,29 @@ const FAQSection = () => {
           hoverShadowColor="hover:shadow-purple-200"
         />
         <MenuCard
+          heading="How can I help? 😁"
+          content={[
+            "1. You can submit PRs on GitHub to improve MagLit's codebase or ",
+            <br></br>,
+            "2. You can buy me a coffee by tipping some",
+            <b key={1}> BATs </b>,
+            "from your Brave Browser or use",
+            <a
+              key={2}
+              target="_blank"
+              rel="noreferrer"
+              href="https://buymeacoffee.com/maglit"
+              className="text-blue-400 font-bold"
+            >
+              {" "}
+              Buy Me A Coffee{" "}
+            </a>,
+          ]}
+          bgColor="bg-red-100/40"
+          shadowColor="shadow-red-200"
+          hoverShadowColor="hover:shadow-red-200"
+        />
+        <MenuCard
           heading="My adblock detected a tracker! 🤥"
           content={[
             "Don't worry, MagLit uses",
@@ -56,27 +79,6 @@ const FAQSection = () => {
           bgColor="bg-cyan-100/40"
           shadowColor="shadow-cyan-200"
           hoverShadowColor="hover:shadow-cyan-200"
-        />
-        <MenuCard
-          heading="Like the project? 👍"
-          content={[
-            "You can buy me a coffee by tipping some",
-            <b key={1}> BATs </b>,
-            "from your Brave Browser or",
-            <a
-              key={2}
-              target="_blank"
-              rel="noreferrer"
-              href="https://buymeacoffee.com/maglit"
-              className="text-blue-400 font-bold"
-            >
-              {" "}
-              BMAC{" "}
-            </a>,
-          ]}
-          bgColor="bg-red-100/40"
-          shadowColor="shadow-red-200"
-          hoverShadowColor="hover:shadow-red-200"
         />
       </div>
     </>
