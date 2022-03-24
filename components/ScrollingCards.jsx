@@ -26,8 +26,8 @@ const ScrollingCards = () => {
     <div
       className={`animate absolute z-40 flex h-full w-full flex-col items-center justify-center overflow-x-hidden bg-transparent ${
         cardsOpen
-          ? "translate-y-0 backdrop-blur-lg"
-          : "translate-y-full backdrop-blur-none"
+          ? "-translate-x-0 md:translate-x-0 md:translate-y-0 backdrop-blur-lg"
+          : "-translate-x-full md:translate-x-0 md:translate-y-full backdrop-blur-none"
       } `}
       onWheel={handleScroll}
       {...handlers}

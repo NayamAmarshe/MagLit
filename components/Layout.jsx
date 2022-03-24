@@ -1,10 +1,9 @@
 import GridLoader from "react-spinners/GridLoader";
-import { navbarState } from "../atoms/navbarAtom";
-import { BsFillGridFill } from "react-icons/bs";
-import { useRecoilState } from "recoil";
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import { navbarState } from "../atoms/navbarAtom";
 import ScrollingCards from "./ScrollingCards";
+import { useRecoilState } from "recoil";
+import Navbar from "./Navbar";
 
 const Layout = ({ children }) => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
