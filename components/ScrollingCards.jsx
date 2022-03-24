@@ -41,7 +41,9 @@ const ScrollingCards = () => {
       >
         <BsFillXCircleFill />
       </button>
-      <h3 className="pb-10 text-2xl font-bold text-slate-600">Lit🔥Links</h3>
+      <h3 className="pb-4 text-center text-2xl font-bold text-slate-600">
+        LIT🔥LINKS
+      </h3>
       {links.length !== 0 ? (
         <div
           id="child"
