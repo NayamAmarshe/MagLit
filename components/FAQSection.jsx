@@ -63,7 +63,7 @@ const FAQSection = () => {
         <MenuCard
           heading="My adblock detected a tracker! 🤥"
           content={[
-            "Don't worry, MagLit uses",
+            "Don't worry, MagLit uses open source and privacy respecting",
             <a
               key={1}
               className="font-bold text-blue-400"
