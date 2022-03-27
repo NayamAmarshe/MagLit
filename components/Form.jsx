@@ -56,7 +56,7 @@ const Form = ({
               onClick={() => setShowEditSlug(false)}
               className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
             >
-              <RiPencilFill className="text-blue-400" />
+              <RiPencilFill className="animate text-blue-400 -rotate-45" />
             </button>
           ) : (
             <button
@@ -64,7 +64,7 @@ const Form = ({
               onClick={() => setShowEditSlug(true)}
               className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
             >
-              <RiPencilFill />
+              <RiPencilFill className="animate" />
             </button>
           )}
         </div>
