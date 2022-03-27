@@ -1,9 +1,11 @@
 import "react-toastify/dist/ReactToastify.css";
+import { ThemeProvider } from "next-themes";
 import Layout from "../components/Layout";
 import { RecoilRoot } from "recoil";
 import dynamic from "next/dynamic";
 import "../styles/globals.css";
 import Head from "next/head";
+
 const CounterAnalytics = dynamic(
   () => import("../components/CounterAnalytics"),
   {
@@ -50,9 +52,11 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <CounterAnalytics />
       <RecoilRoot>
+        {/* <ThemeProvider attribute="class"> */}
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        {/* </ThemeProvider> */}
       </RecoilRoot>
     </>
   );

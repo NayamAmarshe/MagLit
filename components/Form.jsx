@@ -50,7 +50,7 @@ const Form = ({
           )}
 
           {/* EDIT SLUG BUTTON */}
-          {showEditSlug ? (
+          {/* {showEditSlug ? (
             <button
               type="button"
               onClick={() => setShowEditSlug(false)}
@@ -66,13 +66,13 @@ const Form = ({
             >
               <RiPencilFill className="animate" />
             </button>
-          )}
+          )} */}
         </div>
 
         {/* PASSWORD AND SLUG INPUT */}
         <div>
           {/* SLUG INPUT */}
-          <div
+          {/* <div
             className={`${
               !showEditSlug
                 ? "animate h-0 -translate-y-7 opacity-0"
@@ -88,7 +88,7 @@ const Form = ({
               placeholder="Custom MagLit Link"
               disabled={!showEditSlug}
             />
-          </div>
+          </div> */}
 
           {/* PASSWORD INPUT */}
           <div

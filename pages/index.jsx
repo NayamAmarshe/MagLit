@@ -10,12 +10,16 @@ import * as Monkey from "monkey-typewriter";
 import { BASE_URL } from "../utils/config";
 import { FiCopy } from "react-icons/fi";
 import { useRecoilState } from "recoil";
+import { useTheme } from "next-themes";
 import Form from "../components/Form";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
 export default function Home() {
+  // !THIRD PARTY HOOKS
+  const { theme, setTheme } = useTheme();
+
   // !GLOBAL
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
@@ -25,11 +29,19 @@ export default function Home() {
   const [showEditSlug, setShowEditSlug] = useState(false);
   const [magnetLink, setMagnetLink] = useState("");
   const [outputLink, setOutputLink] = useState("");
+  const [mounted, setMounted] = useState(false);
   const [password, setPassword] = useState("");
   const [locked, setLocked] = useState(false);
   const [slug, setSlug] = useState("");
 
   // !EFFECT
+  useEffect(() => {
+    if (!localStorage.getItem("dark-theme")) {
+      localStorage.setItem("dark-theme", "false");
+      setTheme("dark");
+    }
+  });
+
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
     setLinks(linksInStorage);
