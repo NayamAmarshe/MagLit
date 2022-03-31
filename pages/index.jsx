@@ -160,7 +160,7 @@ export default function Home() {
     <div
       className={`${
         navbarOpen || cardsOpen ? "scale-90" : "scale-100"
-      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50`}
+      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-black`}
       onWheel={handleScroll}
       {...handlers}
     >
@@ -170,13 +170,31 @@ export default function Home() {
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate absolute top-5 right-5 z-10 rounded-sm bg-slate-50 text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
+        } animate absolute top-5 right-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
         onClick={() => {
           setNavbarOpen(!navbarOpen);
         }}
       >
         <BsFillGridFill />
       </button>
+      {/* THEME TOGGLE */}
+      <button
+        className="animate bg-slate-400 w-14 h-[30px] animate absolute top-5 right-20 flex items-center justify-center rounded-full gap-2"
+        onClick={() => {
+          theme === "dark" ? setTheme("light") : setTheme("dark");
+        }}
+      >
+        <div
+          className={`${
+            theme === "dark"
+              ? "animate bg-slate-50 left-1"
+              : "animate right-1 bg-slate-50"
+          } animate absolute w-5 h-5 z-10 rounded-full`}
+        ></div>
+        <div className="absolute left-1">🌚</div>
+        <div className="absolute right-1">🌞</div>
+      </button>
+
       {/* MAIN CONTENT */}
       <div className="fixed top-0 flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-col gap-y-10 ">

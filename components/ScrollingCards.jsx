@@ -44,7 +44,7 @@ const ScrollingCards = () => {
       >
         <BsFillXCircleFill />
       </button>
-      <h3 className="pb-4 text-center text-2xl font-bold text-slate-600">
+      <h3 className="pb-4 text-center text-2xl font-bold text-slate-600 dark:text-slate-300">
         LIT🔥LINKS
       </h3>
       {links.length !== 0 ? (
@@ -62,7 +62,7 @@ const ScrollingCards = () => {
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  className="truncate text-slate-700"
+                  className="truncate text-slate-700 dark:text-slate-200"
                   href={link}
                 >
                   {link}

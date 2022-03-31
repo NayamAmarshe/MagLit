@@ -4,9 +4,11 @@ import React from "react";
 const FAQSection = () => {
   return (
     <>
-      <p className="mt-20 pb-4 text-center text-2xl font-bold text-slate-600">
+      <p className="mt-20 pb-4 text-center text-2xl font-bold text-slate-600 dark:text-slate-300">
         FAQ🧐
-        <p className="text-slate-400 text-sm">(Scroll to read more)</p>
+        <p className="text-slate-400 dark:text-slate-500 text-sm">
+          (Scroll to read more)
+        </p>
       </p>
       <div className="mb-10 w-full flex h-[70vh] flex-col items-center gap-5 overflow-y-scroll py-5 pb-10 md:gap-10">
         <MenuCard
@@ -22,9 +24,9 @@ const FAQSection = () => {
               </b>
             </i>,
           ]}
-          bgColor="bg-green-100/40"
-          shadowColor="shadow-green-200"
-          hoverShadowColor="hover:shadow-green-200"
+          bgColor="bg-green-800/40"
+          shadowColor="shadow-green-700"
+          hoverShadowColor="hover:shadow-green-700"
         />
         <MenuCard
           heading="Is it open-source? 🌚"
@@ -33,9 +35,9 @@ const FAQSection = () => {
             <br key={2}></br>,
             "MagLit is a totally free and open source service licensed under AGPLv3. All your requests are proxied through a server and no personal data is ever stored. You can check out the source code on GitHub if you want 😉",
           ]}
-          bgColor="bg-purple-100/40"
-          shadowColor="shadow-purple-200"
-          hoverShadowColor="hover:shadow-purple-200"
+          bgColor="bg-purple-800/40"
+          shadowColor="shadow-purple-700"
+          hoverShadowColor="hover:shadow-purple-700"
         />
         <MenuCard
           heading="How can I help? 😁"
@@ -56,9 +58,9 @@ const FAQSection = () => {
               Buy Me A Coffee{" "}
             </a>,
           ]}
-          bgColor="bg-red-100/40"
-          shadowColor="shadow-red-200"
-          hoverShadowColor="hover:shadow-red-200"
+          bgColor="bg-red-800/40"
+          shadowColor="shadow-red-700"
+          hoverShadowColor="hover:shadow-red-700"
         />
         <MenuCard
           heading="My adblock detected a tracker! 🤥"
@@ -76,9 +78,9 @@ const FAQSection = () => {
             </a>,
             "Your IP is not logged, no cookies are stored, no fingerprinting data is used to spy on you. It just helps us know what countries are accessing maglit.ml and what different screen sizes are accessing this website. It can help us optimize the website layout better. Still, if you don't want to share your screen size and country, please feel free to block the script using your adblocker.",
           ]}
-          bgColor="bg-cyan-100/40"
-          shadowColor="shadow-cyan-200"
-          hoverShadowColor="hover:shadow-cyan-200"
+          bgColor="bg-cyan-800/40"
+          shadowColor="shadow-cyan-700"
+          hoverShadowColor="hover:shadow-cyan-700"
         />
       </div>
     </>

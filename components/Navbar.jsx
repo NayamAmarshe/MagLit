@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`animate absolute z-30 h-full w-screen overflow-x-hidden bg-transparent flex flex-col items-center justify-center ${
+      className={`animate absolute z-30 h-full w-screen overflow-x-hidden flex flex-col items-center justify-center ${
         navbarOpen
           ? "translate-x-0 backdrop-blur-lg"
           : "translate-x-full backdrop-blur-none"

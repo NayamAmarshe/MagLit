@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
           {/* LINKS CARDS */}
           <ScrollingCards />
 
-          <main>{children}</main>
+          <main className="bg-slate-50 dark:bg-black">{children}</main>
           <script
             defer
             data-name="BMC-Widget"
