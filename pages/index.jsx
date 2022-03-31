@@ -26,13 +26,13 @@ export default function Home() {
   const [links, setLinks] = useRecoilState(linksState);
 
   // !LOCAL
-  const [showEditSlug, setShowEditSlug] = useState(false);
+  // const [showEditSlug, setShowEditSlug] = useState(false);
   const [magnetLink, setMagnetLink] = useState("");
   const [outputLink, setOutputLink] = useState("");
   const [mounted, setMounted] = useState(false);
   const [password, setPassword] = useState("");
   const [locked, setLocked] = useState(false);
-  const [slug, setSlug] = useState("");
+  // const [slug, setSlug] = useState("");
 
   // !EFFECT
   useEffect(() => {
@@ -103,11 +103,11 @@ export default function Home() {
     }
 
     const loadingToast = toast.loading("Hold on, lighting up your link...");
-    const generatedSlug = await generateSlug();
+    const slug = await generateSlug();
 
     await axios
       .post(BASE_URL + "/api/create", {
-        slug: showEditSlug ? slug : generatedSlug,
+        slug,
         password,
         link: magnetLink,
       })
@@ -116,7 +116,7 @@ export default function Home() {
         // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
         linksInStorage.push(
-          BASE_URL + "/" + `${showEditSlug ? slug : generatedSlug}`
+          BASE_URL + "/" + slug
         );
         localStorage.setItem("links", JSON.stringify(linksInStorage));
         // SET LINKS STATE
@@ -207,10 +207,10 @@ export default function Home() {
             setPassword={setPassword}
             magnetLink={magnetLink}
             setMagnetLink={setMagnetLink}
-            showEditSlug={showEditSlug}
-            setShowEditSlug={setShowEditSlug}
-            slug={slug}
-            setSlug={setSlug}
+            // showEditSlug={showEditSlug}
+            // setShowEditSlug={setShowEditSlug}
+            // slug={slug}
+            // setSlug={setSlug}
           />
         </div>
         <button
