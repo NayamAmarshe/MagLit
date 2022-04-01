@@ -5,7 +5,7 @@ const Form = ({ password, setPassword, handleSubmit }) => {
       className="mt-auto mb-auto flex flex-col items-center justify-center md:h-full"
     >
       <div className="flex flex-col items-center justify-center space-y-4">
-        <p className="animate xs:text-base text-center text-sm text-slate-300 hover:text-slate-500">
+        <p className="animate xs:text-base text-center text-sm text-slate-300 hover:text-slate-500 dark:text-slate-600 dark:hover:text-slate-400">
           This maglit link is password protected
         </p>
         {/* PASSWORD INPUT */}

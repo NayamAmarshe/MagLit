@@ -35,19 +35,19 @@ const Navbar = () => {
         <BsFillXCircleFill />
       </button>
       <FAQSection />
-      <div className="animate mb-10 flex items-center justify-center gap-10">
+      <div className="animate mb-10 flex items-center justify-center gap-10 text-black dark:text-white">
         <a
           href="mailto:maglit-admin@protonmail.com"
           target="_blank"
           rel="noreferrer"
-          className="animate flex flex-col items-center justify-center hover:text-black/50 focus:text-black/50"
+          className="animate flex flex-col items-center justify-center  hover:text-black/50 dark:hover:text-gray-500"
         >
           <ImMail4 className="text-3xl" />
           <p className="font-medium">Contact</p>
         </a>
         <a
           href="https://github.com/NayamAmarshe/MagLit"
-          className="animate flex flex-col items-center justify-center hover:text-black/50 focus:text-black/50"
+          className="animate flex flex-col items-center justify-center hover:text-black/50 dark:hover:text-gray-500"
           target="_blank"
           rel="noreferrer"
         >

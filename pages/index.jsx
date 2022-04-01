@@ -1,4 +1,5 @@
 import { BsFillGridFill, BsArchiveFill } from "react-icons/bs";
+import TopRightButtons from "../components/TopRightButtons";
 import { cardsOpenState } from "../atoms/cardsOpenState";
 import { toast, ToastContainer } from "react-toastify";
 import { navbarState } from "../atoms/navbarAtom";
@@ -17,9 +18,6 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Home() {
-  // !THIRD PARTY HOOKS
-  const { theme, setTheme } = useTheme();
-
   // !GLOBAL
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
@@ -154,44 +152,11 @@ export default function Home() {
       onWheel={handleScroll}
       {...handlers}
     >
-      <div className="absolute top-5 right-5 z-10 flex flex-row-reverse gap-5">
-        {/* MENU LINK */}
-        <button
-          className={`${
-            navbarOpen || cardsOpen
-              ? "scale-0 opacity-0"
-              : "scale-100 opacity-100"
-          } animate rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
-          onClick={() => {
-            setNavbarOpen(!navbarOpen);
-          }}
-        >
-          <BsFillGridFill />
-        </button>
-
-        {/* THEME TOGGLE */}
-        <button
-          className={`animate bg-slate-400 w-12 md:w-14 h-[20px] md:h-[30px] animate flex items-center justify-center rounded-full gap-2 relative ${
-            navbarOpen || cardsOpen
-              ? "scale-0 opacity-0"
-              : "scale-100 opacity-100"
-          }`}
-          onClick={() => {
-            theme === "dark" ? setTheme("light") : setTheme("dark");
-          }}
-        >
-          <div
-            className={`${
-              theme === "dark"
-                ? "animate bg-slate-50 -translate-x-3"
-                : "animate translate-x-3 bg-slate-50"
-            } animate absolute w-4 h-4 md:w-6 md:h-6 z-10 rounded-full`}
-          ></div>
-          <div className="absolute left-1 text-sm md:text-base">🌞</div>
-          <div className="absolute right-1 text-sm md:text-base">🌚</div>
-        </button>
-      </div>
-
+      <TopRightButtons
+        navbarOpen={navbarOpen}
+        setNavbarOpen={setNavbarOpen}
+        cardsOpen={cardsOpen}
+      />
       {/* MAIN CONTENT */}
       <div className="fixed top-0 flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-col gap-y-10 ">
