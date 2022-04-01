@@ -1,3 +1,4 @@
+import TopRightButtons from "../components/TopRightButtons";
 import { toast, ToastContainer } from "react-toastify";
 import PasswordForm from "../components/PasswordForm";
 import { navbarState } from "../atoms/navbarAtom";
@@ -37,19 +38,13 @@ const RedirectPage = ({ slug }) => {
     <div
       className={`${
         navbarOpen ? "scale-90" : "scale-100"
-      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50`}
+      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-black`}
     >
-      {/* MENU LINK */}
-      <button
-        className={`${
-          navbarOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
-        } animate absolute top-5 right-5 z-10 rounded-sm bg-slate-50 text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
-        onClick={() => {
-          setNavbarOpen(!navbarOpen);
-        }}
-      >
-        <BsFillGridFill />
-      </button>
+      <TopRightButtons
+        navbarOpen={navbarOpen}
+        setNavbarOpen={setNavbarOpen}
+        cardsOpen={false}
+      />
 
       <ToastContainer
         position="top-center"
