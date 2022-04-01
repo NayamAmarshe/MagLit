@@ -2,13 +2,7 @@ import { BsFillGridFill } from "react-icons/bs";
 import { useTheme } from "next-themes";
 import React from "react";
 
-const TopRightButtons = ({
-  cardsOpen,
-  navbarOpen,
-  setNavbarOpen,
-  theme,
-  setTheme,
-}) => {
+const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
   // !THIRD PARTY HOOKS
   const { theme, setTheme } = useTheme();
 
