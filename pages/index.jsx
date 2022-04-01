@@ -34,14 +34,6 @@ export default function Home() {
   const [locked, setLocked] = useState(false);
   // const [slug, setSlug] = useState("");
 
-  // !EFFECT
-  useEffect(() => {
-    if (!localStorage.getItem("dark-theme")) {
-      localStorage.setItem("dark-theme", "false");
-      setTheme("dark");
-    }
-  });
-
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
     setLinks(linksInStorage);
@@ -115,9 +107,7 @@ export default function Home() {
         setOutputLink(BASE_URL + "/" + slug);
         // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
-        linksInStorage.push(
-          BASE_URL + "/" + slug
-        );
+        linksInStorage.push(BASE_URL + "/" + slug);
         localStorage.setItem("links", JSON.stringify(linksInStorage));
         // SET LINKS STATE
         setLinks(linksInStorage);
@@ -164,36 +154,39 @@ export default function Home() {
       onWheel={handleScroll}
       {...handlers}
     >
-      {/* MENU LINK */}
-      <button
-        className={`${
-          navbarOpen || cardsOpen
-            ? "scale-0 opacity-0"
-            : "scale-100 opacity-100"
-        } animate absolute top-5 right-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
-        onClick={() => {
-          setNavbarOpen(!navbarOpen);
-        }}
-      >
-        <BsFillGridFill />
-      </button>
-      {/* THEME TOGGLE */}
-      <button
-        className="animate bg-slate-400 w-14 h-[30px] animate absolute top-5 right-20 flex items-center justify-center rounded-full gap-2"
-        onClick={() => {
-          theme === "dark" ? setTheme("light") : setTheme("dark");
-        }}
-      >
-        <div
+      <div className="absolute top-5 right-5 z-10 flex flex-row-reverse gap-5">
+        {/* MENU LINK */}
+        <button
           className={`${
-            theme === "dark"
-              ? "animate bg-slate-50 left-1"
-              : "animate right-1 bg-slate-50"
-          } animate absolute w-5 h-5 z-10 rounded-full`}
-        ></div>
-        <div className="absolute left-1">🌚</div>
-        <div className="absolute right-1">🌞</div>
-      </button>
+            navbarOpen || cardsOpen
+              ? "scale-0 opacity-0"
+              : "scale-100 opacity-100"
+          } animate rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
+          onClick={() => {
+            setNavbarOpen(!navbarOpen);
+          }}
+        >
+          <BsFillGridFill />
+        </button>
+
+        {/* THEME TOGGLE */}
+        <button
+          className="animate bg-slate-400 w-12 md:w-14 h-[20px] md:h-[30px] animate flex items-center justify-center rounded-full gap-2 relative"
+          onClick={() => {
+            theme === "dark" ? setTheme("light") : setTheme("dark");
+          }}
+        >
+          <div
+            className={`${
+              theme === "dark"
+                ? "animate bg-slate-50 -translate-x-3"
+                : "animate translate-x-3 bg-slate-50"
+            } animate absolute w-4 h-4 md:w-6 md:h-6 z-10 rounded-full`}
+          ></div>
+          <div className="absolute left-1 text-sm">🌞</div>
+          <div className="absolute right-1 text-sm">🌚</div>
+        </button>
+      </div>
 
       {/* MAIN CONTENT */}
       <div className="fixed top-0 flex h-screen flex-col items-center justify-center">

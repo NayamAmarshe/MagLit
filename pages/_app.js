@@ -52,7 +52,11 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <CounterAnalytics />
       <RecoilRoot>
-        <ThemeProvider attribute="class" enableSystem="true">
+        <ThemeProvider
+          attribute="class"
+          enableSystem="true"
+          defaultTheme="light"
+        >
           <Layout>
             <Component {...pageProps} />
           </Layout>
