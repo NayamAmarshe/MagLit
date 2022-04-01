@@ -17,6 +17,25 @@ const colorsList = [
   "bg-rose-100",
 ];
 
+const darkColorsList = [
+  "bg-red-800",
+  "bg-orange-800",
+  "bg-amber-800",
+  "bg-yellow-800",
+  "bg-lime-800",
+  "bg-green-800",
+  "bg-emerald-800",
+  "bg-teal-800",
+  "bg-sky-800",
+  "bg-blue-800",
+  "bg-indigo-800",
+  "bg-violet-800",
+  "bg-purple-800",
+  "bg-fuchsia-800",
+  "bg-pink-800",
+  "bg-rose-800",
+];
+
 const shadowList = [
   "shadow-red-200",
   "shadow-orange-200",
@@ -36,4 +55,23 @@ const shadowList = [
   "shadow-rose-200",
 ];
 
-module.exports = { colorsList, shadowList };
+const darkShadowList = [
+  "shadow-red-700",
+  "shadow-orange-700",
+  "shadow-amber-700",
+  "shadow-yellow-700",
+  "shadow-lime-700",
+  "shadow-green-700",
+  "shadow-emerald-700",
+  "shadow-teal-700",
+  "shadow-sky-700",
+  "shadow-blue-700",
+  "shadow-indigo-700",
+  "shadow-violet-700",
+  "shadow-purple-700",
+  "shadow-fuchsia-700",
+  "shadow-pink-700",
+  "shadow-rose-700",
+];
+
+module.exports = { colorsList, shadowList, darkColorsList, darkShadowList };
