@@ -14,16 +14,19 @@
   .animate {
     @apply transition-all duration-500 ease-in-out;
   }
+  .no-animate {
+    @apply transition-none;
+  }
   .input-box {
     @apply animate xs:w-full w-11/12 rounded-2xl p-5 outline-none hover:shadow-md focus:shadow-lg md:w-full;
   }
   .submit-button {
-    @apply animate z-10 mt-5 rounded-2xl bg-slate-200 p-5 text-slate-500 hover:cursor-pointer hover:bg-cyan-200 hover:text-cyan-700 hover:shadow-lg hover:shadow-cyan-300;
+    @apply animate z-10 mt-5 rounded-2xl bg-slate-200 p-5 text-slate-500 hover:cursor-pointer hover:bg-cyan-200 hover:text-cyan-700 hover:shadow-lg hover:shadow-cyan-300 dark:bg-slate-700 dark:text-slate-400 dark:hover:bg-cyan-200 dark:hover:text-cyan-700;
   }
   .text-input {
-    @apply input-box bg-slate-100 text-slate-500 ring-2 ring-slate-200 hover:shadow-slate-200 focus:border-slate-100 focus:shadow-slate-300;
+    @apply input-box bg-slate-100 text-slate-500 ring-2 ring-slate-200 hover:shadow-slate-200 focus:ring-slate-100 focus:shadow-slate-300 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-700 hover:dark:shadow-slate-700 focus:dark:ring-slate-800 focus:dark:shadow-slate-600;
   }
   .password-input {
-    @apply input-box bg-orange-100 text-orange-500 ring-2 ring-orange-200  hover:shadow-orange-200 focus:border-orange-100 focus:shadow-orange-300;
+    @apply input-box bg-orange-100 text-orange-500 ring-2 ring-orange-200  hover:shadow-orange-200 focus:border-orange-100 focus:shadow-orange-300 dark:bg-stone-800 dark:ring-stone-700 dark:text-stone-400 dark:placeholder:text-stone-500 dark:focus:ring-stone-800 dark:focus:shadow-stone-600 dark:hover:shadow-stone-700;
   }
 }
