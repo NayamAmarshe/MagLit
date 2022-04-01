@@ -171,7 +171,11 @@ export default function Home() {
 
         {/* THEME TOGGLE */}
         <button
-          className="animate bg-slate-400 w-12 md:w-14 h-[20px] md:h-[30px] animate flex items-center justify-center rounded-full gap-2 relative"
+          className={`animate bg-slate-400 w-12 md:w-14 h-[20px] md:h-[30px] animate flex items-center justify-center rounded-full gap-2 relative ${
+            navbarOpen || cardsOpen
+              ? "scale-0 opacity-0"
+              : "scale-100 opacity-100"
+          }`}
           onClick={() => {
             theme === "dark" ? setTheme("light") : setTheme("dark");
           }}
@@ -235,7 +239,7 @@ export default function Home() {
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate absolute top-5 left-5 z-10 rounded-sm bg-slate-50 text-xl text-slate-400 hover:text-blue-500 md:text-3xl visible sm:invisible`}
+        } animate absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl visible sm:invisible`}
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
