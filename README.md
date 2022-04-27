@@ -1,8 +1,8 @@
 ![Maglit Logo (6)](https://user-images.githubusercontent.com/25067102/160302795-40c43343-e41a-4e19-883f-94e0fa7a8b6a.png)
 
-# Mag🔥Lit
-Mag🔥Lit - A super fast and easy-to-use free and open source private encrypted Magnet/HTTP(s) Link Shortener
-### https://maglit.ml
+# MagLit🔥
+MagLit🔥 - A super fast and easy-to-use free and open source private encrypted Magnet/HTTP(s) Link Shortener
+### https://maglit.me
 
 ## Features
 
@@ -40,4 +40,4 @@ You can sponsor this repository or
 
 <img width="240" src="https://user-images.githubusercontent.com/25067102/154571600-a0d030db-341d-4b21-b688-f3b6c5e7cd2e.jpg" />
 
-### 🔥 https://maglit.ml 🔥
+### 🔥 https://maglit.me 🔥
