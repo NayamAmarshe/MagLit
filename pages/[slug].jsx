@@ -37,7 +37,7 @@ const RedirectPage = ({ slug }) => {
   return (
     <div
       className={`${
-        navbarOpen ? "scale-90" : "scale-100"
+        navbarOpen ? "scale-90 blur-lg" : "scale-100 blur-none"
       } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-black`}
     >
       <TopRightButtons

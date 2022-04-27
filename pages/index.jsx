@@ -147,7 +147,7 @@ export default function Home() {
   return (
     <div
       className={`${
-        navbarOpen || cardsOpen ? "scale-90" : "scale-100"
+        navbarOpen || cardsOpen ? "scale-90 blur-lg" : "scale-100 blur-none"
       } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-black`}
       onWheel={handleScroll}
       {...handlers}
