@@ -1,3 +1,5 @@
+# Update April 27 2022: maglit.ml will now be maglit.me, sorry for the inconvenience. All your links should work fine as before, just gotta replace ml with me.
+
 ![Maglit Logo](https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg)
 
 # Mag🔥Lit
