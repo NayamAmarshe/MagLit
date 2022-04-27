@@ -1,10 +1,10 @@
-![Maglit Logo (6)](https://user-images.githubusercontent.com/25067102/160302795-40c43343-e41a-4e19-883f-94e0fa7a8b6a.png)
+![Maglit Logo](https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg)
 
-# MagLit🔥
+# Mag🔥Lit
 MagLit🔥 - A super fast and easy-to-use free and open source private encrypted Magnet/HTTP(s) Link Shortener
 ### https://maglit.me
 
-## Features
+## MagLit Features
 
 ✅ 100% Easy to use\
 ✅ 100% Free and Open Source\
