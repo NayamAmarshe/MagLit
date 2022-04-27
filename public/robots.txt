@@ -32,4 +32,4 @@ User-agent: yahoo-blogs/v3.9
 Disallow: 
 User-agent: *
 Disallow: 
-Sitemap: https://maglit.ml/sitemap.xml
+Sitemap: https://maglit.me/sitemap.xml

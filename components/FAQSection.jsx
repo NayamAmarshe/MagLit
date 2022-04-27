@@ -76,7 +76,7 @@ const FAQSection = () => {
               {" "}
               Counter.Dev Analytics <br></br>
             </a>,
-            "Your IP is not logged, no cookies are stored, no fingerprinting data is used to spy on you. It just helps us know what countries are accessing maglit.ml and what different screen sizes are accessing this website. It can help us optimize the website layout better. Still, if you don't want to share your screen size and country, please feel free to block the script using your adblocker.",
+            "Your IP is not logged, no cookies are stored, no fingerprinting data is used to spy on you. It just helps us know what countries are accessing maglit.me and what different screen sizes are accessing this website. It can help us optimize the website layout better. Still, if you don't want to share your screen size and country, please feel free to block the script using your adblocker.",
           ]}
           bgColor="bg-cyan-100 dark:bg-cyan-800/40"
           shadowColor="shadow-cyan-200 dark:shadow-cyan-700"
