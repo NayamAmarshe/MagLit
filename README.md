@@ -14,8 +14,6 @@ MagLit🔥 - A super fast and easy-to-use free and open source private encrypted
 ✅ 100% Private\
 ✅ 0% Personal Data stored
 
-###### (Except of course, for the links you encrypt)
-
 ## Getting Started
 
 First, run the development server:
