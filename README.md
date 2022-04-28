@@ -14,7 +14,7 @@ MagLit🔥 - A super fast and easy-to-use free and open source private encrypted
 ✅ 100% Private\
 ✅ 0% Personal Data stored
 
-**WYSIWYG:** [The code in this repository is the same code that's deployed on MagLit.me](https://github.com/NayamAmarshe/MagLit/deployments)
+**WYSIWYG:** [The code in this repository is the same code that's deployed on MagLit.me, Nothing added, nothing ripped.](https://github.com/NayamAmarshe/MagLit/deployments)
 ## Getting Started
 
 First, run the development server:
