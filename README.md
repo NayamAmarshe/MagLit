@@ -3,7 +3,7 @@
 ![Maglit Logo](https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg)
 
 # Mag🔥Lit
-MagLit🔥 - A super fast and easy-to-use free and open source private encrypted Magnet/HTTP(s) Link Shortener
+🔥 MagLit - A **super fast** and **easy-to-use** **Free** and **Open Source Privacy Respecting Encrypted** Magnet/HTTP(s) Link Shortener with **Password Protection** 🔥
 ### https://maglit.me
 
 ## MagLit Features
@@ -14,7 +14,7 @@ MagLit🔥 - A super fast and easy-to-use free and open source private encrypted
 ✅ 100% Private\
 ✅ 0% Personal Data stored
 
-**WYSIWYG:** [The code in this repository is the same code that's deployed on MagLit.me, Nothing added, nothing ripped.](https://github.com/NayamAmarshe/MagLit/deployments)
+**WYSIWYG:** [MagLit builds are fully verifiable: The code in this repository is the same code that's deployed on MagLit.me, Nothing added, nothing ripped, so you know it's 100% trusted ;) ](https://github.com/NayamAmarshe/MagLit/deployments)
 ## Getting Started
 
 First, run the development server:
