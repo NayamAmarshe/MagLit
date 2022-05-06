@@ -158,7 +158,7 @@ export default function Home() {
         cardsOpen={cardsOpen}
       />
       {/* MAIN CONTENT */}
-      <div className="fixed top-0 flex h-screen flex-col items-center justify-center">
+      <div className="flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-col gap-y-10 ">
           <MainLogo />
           <Form
