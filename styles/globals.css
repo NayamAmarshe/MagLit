@@ -27,6 +27,6 @@
     @apply input-box bg-slate-100 text-slate-500 ring-2 ring-slate-200 hover:shadow-slate-200 focus:ring-slate-100 focus:shadow-slate-300 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-700 hover:dark:shadow-slate-700 focus:dark:ring-slate-800 focus:dark:shadow-slate-600;
   }
   .password-input {
-    @apply input-box bg-orange-100 text-orange-500 ring-2 ring-orange-200  hover:shadow-orange-200 focus:border-orange-100 focus:shadow-orange-300 dark:bg-stone-800 dark:ring-stone-700 dark:text-stone-400 dark:placeholder:text-stone-500 dark:focus:ring-stone-800 dark:focus:shadow-stone-600 dark:hover:shadow-stone-700;
+    @apply input-box bg-orange-100 text-orange-500 ring-2 ring-orange-200  hover:shadow-orange-200 focus:ring-orange-100 focus:shadow-orange-300 dark:bg-stone-800 dark:ring-stone-700 dark:text-stone-400 dark:placeholder:text-stone-500 dark:focus:ring-stone-800 dark:focus:shadow-stone-600 dark:hover:shadow-stone-700;
   }
 }

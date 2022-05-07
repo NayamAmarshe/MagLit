@@ -1,7 +1,9 @@
+import { linkSettingsOpenState } from "../atoms/linkSettingsOpenState";
 import { BsFillGridFill, BsArchiveFill } from "react-icons/bs";
 import TopRightButtons from "../components/TopRightButtons";
 import { cardsOpenState } from "../atoms/cardsOpenState";
 import { toast, ToastContainer } from "react-toastify";
+import { Backdrop } from "../components/Backdrop";
 import { navbarState } from "../atoms/navbarAtom";
 import { linksState } from "../atoms/linksState";
 import { RiArrowUpSLine } from "react-icons/ri";
@@ -22,6 +24,9 @@ export default function Home() {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
   const [links, setLinks] = useRecoilState(linksState);
+  const [linkSettingsOpen, setLinkSettingsOpen] = useRecoilState(
+    linkSettingsOpenState
+  );
 
   // !LOCAL
   // const [showEditSlug, setShowEditSlug] = useState(false);
@@ -157,6 +162,20 @@ export default function Home() {
         setNavbarOpen={setNavbarOpen}
         cardsOpen={cardsOpen}
       />
+
+      {linkSettingsOpen && (
+        <Backdrop
+          onClickHandler={() => {
+            setLinkSettingsOpen(false);
+          }}
+        >
+          <div
+            className="h-1/2 w-1/2 rounded-xl bg-slate-50"
+            onClick={(e) => e.stopPropagation()}
+          ></div>
+        </Backdrop>
+      )}
+
       {/* MAIN CONTENT */}
       <div className="flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-col gap-y-10 ">
@@ -169,6 +188,7 @@ export default function Home() {
             setPassword={setPassword}
             magnetLink={magnetLink}
             setMagnetLink={setMagnetLink}
+            setLinkSettingsOpen={setLinkSettingsOpen}
             // showEditSlug={showEditSlug}
             // setShowEditSlug={setShowEditSlug}
             // slug={slug}
@@ -187,10 +207,11 @@ export default function Home() {
           <FiCopy className="right-10" />
         </button>
       </div>
+
       {/* LIT LINKS BUTTON */}
       {/* DESKTOP */}
       <button
-        className="absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 invisible sm:visible"
+        className="invisible absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 sm:visible"
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
@@ -198,19 +219,21 @@ export default function Home() {
         <RiArrowUpSLine className="text-3xl" />
         Lit Links
       </button>
+
       {/* MOBILE */}
       <button
         className={`${
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl visible sm:invisible`}
+        } animate visible absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 sm:invisible md:text-3xl`}
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
       >
         <BsArchiveFill />
       </button>
+
       {/* TOASTIFY */}
       <ToastContainer
         position="top-center"
