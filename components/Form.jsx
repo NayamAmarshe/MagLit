@@ -52,7 +52,7 @@ const Form = ({
           {/* LINK SETTINGS BUTTON */}
           <button
             type="button"
-            className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:rotate-45 object-cover"
+            className="animate z-10 cursor-pointer object-cover text-3xl text-slate-400 hover:rotate-45"
             onClick={() => setLinkSettingsOpen(true)}
           >
             <BsFillGearFill />

@@ -14,6 +14,7 @@ import { BASE_URL } from "../utils/config";
 import { FiCopy } from "react-icons/fi";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
+import { AnimatePresence, motion } from "framer-motion";
 import Form from "../components/Form";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -162,19 +163,39 @@ export default function Home() {
         setNavbarOpen={setNavbarOpen}
         cardsOpen={cardsOpen}
       />
-
-      {linkSettingsOpen && (
-        <Backdrop
-          onClickHandler={() => {
-            setLinkSettingsOpen(false);
-          }}
-        >
-          <div
-            className="h-1/2 w-1/2 rounded-xl bg-slate-50"
-            onClick={(e) => e.stopPropagation()}
-          ></div>
-        </Backdrop>
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {linkSettingsOpen && (
+          <Backdrop
+            onClickHandler={() => {
+              setLinkSettingsOpen(false);
+            }}
+          >
+            <motion.div
+              initial={{ y: -50 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              exit={{ y: -50 }}
+              className="relative flex h-3/5 w-4/5 flex-col items-center justify-start rounded-xl border-8 border-slate-200 bg-slate-50"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h4 className="mt-5 text-2xl font-semibold text-slate-400">
+                Options
+              </h4>
+              <div className="mt-2 flex h-full flex-col items-center justify-center gap-y-5 p-5">
+                <input
+                  type="text"
+                  className="text-input"
+                  placeholder="Custom Link"
+                />
+                <div className="inline-flex">
+                  <p className="text-md text-slate-400">One Time Use?</p>
+                  <input type="checkbox" className="checkbox-input" />
+                </div>
+              </div>
+            </motion.div>
+          </Backdrop>
+        )}
+      </AnimatePresence>
 
       {/* MAIN CONTENT */}
       <div className="flex h-screen flex-col items-center justify-center">
