@@ -12,6 +12,7 @@ import MainLogo from "../components/MainLogo";
 import * as Monkey from "monkey-typewriter";
 import { BASE_URL } from "../utils/config";
 import { FiCopy } from "react-icons/fi";
+import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
 import { AnimatePresence, motion } from "framer-motion";
@@ -33,10 +34,11 @@ export default function Home() {
   // const [showEditSlug, setShowEditSlug] = useState(false);
   const [magnetLink, setMagnetLink] = useState("");
   const [outputLink, setOutputLink] = useState("");
+  const [oneTimeUse, setOneTimeUse] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [password, setPassword] = useState("");
   const [locked, setLocked] = useState(false);
-  // const [slug, setSlug] = useState("");
+  const [customSlug, setCustomSlug] = useState("");
 
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
@@ -175,22 +177,38 @@ export default function Home() {
               animate={{ y: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               exit={{ y: -50 }}
-              className="relative flex h-3/5 w-4/5 flex-col items-center justify-start rounded-xl border-8 border-slate-200 bg-slate-50"
+              className="max-w-mid relative flex flex-col items-center justify-start rounded-xl border-8 border-slate-200 bg-slate-50"
               onClick={(e) => e.stopPropagation()}
             >
+              <button className="animate absolute top-2 right-2 text-2xl text-slate-300 hover:text-red-400">
+                <AiFillCloseCircle />
+              </button>
               <h4 className="mt-5 text-2xl font-semibold text-slate-400">
                 Options
               </h4>
-              <div className="mt-2 flex h-full flex-col items-center justify-center gap-y-5 p-5">
+              <div className="mt-2 flex h-full flex-col items-center justify-center space-y-5 p-5">
                 <input
                   type="text"
                   className="text-input"
                   placeholder="Custom Link"
+                  value={customSlug}
+                  onChange={(e) => setCustomSlug(e.target.value)}
                 />
-                <div className="inline-flex">
+                <div className="flex items-center space-x-2">
                   <p className="text-md text-slate-400">One Time Use?</p>
-                  <input type="checkbox" className="checkbox-input" />
+                  <button onClick={() => setOneTimeUse(!oneTimeUse)}>
+                    <AiFillCheckCircle
+                      className={`${
+                        oneTimeUse
+                          ? "text-cyan-400"
+                          : "text-slate-300 hover:text-cyan-200"
+                      } animate text-2xl text-slate-300`}
+                    />
+                  </button>
                 </div>
+                <button type="button" className="save-button">
+                  Save 💾
+                </button>
               </div>
             </motion.div>
           </Backdrop>
