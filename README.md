@@ -14,6 +14,9 @@
 ✅ 100% Private\
 ✅ 0% Personal Data stored
 
+🆕 NEW FEATURES:
+- MagLit now supports custom links!
+
 **WYSIWYG:** [MagLit builds are fully verifiable: The code in this repository is the same code that's deployed on MagLit.me, Nothing added, nothing ripped, so you know it's 100% trusted ;) ](https://github.com/NayamAmarshe/MagLit/deployments)
 ## Getting Started
 
