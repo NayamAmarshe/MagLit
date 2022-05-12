@@ -1,11 +1,17 @@
-import { BsFillGridFill, BsArchiveFill } from "react-icons/bs";
+import { linkSettingsOpenState } from "../atoms/linkSettingsOpenState";
+import LinkOptionsModal from "../components/LinkOptionsModal";
 import TopRightButtons from "../components/TopRightButtons";
 import { cardsOpenState } from "../atoms/cardsOpenState";
+import LinkClipboard from "../components/LinkClipboard";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { Backdrop } from "../components/Backdrop";
 import { navbarState } from "../atoms/navbarAtom";
 import { linksState } from "../atoms/linksState";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { useSwipeable } from "react-swipeable";
+import { BsArchiveFill } from "react-icons/bs";
 import MainLogo from "../components/MainLogo";
 import * as Monkey from "monkey-typewriter";
 import { BASE_URL } from "../utils/config";
@@ -22,15 +28,19 @@ export default function Home() {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
   const [links, setLinks] = useRecoilState(linksState);
+  const [linkSettingsOpen, setLinkSettingsOpen] = useRecoilState(
+    linkSettingsOpenState
+  );
 
   // !LOCAL
   // const [showEditSlug, setShowEditSlug] = useState(false);
   const [magnetLink, setMagnetLink] = useState("");
   const [outputLink, setOutputLink] = useState("");
+  const [oneTimeUse, setOneTimeUse] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [password, setPassword] = useState("");
   const [locked, setLocked] = useState(false);
-  // const [slug, setSlug] = useState("");
+  const [customSlug, setCustomSlug] = useState("");
 
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
@@ -79,7 +89,7 @@ export default function Home() {
   });
 
   const handleScroll = (e) => {
-    if (e.deltaY > 0) {
+    if (e.deltaY > 0 && !linkSettingsOpen) {
       setCardsOpen(true);
     }
   };
@@ -92,20 +102,26 @@ export default function Home() {
       return;
     }
 
+    if (!locked) {
+      setPassword("");
+    }
+
     const loadingToast = toast.loading("Hold on, lighting up your link...");
     const slug = await generateSlug();
 
+    const customOrDefaultSlug = customSlug.length == 0 ? slug : customSlug;
+
     await axios
       .post(BASE_URL + "/api/create", {
-        slug,
-        password,
+        slug: customOrDefaultSlug,
+        password: locked ? password : "",
         link: magnetLink,
       })
       .then((response) => {
-        setOutputLink(BASE_URL + "/" + slug);
+        setOutputLink(BASE_URL + "/" + customOrDefaultSlug);
         // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
-        linksInStorage.push(BASE_URL + "/" + slug);
+        linksInStorage.push(BASE_URL + "/" + customOrDefaultSlug);
         localStorage.setItem("links", JSON.stringify(linksInStorage));
         // SET LINKS STATE
         setLinks(linksInStorage);
@@ -147,7 +163,7 @@ export default function Home() {
   return (
     <div
       className={`${
-        navbarOpen || cardsOpen ? "scale-90 blur-lg" : "scale-100 blur-none"
+        navbarOpen || cardsOpen ? "scale-90 blur-3xl" : "scale-100 blur-none"
       } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-black`}
       onWheel={handleScroll}
       {...handlers}
@@ -157,6 +173,17 @@ export default function Home() {
         setNavbarOpen={setNavbarOpen}
         cardsOpen={cardsOpen}
       />
+      <AnimatePresence exitBeforeEnter>
+        {linkSettingsOpen && (
+          <LinkOptionsModal
+            customSlug={customSlug}
+            setCustomSlug={setCustomSlug}
+            linkSettingsOpen={linkSettingsOpen}
+            setLinkSettingsOpen={setLinkSettingsOpen}
+          />
+        )}
+      </AnimatePresence>
+
       {/* MAIN CONTENT */}
       <div className="flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-col gap-y-10 ">
@@ -169,28 +196,19 @@ export default function Home() {
             setPassword={setPassword}
             magnetLink={magnetLink}
             setMagnetLink={setMagnetLink}
-            // showEditSlug={showEditSlug}
-            // setShowEditSlug={setShowEditSlug}
-            // slug={slug}
-            // setSlug={setSlug}
+            setLinkSettingsOpen={setLinkSettingsOpen}
           />
         </div>
-        <button
-          onClick={copyToClipboard}
-          className={
-            outputLink.length > 1
-              ? `animate relative mx-auto mt-7 flex h-10 w-11/12 items-center justify-center truncate rounded-xl bg-green-300 py-10 text-green-800 hover:cursor-pointer hover:shadow-inner hover:shadow-green-500 focus:shadow-inner focus:shadow-green-400`
-              : `animate relative flex h-0 scale-y-0 items-center justify-center truncate`
-          }
-        >
-          <h1 className="w-[70%] truncate">{outputLink}</h1>
-          <FiCopy className="right-10" />
-        </button>
+        <LinkClipboard
+          outputLink={outputLink}
+          copyToClipboard={copyToClipboard}
+        />
       </div>
+
       {/* LIT LINKS BUTTON */}
       {/* DESKTOP */}
       <button
-        className="absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 invisible sm:visible"
+        className="invisible absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 sm:visible"
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
@@ -198,19 +216,21 @@ export default function Home() {
         <RiArrowUpSLine className="text-3xl" />
         Lit Links
       </button>
+
       {/* MOBILE */}
       <button
         className={`${
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl visible sm:invisible`}
+        } animate visible absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 sm:invisible md:text-3xl`}
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
       >
         <BsArchiveFill />
       </button>
+
       {/* TOASTIFY */}
       <ToastContainer
         position="top-center"

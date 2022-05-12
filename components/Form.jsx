@@ -1,4 +1,8 @@
-import { BsFillLockFill, BsFillUnlockFill } from "react-icons/bs";
+import {
+  BsFillGearFill,
+  BsFillLockFill,
+  BsFillUnlockFill,
+} from "react-icons/bs";
 
 const Form = ({
   locked,
@@ -8,6 +12,7 @@ const Form = ({
   magnetLink,
   setMagnetLink,
   handleSubmit,
+  setLinkSettingsOpen,
 }) => {
   return (
     <form
@@ -24,24 +29,35 @@ const Form = ({
           placeholder="Enter your link"
         />
 
-        {/* LOCK BUTTON */}
-        {locked ? (
+        {/* LOCK & CONFIG BUTTONS */}
+        <div className="flex flex-row items-center justify-center space-x-4">
+          {locked ? (
+            <button
+              type="button"
+              onClick={() => setLocked(!locked)}
+              className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
+            >
+              <BsFillLockFill />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setLocked(!locked)}
+              className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
+            >
+              <BsFillUnlockFill />
+            </button>
+          )}
+
+          {/* LINK SETTINGS BUTTON */}
           <button
             type="button"
-            onClick={() => setLocked(!locked)}
-            className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
+            className="animate z-10 cursor-pointer object-cover text-3xl text-slate-400 hover:rotate-45"
+            onClick={() => setLinkSettingsOpen(true)}
           >
-            <BsFillLockFill />
+            <BsFillGearFill />
           </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setLocked(!locked)}
-            className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
-          >
-            <BsFillUnlockFill />
-          </button>
-        )}
+        </div>
 
         {/* PASSWORD INPUT */}
         <div
