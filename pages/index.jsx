@@ -1,21 +1,22 @@
 import { linkSettingsOpenState } from "../atoms/linkSettingsOpenState";
-import { BsFillGridFill, BsArchiveFill } from "react-icons/bs";
+import LinkOptionsModal from "../components/LinkOptionsModal";
 import TopRightButtons from "../components/TopRightButtons";
 import { cardsOpenState } from "../atoms/cardsOpenState";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { Backdrop } from "../components/Backdrop";
 import { navbarState } from "../atoms/navbarAtom";
 import { linksState } from "../atoms/linksState";
 import { RiArrowUpSLine } from "react-icons/ri";
 import { useSwipeable } from "react-swipeable";
+import { BsArchiveFill } from "react-icons/bs";
 import MainLogo from "../components/MainLogo";
 import * as Monkey from "monkey-typewriter";
 import { BASE_URL } from "../utils/config";
 import { FiCopy } from "react-icons/fi";
-import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
-import { AnimatePresence, motion } from "framer-motion";
 import Form from "../components/Form";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -169,54 +170,12 @@ export default function Home() {
       />
       <AnimatePresence exitBeforeEnter>
         {linkSettingsOpen && (
-          <Backdrop
-            onClickHandler={() => {
-              setLinkSettingsOpen(false);
-            }}
-          >
-            <motion.div
-              initial={{ y: -50 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              exit={{ y: -50 }}
-              className="max-w-mid relative flex flex-col items-center justify-start rounded-xl bg-slate-50 ring-8 ring-slate-200/70 dark:bg-slate-900 dark:ring-slate-700/70"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                className="animate absolute top-2 right-2 text-2xl text-slate-300 hover:text-red-400"
-                onClick={() => {
-                  setLinkSettingsOpen(false);
-                }}
-              >
-                <AiFillCloseCircle />
-              </button>
-              <h4 className="mt-5 text-2xl font-semibold text-slate-400">
-                Options
-              </h4>
-              <div className="mt-2 flex h-full flex-col items-center justify-center space-y-5 p-5">
-                <input
-                  type="text"
-                  className="text-input"
-                  placeholder="Custom Link"
-                  value={customSlug}
-                  onChange={(e) => setCustomSlug(e.target.value)}
-                />
-                {/* TODO: ADD ONE TIME USE */}
-                {/* <div className="flex items-center space-x-2">
-                  <p className="text-md text-slate-400">One Time Use?</p>
-                  <button onClick={() => setOneTimeUse(!oneTimeUse)}>
-                    <AiFillCheckCircle
-                      className={`${
-                        oneTimeUse
-                          ? "text-cyan-400"
-                          : "text-slate-300 hover:text-cyan-200"
-                      } animate text-2xl text-slate-300`}
-                    />
-                  </button>
-                </div> */}
-              </div>
-            </motion.div>
-          </Backdrop>
+          <LinkOptionsModal
+            customSlug={customSlug}
+            setCustomSlug={setCustomSlug}
+            linkSettingsOpen={linkSettingsOpen}
+            setLinkSettingsOpen={setLinkSettingsOpen}
+          />
         )}
       </AnimatePresence>
 
