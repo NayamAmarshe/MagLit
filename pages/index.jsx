@@ -103,17 +103,19 @@ export default function Home() {
     const loadingToast = toast.loading("Hold on, lighting up your link...");
     const slug = await generateSlug();
 
+    const customOrDefaultSlug = customSlug.length == 0 ? slug : customSlug;
+
     await axios
       .post(BASE_URL + "/api/create", {
-        slug,
+        slug: customOrDefaultSlug,
         password,
         link: magnetLink,
       })
       .then((response) => {
-        setOutputLink(BASE_URL + "/" + slug);
+        setOutputLink(BASE_URL + "/" + customOrDefaultSlug);
         // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
-        linksInStorage.push(BASE_URL + "/" + slug);
+        linksInStorage.push(BASE_URL + "/" + customOrDefaultSlug);
         localStorage.setItem("links", JSON.stringify(linksInStorage));
         // SET LINKS STATE
         setLinks(linksInStorage);
@@ -177,10 +179,15 @@ export default function Home() {
               animate={{ y: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               exit={{ y: -50 }}
-              className="max-w-mid relative flex flex-col items-center justify-start rounded-xl border-8 border-slate-200 bg-slate-50"
+              className="max-w-mid relative flex flex-col items-center justify-start rounded-xl bg-slate-50 ring-8 ring-slate-200/70"
               onClick={(e) => e.stopPropagation()}
             >
-              <button className="animate absolute top-2 right-2 text-2xl text-slate-300 hover:text-red-400">
+              <button
+                className="animate absolute top-2 right-2 text-2xl text-slate-300 hover:text-red-400"
+                onClick={() => {
+                  setLinkSettingsOpen(false);
+                }}
+              >
                 <AiFillCloseCircle />
               </button>
               <h4 className="mt-5 text-2xl font-semibold text-slate-400">
@@ -194,7 +201,8 @@ export default function Home() {
                   value={customSlug}
                   onChange={(e) => setCustomSlug(e.target.value)}
                 />
-                <div className="flex items-center space-x-2">
+                {/* TODO: ADD ONE TIME USE */}
+                {/* <div className="flex items-center space-x-2">
                   <p className="text-md text-slate-400">One Time Use?</p>
                   <button onClick={() => setOneTimeUse(!oneTimeUse)}>
                     <AiFillCheckCircle
@@ -205,10 +213,7 @@ export default function Home() {
                       } animate text-2xl text-slate-300`}
                     />
                   </button>
-                </div>
-                <button type="button" className="save-button">
-                  Save 💾
-                </button>
+                </div> */}
               </div>
             </motion.div>
           </Backdrop>

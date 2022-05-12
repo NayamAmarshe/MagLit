@@ -4,13 +4,13 @@ import React from "react";
 const FAQSection = () => {
   return (
     <>
-      <p className="mt-20 pb-4 text-center text-2xl font-bold text-slate-600 dark:text-slate-300">
+      <h3 className="mt-20 pb-4 text-center text-2xl font-bold text-slate-600 dark:text-slate-300">
         FAQ🧐
-        <p className="text-slate-400 dark:text-slate-500 text-sm">
+        <p className="text-sm text-slate-400 dark:text-slate-500">
           (Scroll to read more)
         </p>
-      </p>
-      <div className="mb-10 w-full flex h-[70vh] flex-col items-center gap-5 overflow-y-scroll py-5 pb-10 md:gap-10">
+      </h3>
+      <div className="mb-10 flex h-[70vh] w-full flex-col items-center gap-5 overflow-y-scroll py-5 pb-10 md:gap-10">
         <MenuCard
           heading="The hell is this? 🤔"
           content={[
@@ -52,7 +52,7 @@ const FAQSection = () => {
               target="_blank"
               rel="noreferrer"
               href="https://buymeacoffee.com/maglit"
-              className="text-blue-400 font-bold"
+              className="font-bold text-blue-400"
             >
               {" "}
               Buy Me A Coffee{" "}
