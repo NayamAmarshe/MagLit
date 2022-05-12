@@ -179,7 +179,7 @@ export default function Home() {
               animate={{ y: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               exit={{ y: -50 }}
-              className="max-w-mid relative flex flex-col items-center justify-start rounded-xl bg-slate-50 ring-8 ring-slate-200/70"
+              className="max-w-mid relative flex flex-col items-center justify-start rounded-xl bg-slate-50 ring-8 ring-slate-200/70 dark:bg-slate-900 dark:ring-slate-700/70"
               onClick={(e) => e.stopPropagation()}
             >
               <button
