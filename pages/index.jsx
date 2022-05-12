@@ -157,7 +157,7 @@ export default function Home() {
   return (
     <div
       className={`${
-        navbarOpen || cardsOpen ? "scale-90 blur-lg" : "scale-100 blur-none"
+        navbarOpen || cardsOpen ? "scale-90 blur-3xl" : "scale-100 blur-none"
       } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-black`}
       onWheel={handleScroll}
       {...handlers}
@@ -243,7 +243,7 @@ export default function Home() {
           onClick={copyToClipboard}
           className={
             outputLink.length > 1
-              ? `animate relative mx-auto mt-7 flex h-10 w-11/12 items-center justify-center truncate rounded-xl bg-green-300 py-10 text-green-800 hover:cursor-pointer hover:shadow-inner hover:shadow-green-500 focus:shadow-inner focus:shadow-green-400`
+              ? `animate relative mx-auto mt-7 flex h-10 w-11/12 items-center justify-center truncate rounded-xl bg-green-300 py-10 text-green-800 hover:cursor-pointer hover:shadow-inner hover:shadow-green-500 focus:shadow-inner focus:shadow-green-400 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-400 dark:hover:shadow-green-700 dark:focus:shadow-green-800`
               : `animate relative flex h-0 scale-y-0 items-center justify-center truncate`
           }
         >
