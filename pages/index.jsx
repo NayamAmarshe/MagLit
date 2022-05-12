@@ -87,7 +87,7 @@ export default function Home() {
   });
 
   const handleScroll = (e) => {
-    if (e.deltaY > 0) {
+    if (e.deltaY > 0 && !linkSettingsOpen) {
       setCardsOpen(true);
     }
   };
