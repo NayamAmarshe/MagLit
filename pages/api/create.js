@@ -12,12 +12,16 @@ export default async function handler(req, res) {
   const collectionName =
     process.env.NODE_ENV === "production" ? "links" : "testLinks";
 
+  // check if link is valid
   if (link.length < 1) {
     return res
       .status(400)
       .json({ slug, message: "You entered an invalid link" });
   }
-
+  if (!regex.test(link)) {
+    return res.status(400).json({ slug, message: "Please enter a valid link" });
+  }
+  // check if slug is valid
   if (slug.length < 1) {
     return res.status(400).json({ message: "Invalid Slug!" });
   }
@@ -29,13 +33,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // check if link is valid
-    if (!regex.test(link)) {
-      return res
-        .status(400)
-        .json({ slug, message: "Please enter a valid link" });
-    }
-
     // check firebase if slug exists
     const documentRef = doc(db, collectionName, slug);
     const documentSnapshot = await getDoc(documentRef);
