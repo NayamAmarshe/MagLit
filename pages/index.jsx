@@ -2,6 +2,7 @@ import { linkSettingsOpenState } from "../atoms/linkSettingsOpenState";
 import LinkOptionsModal from "../components/LinkOptionsModal";
 import TopRightButtons from "../components/TopRightButtons";
 import { cardsOpenState } from "../atoms/cardsOpenState";
+import LinkClipboard from "../components/LinkClipboard";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -101,6 +102,10 @@ export default function Home() {
       return;
     }
 
+    if (!locked) {
+      setPassword("");
+    }
+
     const loadingToast = toast.loading("Hold on, lighting up your link...");
     const slug = await generateSlug();
 
@@ -109,7 +114,7 @@ export default function Home() {
     await axios
       .post(BASE_URL + "/api/create", {
         slug: customOrDefaultSlug,
-        password,
+        password: locked ? password : "",
         link: magnetLink,
       })
       .then((response) => {
@@ -192,23 +197,12 @@ export default function Home() {
             magnetLink={magnetLink}
             setMagnetLink={setMagnetLink}
             setLinkSettingsOpen={setLinkSettingsOpen}
-            // showEditSlug={showEditSlug}
-            // setShowEditSlug={setShowEditSlug}
-            // slug={slug}
-            // setSlug={setSlug}
           />
         </div>
-        <button
-          onClick={copyToClipboard}
-          className={
-            outputLink.length > 1
-              ? `animate relative mx-auto mt-7 flex h-10 w-11/12 items-center justify-center truncate rounded-xl bg-green-300 py-10 text-green-800 hover:cursor-pointer hover:shadow-inner hover:shadow-green-500 focus:shadow-inner focus:shadow-green-400 dark:bg-green-500 dark:text-green-900 dark:hover:bg-green-400 dark:hover:shadow-green-700 dark:focus:shadow-green-800`
-              : `animate relative flex h-0 scale-y-0 items-center justify-center truncate`
-          }
-        >
-          <h1 className="w-[70%] truncate">{outputLink}</h1>
-          <FiCopy className="right-10" />
-        </button>
+        <LinkClipboard
+          outputLink={outputLink}
+          copyToClipboard={copyToClipboard}
+        />
       </div>
 
       {/* LIT LINKS BUTTON */}
