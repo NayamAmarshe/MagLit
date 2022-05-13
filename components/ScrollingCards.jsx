@@ -47,7 +47,7 @@ const ScrollingCards = () => {
       id="parent"
     >
       <button
-        className="animate absolute top-5 right-5 z-30 text-xl text-slate-400 hover:text-red-500 md:text-3xl bg-transparent"
+        className="animate absolute top-5 right-5 z-30 bg-transparent text-xl text-slate-400 hover:text-red-500 md:text-3xl"
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
@@ -68,7 +68,7 @@ const ScrollingCards = () => {
             return (
               <div
                 key={linkIndex}
-                className={`animate flex flex-col mx-auto max-w-md rounded-xl hover:bg-cyan-100/40 hover:shadow-cyan-200 bg-opacity-40 p-5 my-5 shadow-lg ${
+                className={`animate mx-auto my-5 flex max-w-md flex-col rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-cyan-100/40 hover:shadow-cyan-200 ${
                   theme === "light" && colorsList[color]
                 } ${theme === "dark" && darkColorsList[color]} ${
                   theme === "light" && shadowList[color]
@@ -77,7 +77,7 @@ const ScrollingCards = () => {
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  className="truncate w-full text-slate-700 dark:text-slate-200"
+                  className="w-full truncate text-slate-700 dark:text-slate-200"
                   href={typeof link === "string" ? link : link.link}
                 >
                   {typeof link === "string" ? link : link.link}
