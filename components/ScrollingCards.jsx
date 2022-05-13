@@ -68,7 +68,7 @@ const ScrollingCards = () => {
             return (
               <div
                 key={linkIndex}
-                className={`animate mx-auto flex w-md items-center justify-center truncate rounded-xl hover:bg-cyan-100/40 hover:shadow-cyan-200 bg-opacity-40 p-5 my-5 shadow-lg ${
+                className={`animate flex flex-col mx-auto max-w-md rounded-xl hover:bg-cyan-100/40 hover:shadow-cyan-200 bg-opacity-40 p-5 my-5 shadow-lg ${
                   theme === "light" && colorsList[color]
                 } ${theme === "dark" && darkColorsList[color]} ${
                   theme === "light" && shadowList[color]
@@ -77,11 +77,16 @@ const ScrollingCards = () => {
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  className="truncate text-slate-700 dark:text-slate-200"
-                  href={link}
+                  className="truncate w-full text-slate-700 dark:text-slate-200"
+                  href={typeof link === "string" ? link : link.link}
                 >
-                  {link}
+                  {typeof link === "string" ? link : link.link}
                 </a>
+                {link?.password?.length > 0 ? (
+                  <p className="break-all	text-black/50">
+                    Password: {link?.password}
+                  </p>
+                ) : null}
               </div>
             );
           })}
