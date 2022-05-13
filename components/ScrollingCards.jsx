@@ -60,7 +60,7 @@ const ScrollingCards = () => {
       {links.length !== 0 ? (
         <div
           id="child"
-          className="z-30 h-2/3 w-11/12 gap-12 overflow-y-auto overflow-x-hidden
+          className="z-30 h-2/3 w-full gap-12 overflow-y-auto overflow-x-hidden
           rounded-xl p-2 pb-10 text-center sm:w-auto"
         >
           {links.map((link, linkIndex) => {
@@ -68,7 +68,7 @@ const ScrollingCards = () => {
             return (
               <div
                 key={linkIndex}
-                className={`animate mx-auto flex w-11/12 items-center justify-center truncate rounded-xl hover:bg-cyan-100/40 hover:shadow-cyan-200 bg-opacity-40 p-5 my-5 shadow-lg ${
+                className={`animate mx-auto flex w-md items-center justify-center truncate rounded-xl hover:bg-cyan-100/40 hover:shadow-cyan-200 bg-opacity-40 p-5 my-5 shadow-lg ${
                   theme === "light" && colorsList[color]
                 } ${theme === "dark" && darkColorsList[color]} ${
                   theme === "light" && shadowList[color]
