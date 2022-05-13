@@ -33,7 +33,6 @@ export default function Home() {
   );
 
   // !LOCAL
-  // const [showEditSlug, setShowEditSlug] = useState(false);
   const [magnetLink, setMagnetLink] = useState("");
   const [outputLink, setOutputLink] = useState("");
   const [oneTimeUse, setOneTimeUse] = useState(false);
@@ -119,10 +118,15 @@ export default function Home() {
       })
       .then((response) => {
         setOutputLink(BASE_URL + "/" + customOrDefaultSlug);
+
         // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
-        linksInStorage.push(BASE_URL + "/" + customOrDefaultSlug);
+        linksInStorage.push({
+          link: BASE_URL + "/" + customOrDefaultSlug,
+          password: locked ? password : "",
+        });
         localStorage.setItem("links", JSON.stringify(linksInStorage));
+
         // SET LINKS STATE
         setLinks(linksInStorage);
         // SHOW TOAST
