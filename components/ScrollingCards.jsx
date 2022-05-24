@@ -22,10 +22,10 @@ const ScrollingCards = () => {
 
   const handlers = useSwipeable({
     onSwipedDown: (e) => {
-      if (e.event.target.id === "parent") setCardsOpen(false);
+      if (e.event.target.id !== "no-swipe") setCardsOpen(false);
     },
     onSwipedLeft: (e) => {
-      if (e.event.target.id === "parent") setCardsOpen(false);
+      if (e.event.target.id !== "no-swipe") setCardsOpen(false);
     },
   });
 
@@ -59,7 +59,6 @@ const ScrollingCards = () => {
       </h3>
       {links.length !== 0 ? (
         <div
-          id="child"
           className="z-30 h-2/3 w-full gap-12 overflow-y-auto overflow-x-hidden
           rounded-xl p-2 pb-10 text-center sm:w-auto"
         >
@@ -79,11 +78,15 @@ const ScrollingCards = () => {
                   rel="noreferrer"
                   className="w-full truncate text-slate-700 dark:text-slate-200"
                   href={typeof link === "string" ? link : link.link}
+                  id="no-swipe"
                 >
                   {typeof link === "string" ? link : link.link}
                 </a>
                 {link?.password?.length > 0 ? (
-                  <p className="break-all	text-black/50 dark:text-white/50">
+                  <p
+                    className="break-all	text-black/50 dark:text-white/50"
+                    id="no-swipe"
+                  >
                     Password: {link?.password}
                   </p>
                 ) : null}
