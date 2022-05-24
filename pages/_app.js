@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>MagLit🔥 - Encrypted Private Link Shortener</title>
+        <title>MagLit🔥 - Privacy Respecting Encrypted Link Shortener</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           name="description"
