@@ -22,11 +22,9 @@ const ScrollingCards = () => {
 
   const handlers = useSwipeable({
     onSwipedDown: (e) => {
-      console.log("🚀 => ScrollingCards => e.event.target.id", e.event.target);
       if (e.event.target.id !== "no-swipe") setCardsOpen(false);
     },
     onSwipedLeft: (e) => {
-      console.log("🚀 => ScrollingCards => e.event.target.id", e.event.target);
       if (e.event.target.id !== "no-swipe") setCardsOpen(false);
     },
   });
