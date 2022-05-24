@@ -83,7 +83,7 @@ const ScrollingCards = () => {
                   {typeof link === "string" ? link : link.link}
                 </a>
                 {link?.password?.length > 0 ? (
-                  <p className="break-all	text-black/50">
+                  <p className="break-all	text-black/50 dark:text-white/50">
                     Password: {link?.password}
                   </p>
                 ) : null}

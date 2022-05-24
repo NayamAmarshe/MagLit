@@ -80,9 +80,13 @@ export default function Home() {
   // !HANDLER FUNCTIONS
   const handlers = useSwipeable({
     onSwipedRight: (e) => {
+      if (e.event.target.id === "no-swipe") return;
+      if (linkSettingsOpen) return;
       setCardsOpen(true);
     },
     onSwipedLeft: (e) => {
+      if (e.event.target.id === "no-swipe") return;
+      if (linkSettingsOpen) return;
       setNavbarOpen(true);
     },
   });
