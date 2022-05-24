@@ -27,6 +27,7 @@ const Form = ({
           value={magnetLink}
           onChange={(e) => setMagnetLink(e.target.value)}
           placeholder="Enter your link"
+          id="no-swipe"
         />
 
         {/* LOCK & CONFIG BUTTONS */}
@@ -74,6 +75,7 @@ const Form = ({
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             disabled={!locked}
+            id="no-swipe"
           />
         </div>
       </div>
