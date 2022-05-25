@@ -14,7 +14,7 @@ const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate rounded-sm text-xl text-slate-400 hover:text-blue-500 md:text-3xl`}
+        } animate rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 dark:hover:text-stone-300 md:text-3xl`}
         onClick={() => {
           setNavbarOpen(!navbarOpen);
         }}
@@ -24,7 +24,7 @@ const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
 
       {/* THEME TOGGLE */}
       <button
-        className={`animate bg-slate-400 w-12 md:w-14 h-[20px] md:h-[30px] animate flex items-center justify-center rounded-full gap-2 relative ${
+        className={`animate animate relative flex h-[20px] w-12 items-center justify-center gap-2 rounded-full bg-slate-400 dark:bg-stone-400 md:h-[30px] md:w-14 ${
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
@@ -36,9 +36,9 @@ const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
         <div
           className={`${
             theme === "dark"
-              ? "animate bg-slate-50 -translate-x-3"
+              ? "animate -translate-x-3 bg-slate-50"
               : "animate translate-x-3 bg-slate-50"
-          } animate absolute w-4 h-4 md:w-6 md:h-6 z-10 rounded-full`}
+          } animate absolute z-10 h-4 w-4 rounded-full md:h-6 md:w-6`}
         ></div>
         <div className="absolute left-1 text-xs md:text-base">🌞</div>
         <div className="absolute right-1 text-xs md:text-base">🌚</div>

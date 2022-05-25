@@ -36,7 +36,7 @@ const Form = ({
             <button
               type="button"
               onClick={() => setLocked(!locked)}
-              className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
+              className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110 dark:text-stone-400"
             >
               <BsFillLockFill />
             </button>
@@ -44,7 +44,7 @@ const Form = ({
             <button
               type="button"
               onClick={() => setLocked(!locked)}
-              className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110"
+              className="animate z-10 cursor-pointer text-3xl text-slate-400 hover:scale-110 dark:text-stone-400"
             >
               <BsFillUnlockFill />
             </button>
@@ -53,7 +53,7 @@ const Form = ({
           {/* LINK SETTINGS BUTTON */}
           <button
             type="button"
-            className="animate z-10 cursor-pointer object-cover text-3xl text-slate-400 hover:rotate-45"
+            className="animate z-10 cursor-pointer object-cover text-3xl text-slate-400 hover:rotate-45 dark:text-stone-400"
             onClick={() => setLinkSettingsOpen(true)}
           >
             <BsFillGearFill />

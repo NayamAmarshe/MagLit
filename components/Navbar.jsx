@@ -19,13 +19,13 @@ const Navbar = () => {
 
   return (
     <div
-      className={`animate absolute z-30 h-full w-screen overflow-x-hidden flex flex-col items-center justify-center ${
+      className={`animate absolute z-30 flex h-full w-screen flex-col items-center justify-center overflow-x-hidden ${
         navbarOpen ? "translate-x-0" : "translate-x-full"
       } `}
       {...handlers}
     >
       <button
-        className="animate absolute top-5 right-5 z-30 text-xl text-slate-400 hover:text-red-500 md:text-3xl"
+        className="animate close-button absolute top-5 right-5 z-30 text-xl md:text-3xl"
         onClick={() => {
           setNavbarOpen(!navbarOpen);
         }}
@@ -33,19 +33,19 @@ const Navbar = () => {
         <BsFillXCircleFill />
       </button>
       <FAQSection />
-      <div className="animate mb-10 flex items-center justify-center gap-10 text-black dark:text-white">
+      <div className="animate mb-10 flex items-center justify-center gap-10 text-black dark:text-stone-300">
         <a
           href="mailto:maglit-admin@protonmail.com"
           target="_blank"
           rel="noreferrer"
-          className="animate flex flex-col items-center justify-center  hover:text-black/50 dark:hover:text-gray-500"
+          className="animate hover:text-stone/50 flex flex-col items-center  justify-center dark:hover:text-stone-500"
         >
           <ImMail4 className="text-3xl" />
           <p className="font-medium">Contact</p>
         </a>
         <a
           href="https://github.com/NayamAmarshe/MagLit"
-          className="animate flex flex-col items-center justify-center hover:text-black/50 dark:hover:text-gray-500"
+          className="animate flex flex-col items-center justify-center hover:text-black/50 dark:hover:text-stone-500"
           target="_blank"
           rel="noreferrer"
         >
@@ -54,8 +54,10 @@ const Navbar = () => {
         </a>
       </div>
       {/* FOOTER */}
-      <p className="text-slate-500 mb-1">Made with ⌨ and 🖱</p>
-      <p className="text-slate-500 mb-1 text-sm">
+      <p className="mb-1 text-slate-500 dark:text-stone-500">
+        Made with ⌨ and 🖱
+      </p>
+      <p className="mb-1 text-sm text-slate-500 dark:text-stone-500">
         Copyright © {new Date().getFullYear()} <b>MagLit</b>
       </p>
     </div>

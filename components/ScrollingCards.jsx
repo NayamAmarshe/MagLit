@@ -47,14 +47,14 @@ const ScrollingCards = () => {
       id="parent"
     >
       <button
-        className="animate absolute top-5 right-5 z-30 bg-transparent text-xl text-slate-400 hover:text-red-500 md:text-3xl"
+        className="animate close-button absolute top-5 right-5 z-30 bg-transparent text-xl md:text-3xl"
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
       >
         <BsFillXCircleFill />
       </button>
-      <h3 className="pb-4 text-center text-2xl font-bold text-slate-600 dark:text-slate-300">
+      <h3 className="pb-4 text-center text-2xl font-bold text-slate-600 dark:text-stone-300">
         LIT🔥LINKS
       </h3>
       {links.length !== 0 ? (
@@ -67,16 +67,16 @@ const ScrollingCards = () => {
             return (
               <div
                 key={linkIndex}
-                className={`animate mx-auto my-5 flex max-w-md flex-col rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-cyan-100/40 hover:shadow-cyan-200 ${
+                className={`animate mx-auto my-5 flex max-w-md flex-col rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-cyan-100/40 hover:shadow-cyan-200 dark:hover:bg-stone-600 ${
                   theme === "light" && colorsList[color]
-                } ${theme === "dark" && darkColorsList[color]} ${
+                } ${theme === "dark" && "bg-stone-700/40"} ${
                   theme === "light" && shadowList[color]
-                } ${theme === "dark" && darkShadowList[color]} `}
+                } ${theme === "dark" && "shadow-none"} `}
               >
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full truncate text-slate-700 dark:text-slate-200"
+                  className="w-full truncate text-slate-700 dark:text-stone-200"
                   href={typeof link === "string" ? link : link.link}
                   id="no-swipe"
                 >
@@ -84,7 +84,7 @@ const ScrollingCards = () => {
                 </a>
                 {link?.password?.length > 0 ? (
                   <p
-                    className="break-all	text-black/50 dark:text-white/50"
+                    className="break-all	text-black/50 dark:text-stone-500"
                     id="no-swipe"
                   >
                     Password: {link?.password}
@@ -95,7 +95,7 @@ const ScrollingCards = () => {
           })}
         </div>
       ) : (
-        <div className="rounded-lg bg-red-400 p-5 text-center text-white">
+        <div className="rounded-lg bg-red-400 p-5 text-center text-white dark:bg-red-900 dark:text-red-200">
           <h4 className="text-xl font-semibold leading-none">
             No links found.
           </h4>
