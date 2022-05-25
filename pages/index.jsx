@@ -172,7 +172,7 @@ export default function Home() {
     <div
       className={`${
         navbarOpen || cardsOpen ? "scale-90 blur-3xl" : "scale-100 blur-none"
-      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-black`}
+      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-stone-900`}
       onWheel={handleScroll}
       {...handlers}
     >
@@ -216,7 +216,7 @@ export default function Home() {
       {/* LIT LINKS BUTTON */}
       {/* DESKTOP */}
       <button
-        className="invisible absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 sm:visible"
+        className="invisible absolute bottom-5 flex flex-col items-center justify-center font-medium text-slate-400 dark:text-stone-400 sm:visible"
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
