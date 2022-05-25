@@ -34,13 +34,19 @@ const LinkOptionsModal = ({
         <h4 className="mt-5 text-2xl font-semibold text-slate-400 dark:text-stone-500">
           Link Options
         </h4>
-        <div className="mt-2 flex h-full flex-col items-center justify-center space-y-5 p-5">
+        <div className="mt-2 flex h-full w-full flex-col items-center justify-center space-y-5 p-5">
+          <p className="w-52 truncate text-slate-400 dark:text-stone-400">
+            {customSlug.length < 1
+              ? "https://maglit.me/example"
+              : "https://maglit.me/"}
+            <span className="text-green-500">{customSlug.toLowerCase()}</span>
+          </p>
           <input
             type="text"
             className="text-input"
             placeholder="Custom Link"
             value={customSlug}
-            onChange={(e) => setCustomSlug(e.target.value)}
+            onChange={(e) => setCustomSlug(e.target.value.toLowerCase())}
           />
           {/* TODO: ADD ONE TIME USE */}
           {/* <div className="flex items-center space-x-2">

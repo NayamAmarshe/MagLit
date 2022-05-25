@@ -231,7 +231,7 @@ export default function Home() {
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate visible absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 sm:invisible md:text-3xl`}
+        } animate visible absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 sm:invisible md:text-3xl`}
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
