@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       .json({ slug, message: "You entered an invalid link" });
   }
   if (!regex.test(link)) {
-    return res.status(400).json({ slug, message: "Please enter a valid link" });
+    return res.status(400).json({ slug, message: "Please make sure your link starts with http:// or https:// or magnet://" });
   }
   // check if slug is valid
   if (slug.length < 1) {
