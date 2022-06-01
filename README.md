@@ -1,6 +1,3 @@
-# UPDATE June 1 2022
-**MagLit is currently under attack mode. Someone DDoSed the website and my server host has suspended my account for unfair usage. The website runs on generous free services and in no way commercially viable. Hope whoever DDoSed the website, has had their fun.**
-
 ![Maglit Logo](https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg)
 
 # Mag🔥Lit
