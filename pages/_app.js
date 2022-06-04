@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider
           attribute="class"
           enableSystem="true"
-          defaultTheme="light"
+          defaultTheme="system"
         >
           <Layout>
             <Component {...pageProps} />
