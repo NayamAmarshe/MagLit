@@ -1,4 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
+import { StatusCodes } from "http-status-codes";
 import { db } from "../../utils/firebase";
 
 export default async function handler(req, res) {
@@ -14,9 +15,11 @@ export default async function handler(req, res) {
     if (documentSnapshot.exists()) {
       res.setHeader("Cache-Control", "s-maxage=86400");
       // return 401 if slug exists
-      return res.status(403).json({ message: "Slug already exists!" });
+      return res
+        .status(StatusCodes.FORBIDDEN)
+        .json({ message: "Slug already exists!" });
     } else {
-      return res.status(200).json({
+      return res.status(StatusCodes.OK).json({
         message: "Slug is unique!",
       });
     }
