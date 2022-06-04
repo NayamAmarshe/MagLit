@@ -40,6 +40,9 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [locked, setLocked] = useState(false);
   const [customSlug, setCustomSlug] = useState("");
+  const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
+  const linkRegex =
+    /(magnet:\?xt=urn:btih:[a-zA-Z0-9]*)|(^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,8}(:[0-9]{1,5})?(\/.*)?$)/;
 
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
@@ -109,11 +112,35 @@ export default function Home() {
       setPassword("");
     }
 
-    const loadingToast = toast.loading("Hold on, lighting up your link...");
     const slug = await generateSlug();
 
     const customOrDefaultSlug = customSlug.length == 0 ? slug : customSlug;
 
+    if (magnetLink.length < 1) {
+      toast.error("You entered an invalid link");
+      return;
+    }
+
+    if (!linkRegex.test(magnetLink)) {
+      toast.warn(
+        "Please make sure your link starts with 'http://' or 'https://' or 'magnet://'"
+      );
+      return;
+    }
+
+    if (slug.length < 1) {
+      toast.error("Invalid Slug!");
+      return;
+    }
+
+    if (!slugRegex.test(customOrDefaultSlug)) {
+      toast.error(
+        "The slug should only contain lowercase alphabets, numbers and hyphen"
+      );
+      return;
+    }
+
+    const loadingToast = toast.loading("Hold on, lighting up your link...");
     await axios
       .post(BASE_URL + "/api/create", {
         slug: customOrDefaultSlug,

@@ -12,6 +12,7 @@ export default async function handler(req, res) {
     const documentSnapshot = await getDoc(documentRef);
 
     if (documentSnapshot.exists()) {
+      res.setHeader("Cache-Control", "s-maxage=86400");
       // return 401 if slug exists
       return res.status(403).json({ message: "Slug already exists!" });
     } else {

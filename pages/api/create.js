@@ -1,9 +1,10 @@
 import { doc, getDoc, collection, setDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import CryptoJS from "crypto-js";
+import { StatusCodes } from "http-status-codes";
+
 const regex =
   /(magnet:\?xt=urn:btih:[a-zA-Z0-9]*)|(^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,8}(:[0-9]{1,5})?(\/.*)?$)/;
-
 const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
 export default async function handler(req, res) {
@@ -15,18 +16,27 @@ export default async function handler(req, res) {
   // check if link is valid
   if (link.length < 1) {
     return res
-      .status(400)
+      .status(StatusCodes.BAD_REQUEST)
       .json({ slug, message: "You entered an invalid link" });
   }
+
   if (!regex.test(link)) {
-    return res.status(400).json({ slug, message: "Please make sure your link starts with http:// or https:// or magnet://" });
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      slug,
+      message:
+        "Please make sure your link starts with http:// or https:// or magnet://",
+    });
   }
+
   // check if slug is valid
   if (slug.length < 1) {
-    return res.status(400).json({ message: "Invalid Slug!" });
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Invalid Slug!" });
   }
+
   if (!slugRegex.test(slug)) {
-    return res.status(400).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message:
         "The slug should only contain lowercase alphabets, numbers and hyphen",
     });
@@ -39,7 +49,10 @@ export default async function handler(req, res) {
 
     if (documentSnapshot.exists()) {
       // return 401 if slug exists
-      return res.status(403).json({ message: "Slug already exists" });
+      res.setHeader("Cache-Control", "s-maxage=86400");
+      return res
+        .status(StatusCodes.FORBIDDEN)
+        .json({ message: "Slug already exists" });
     } else {
       // create a new link
       const encryptedLink = CryptoJS.AES.encrypt(
@@ -55,13 +68,16 @@ export default async function handler(req, res) {
         protected: !(password === ""),
       });
 
-      return res.status(200).json({
+      res.setHeader("Cache-Control", "s-maxage=86400");
+      return res.status(StatusCodes.OK).json({
         message: "Link lit successfully",
         maglitLink: slug,
       });
     }
   } catch (err) {
-    console.log("Database Error", err);
-    throw err;
+    console.log("Error", err);
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Network Error, Please try again..." });
   }
 }

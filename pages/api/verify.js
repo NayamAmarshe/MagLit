@@ -1,4 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
+import { StatusCodes } from "http-status-codes";
 import { db } from "../../utils/firebase";
 import crypto from "crypto-js";
 
@@ -7,18 +8,20 @@ export default async function handler(req, res) {
   const collectionName =
     process.env.NODE_ENV === "production" ? "links" : "testLinks";
 
-  try {
-    if (slug.length < 1) {
-      return res.status(400).json({ message: "Link doesn't exist" });
-    }
+  if (slug.length < 1) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Link doesn't exist" });
+  }
 
+  try {
     // check firebase if slug exists
     const documentRef = doc(db, collectionName, slug);
     const documentSnapshot = await getDoc(documentRef);
 
     if (!documentSnapshot.exists()) {
-      // return 401 if slug doesn't exist
-      return res.status(404).json({
+      // return 404 if slug doesn't exist
+      return res.status(StatusCodes.NOT_FOUND).json({
         message: "Link doesn't exist",
         linkData: {
           link: "",
@@ -47,16 +50,22 @@ export default async function handler(req, res) {
 
       // check protected link
       if (decryptedLink.length < 1) {
-        return res.status(403).json({ message: "Wrong Password!", linkData });
+        return res
+          .status(StatusCodes.FORBIDDEN)
+          .json({ message: "Wrong Password!", linkData });
       }
 
       // if password is correct
-      return res.status(200).json({
+      res.setHeader("Cache-Control", "s-maxage=86400");
+      return res.status(StatusCodes.OK).json({
         message: "Link found!",
         linkData: JSON.parse(decryptedLink),
       });
     }
   } catch (err) {
     console.log(err);
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "Network Error, Please try again..." });
   }
 }

@@ -59,7 +59,7 @@ const RedirectPage = ({ slug }) => {
         limit={2}
       />
 
-      <div className="flex w-full flex-col gap-y-10 items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center gap-y-10">
         <MainLogo />
         <PasswordForm
           password={password}
