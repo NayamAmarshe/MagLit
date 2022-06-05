@@ -34,6 +34,8 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+MagLit uses Firebase Firestore as a database. You must first create a new Firebase project, then a file with the name `.env.local` in root directory of the project and fill the details as mentioned in `.ENV.LOCAL_EXAMPLE`.
+
 ## If you like the project
 You can sponsor this repository or    
 <a href="https://www.buymeacoffee.com/maglit">
