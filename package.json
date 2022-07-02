@@ -17,6 +17,7 @@
     "monkey-typewriter": "^1.0.14",
     "next": "12.1.0",
     "next-themes": "^0.1.1",
+    "qr-code-styling": "^1.6.0-rc.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
