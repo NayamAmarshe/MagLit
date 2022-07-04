@@ -12,8 +12,10 @@ import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
 import React, { useState } from "react";
 import { HiOutlineQrcode } from "react-icons/hi";
-import QRCodeModal from "./QRCodeModal";
-import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+const QRCode = dynamic(() => import("./QRCode"), {
+  ssr: false,
+});
 
 const ScrollingCards = () => {
   // !THIRD PARTY HOOKS
@@ -23,6 +25,7 @@ const ScrollingCards = () => {
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
   const [links, setLinks] = useRecoilState(linksState);
   const [showQRCodeModal, setShowQRCodeModal] = useState(false);
+  const [qrCodeIndex, setQRCodeIndex] = useState(null);
 
   const handlers = useSwipeable({
     onSwipedDown: (e) => {
@@ -92,17 +95,24 @@ const ScrollingCards = () => {
                       className="break-all	text-black/50 dark:text-stone-500"
                       id="no-swipe"
                     >
-                      Password: {link?.password}
+                      Password:{" "}
+                      <span className="select-all">{link?.password}</span>
                     </p>
                   ) : null}
+                  {showQRCodeModal && qrCodeIndex === linkIndex && (
+                    <QRCode
+                      qrCodeLink={typeof link === "string" ? link : link.link}
+                    />
+                  )}
                 </div>
-                <button type="button" onClick={() => setShowQRCodeModal(true)}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowQRCodeModal(!showQRCodeModal);
+                    setQRCodeIndex(linkIndex);
+                  }}
+                >
                   <HiOutlineQrcode />
-                  <AnimatePresence>
-                    {showQRCodeModal && (
-                      <QRCodeModal setShowQRCodeModal={setShowQRCodeModal} />
-                    )}
-                  </AnimatePresence>
                 </button>
               </div>
             );
