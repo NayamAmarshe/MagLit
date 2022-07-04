@@ -4,6 +4,8 @@
 🔥 MagLit - A **super fast** and **easy-to-use** **Free** and **Open Source Privacy Respecting Encrypted** Magnet/HTTP(s) Link Shortener with **Password Protection** 🔥
 ### https://maglit.me
 
+# 🔥 Featured on [Awesome Open Source](https://awesomeopensource.com/) and [Awesome Privacy](https://github.com/pluja/awesome-privacy#link-shorteners)
+
 ## MagLit Features
 
 ✅ 100% Easy to use\
