@@ -1,7 +1,9 @@
-import { AiFillCloseCircle } from "react-icons/ai";
+import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { Backdrop } from "./Backdrop";
 import React from "react";
+import { downloadQRCodeState } from "../atoms/downloadQRCodeState";
+import { useRecoilState } from "recoil";
 
 const LinkOptionsModal = ({
   customSlug,
@@ -9,6 +11,9 @@ const LinkOptionsModal = ({
   setLinkSettingsOpen,
   linkSettingsOpen,
 }) => {
+  const [downloadQRCode, setDownloadQRCode] =
+    useRecoilState(downloadQRCodeState);
+
   return (
     <Backdrop
       onClickHandler={() => {
@@ -48,19 +53,26 @@ const LinkOptionsModal = ({
             value={customSlug}
             onChange={(e) => setCustomSlug(e.target.value.toLowerCase())}
           />
-          {/* TODO: ADD ONE TIME USE */}
-          {/* <div className="flex items-center space-x-2">
-                  <p className="text-md text-slate-400">One Time Use?</p>
-                  <button onClick={() => setOneTimeUse(!oneTimeUse)}>
-                    <AiFillCheckCircle
-                      className={`${
-                        oneTimeUse
-                          ? "text-cyan-400"
-                          : "text-slate-300 hover:text-cyan-200"
-                      } animate text-2xl text-slate-300`}
-                    />
-                  </button>
-                </div> */}
+          <div className="flex flex-row flex-wrap items-center space-x-2">
+            <p className="text-md text-slate-400 dark:text-stone-500">
+              Download QR Code?
+            </p>
+            <button onClick={() => setDownloadQRCode(!downloadQRCode)}>
+              <AiFillCheckCircle
+                className={`${
+                  downloadQRCode
+                    ? "text-cyan-400 dark:text-stone-400"
+                    : "text-slate-300 hover:text-cyan-200 dark:text-stone-700"
+                } animate text-2xl text-slate-300`}
+              />
+            </button>
+          </div>
+          <button
+            className="submit-button"
+            onClick={() => setLinkSettingsOpen(false)}
+          >
+            Save 💾
+          </button>
         </div>
       </motion.div>
     </Backdrop>

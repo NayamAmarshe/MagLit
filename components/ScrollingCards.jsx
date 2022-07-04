@@ -10,7 +10,12 @@ import { linksState } from "../atoms/linksState";
 import { useSwipeable } from "react-swipeable";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useState } from "react";
+import { HiOutlineQrcode } from "react-icons/hi";
+import dynamic from "next/dynamic";
+const QRCode = dynamic(() => import("./QRCode"), {
+  ssr: false,
+});
 
 const ScrollingCards = () => {
   // !THIRD PARTY HOOKS
@@ -19,6 +24,8 @@ const ScrollingCards = () => {
   // !GLOBAL
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
   const [links, setLinks] = useRecoilState(linksState);
+  const [showQRCodeModal, setShowQRCodeModal] = useState(false);
+  const [qrCodeIndex, setQRCodeIndex] = useState(null);
 
   const handlers = useSwipeable({
     onSwipedDown: (e) => {
@@ -67,29 +74,46 @@ const ScrollingCards = () => {
             return (
               <div
                 key={linkIndex}
-                className={`animate mx-auto my-5 flex max-w-md flex-col rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-cyan-100/40 hover:shadow-cyan-200 dark:hover:bg-stone-600 ${
+                className={`animate mx-auto my-5 flex max-w-md flex-col items-center justify-between gap-5 rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-cyan-100/40 hover:shadow-cyan-200 dark:hover:bg-stone-600 sm:flex-row ${
                   theme === "light" && colorsList[color]
                 } ${theme === "dark" && "bg-stone-700/40"} ${
                   theme === "light" && shadowList[color]
                 } ${theme === "dark" && "shadow-none"} `}
               >
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full truncate text-slate-700 dark:text-stone-200"
-                  href={typeof link === "string" ? link : link.link}
-                  id="no-swipe"
-                >
-                  {typeof link === "string" ? link : link.link}
-                </a>
-                {link?.password?.length > 0 ? (
-                  <p
-                    className="break-all	text-black/50 dark:text-stone-500"
+                <div className="flex w-full flex-col">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full truncate text-slate-700 dark:text-stone-200"
+                    href={typeof link === "string" ? link : link.link}
                     id="no-swipe"
                   >
-                    Password: {link?.password}
-                  </p>
-                ) : null}
+                    {typeof link === "string" ? link : link.link}
+                  </a>
+                  {link?.password?.length > 0 ? (
+                    <p
+                      className="break-all	text-black/50 dark:text-stone-500"
+                      id="no-swipe"
+                    >
+                      Password:{" "}
+                      <span className="select-all">{link?.password}</span>
+                    </p>
+                  ) : null}
+                  {showQRCodeModal && qrCodeIndex === linkIndex && (
+                    <QRCode
+                      qrCodeLink={typeof link === "string" ? link : link.link}
+                    />
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowQRCodeModal(!showQRCodeModal);
+                    setQRCodeIndex(linkIndex);
+                  }}
+                >
+                  <HiOutlineQrcode />
+                </button>
               </div>
             );
           })}
