@@ -8,7 +8,7 @@ const MainLogo = () => {
         <h1 className="flex flex-wrap items-center pb-5 text-center text-6xl font-bold text-slate-400 dark:text-stone-400 md:justify-center xs:justify-center xs:text-8xl">
           Mag
           <div className="relative h-16 w-16 xs:h-24 xs:w-24">
-            <Image layout="fill" src="/fire.png" alt="MagLit Logo" />
+            <Image layout="fill" src="/fire.png" alt="MagLit Logo" priority />
           </div>
           Lit
         </h1>
