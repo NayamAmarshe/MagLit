@@ -27,6 +27,7 @@ const QRCode = ({ qrCodeLink, instantDownload }) => {
     qrCode.update({
       data: qrCodeLink,
     });
+
     if (instantDownload) {
       qrCode.download({
         extension: fileExt,

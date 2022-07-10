@@ -3,14 +3,14 @@ import {
   shadowList,
   darkColorsList,
   darkShadowList,
-} from "../utils/bgColors";
-import { cardsOpenState } from "../atoms/cardsOpenState";
+} from "../../utils/bgColors";
+import { cardsOpenState } from "../../atoms/cardsOpenState";
 import { BsFillXCircleFill } from "react-icons/bs";
-import { linksState } from "../atoms/linksState";
+import { linksState } from "../../atoms/linksState";
 import { useSwipeable } from "react-swipeable";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineQrcode } from "react-icons/hi";
 import dynamic from "next/dynamic";
 const QRCode = dynamic(() => import("./QRCode"), {
@@ -24,7 +24,6 @@ const ScrollingCards = () => {
   // !GLOBAL
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
   const [links, setLinks] = useRecoilState(linksState);
-  const [showQRCodeModal, setShowQRCodeModal] = useState(false);
   const [qrCodeIndex, setQRCodeIndex] = useState(null);
 
   const handlers = useSwipeable({
@@ -99,7 +98,7 @@ const ScrollingCards = () => {
                       <span className="select-all">{link?.password}</span>
                     </p>
                   ) : null}
-                  {showQRCodeModal && qrCodeIndex === linkIndex && (
+                  {qrCodeIndex === linkIndex && (
                     <QRCode
                       qrCodeLink={typeof link === "string" ? link : link.link}
                     />
@@ -108,8 +107,11 @@ const ScrollingCards = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setShowQRCodeModal(!showQRCodeModal);
-                    setQRCodeIndex(linkIndex);
+                    if (qrCodeIndex === null) {
+                      setQRCodeIndex(linkIndex);
+                    } else {
+                      setQRCodeIndex(null);
+                    }
                   }}
                 >
                   <HiOutlineQrcode />
