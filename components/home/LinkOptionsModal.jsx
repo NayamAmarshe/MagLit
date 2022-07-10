@@ -1,9 +1,9 @@
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
-import { motion } from "framer-motion";
-import { Backdrop } from "./Backdrop";
-import React from "react";
-import { downloadQRCodeState } from "../atoms/downloadQRCodeState";
+import { downloadQRCodeState } from "../../atoms/downloadQRCodeState";
 import { useRecoilState } from "recoil";
+import { motion } from "framer-motion";
+import { Backdrop } from "../Backdrop";
+import React from "react";
 
 const LinkOptionsModal = ({
   customSlug,
@@ -61,9 +61,9 @@ const LinkOptionsModal = ({
               <AiFillCheckCircle
                 className={`${
                   downloadQRCode
-                    ? "text-cyan-400 dark:text-stone-400"
-                    : "text-slate-300 hover:text-cyan-200 dark:text-stone-700"
-                } animate text-2xl text-slate-300`}
+                    ? "text-cyan-300 dark:text-stone-400"
+                    : "text-slate-300 dark:text-stone-700"
+                } animate text-2xl`}
               />
             </button>
           </div>

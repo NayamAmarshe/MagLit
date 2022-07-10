@@ -1,12 +1,11 @@
+import { navbarState } from "../../atoms/navbarAtom";
 import { BsFillXCircleFill } from "react-icons/bs";
-import { navbarState } from "../atoms/navbarAtom";
 import { useSwipeable } from "react-swipeable";
 import { FaGithub } from "react-icons/fa";
 import { ImMail4 } from "react-icons/im";
 import { useRecoilState } from "recoil";
 import React, { useState } from "react";
 import FAQSection from "./FAQSection";
-import MenuCard from "./MenuCard";
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);

@@ -1,10 +1,10 @@
-import TopRightButtons from "../components/TopRightButtons";
+import TopRightButtons from "../components/home/TopRightButtons";
 import { toast, ToastContainer } from "react-toastify";
-import PasswordForm from "../components/PasswordForm";
+import PasswordForm from "../components/home/PasswordForm";
 import { navbarState } from "../atoms/navbarAtom";
 import { BsFillGridFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
-import MainLogo from "../components/MainLogo";
+import MainLogo from "../components/home/MainLogo";
 import { BASE_URL } from "../utils/config";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
