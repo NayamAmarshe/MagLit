@@ -1,18 +1,14 @@
-import {
-  colorsList,
-  shadowList,
-  darkColorsList,
-  darkShadowList,
-} from "../../utils/bgColors";
+import { colorsList, shadowList } from "../../utils/bgColors";
 import { cardsOpenState } from "../../atoms/cardsOpenState";
-import { BsFillXCircleFill } from "react-icons/bs";
 import { linksState } from "../../atoms/linksState";
+import React, { useEffect, useState } from "react";
+import { BsFillXCircleFill } from "react-icons/bs";
+import { HiOutlineQrcode } from "react-icons/hi";
 import { useSwipeable } from "react-swipeable";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
-import { HiOutlineQrcode } from "react-icons/hi";
 import dynamic from "next/dynamic";
+
 const QRCode = dynamic(() => import("./QRCode"), {
   ssr: false,
 });

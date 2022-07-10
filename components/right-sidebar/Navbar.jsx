@@ -1,5 +1,5 @@
-import { BsFillXCircleFill } from "react-icons/bs";
 import { navbarState } from "../../atoms/navbarAtom";
+import { BsFillXCircleFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
 import { FaGithub } from "react-icons/fa";
 import { ImMail4 } from "react-icons/im";

@@ -1,9 +1,9 @@
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
+import { downloadQRCodeState } from "../../atoms/downloadQRCodeState";
+import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 import { Backdrop } from "../Backdrop";
 import React from "react";
-import { downloadQRCodeState } from "../../atoms/downloadQRCodeState";
-import { useRecoilState } from "recoil";
 
 const LinkOptionsModal = ({
   customSlug,

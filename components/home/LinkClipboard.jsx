@@ -1,8 +1,9 @@
-import { FiCopy } from "react-icons/fi";
-import React from "react";
-import { useRecoilState } from "recoil";
 import { downloadQRCodeState } from "../../atoms/downloadQRCodeState";
+import { FiCopy } from "react-icons/fi";
+import { useRecoilState } from "recoil";
 import dynamic from "next/dynamic";
+import React from "react";
+
 const QRCode = dynamic(() => import("../bottom-sidebar/QRCode"), {
   ssr: false,
 });
