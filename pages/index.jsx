@@ -267,7 +267,7 @@ export default function Home() {
       </button>
 
       <a
-        href="https://vercel.com/?utm_source=maglit&utm_campaign=oss"
+        href="https://vercel.com/?utm_source=mag-lit&utm_campaign=oss"
         rel="noreferrer"
         target="_blank"
       >
