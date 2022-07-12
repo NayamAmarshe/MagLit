@@ -1,4 +1,8 @@
-![Maglit Logo](https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg)
+<div align="center"><a href="https://vercel.com/?utm_source=maglit&utm_campaign=oss"><img src="https://user-images.githubusercontent.com/25067102/178521042-fc564081-9b44-4988-aa80-eb53f57642d5.svg" /></a>
+</div>
+   
+<div align="center"><img src="https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg" />
+</div>
 
 # Mag🔥Lit
 🔥 MagLit - A **super fast** and **easy-to-use** **Free** and **Open Source Privacy Respecting Encrypted** Magnet/HTTP(s) Link Shortener with **Password Protection** 🔥
