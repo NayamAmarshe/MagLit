@@ -274,7 +274,7 @@ export default function Home() {
         <img
           src="/powered-by-vercel.svg"
           alt="Powered by Vercel"
-          className="absolute right-5 bottom-5"
+          className="absolute right-5 bottom-5 w-52 mix-blend-exclusion"
         />
       </a>
 
