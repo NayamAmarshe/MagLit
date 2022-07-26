@@ -37,7 +37,7 @@
     dark:bg-stone-800 dark:text-stone-400 dark:ring-stone-700 dark:placeholder:text-stone-500 hover:dark:shadow-[#131110]  focus:dark:shadow-[#131110] focus:dark:ring-stone-800;
   }
   .password-input {
-    @apply input-box bg-orange-100 text-orange-500 ring-2 ring-orange-200  hover:shadow-orange-200 focus:shadow-orange-300 focus:ring-orange-100 dark:bg-red-900 dark:text-red-400 dark:ring-red-700 dark:placeholder:text-red-500 dark:hover:shadow-black dark:focus:shadow-[#250000] dark:focus:ring-red-900;
+    @apply input-box bg-orange-100 text-orange-500 ring-2 ring-orange-200  hover:shadow-orange-200 focus:shadow-orange-300 focus:ring-orange-100 dark:bg-orange-900 dark:text-orange-400 dark:ring-orange-700 dark:placeholder:text-orange-500 dark:hover:shadow-black dark:focus:shadow-[#250f00] dark:focus:ring-orange-900;
   }
   .checkbox-input {
     @apply h-5 w-5 cursor-pointer appearance-none rounded-full bg-slate-300 checked:bg-cyan-300;
