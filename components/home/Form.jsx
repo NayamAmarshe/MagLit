@@ -1,4 +1,7 @@
+import { useState } from "react";
 import {
+  BsFillEyeFill,
+  BsFillEyeSlashFill,
   BsFillGearFill,
   BsFillLockFill,
   BsFillUnlockFill,
@@ -14,6 +17,7 @@ const Form = ({
   handleSubmit,
   setLinkSettingsOpen,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <form
       onSubmit={handleSubmit}
@@ -66,10 +70,10 @@ const Form = ({
             !locked
               ? "animate h-0 -translate-y-7 opacity-0"
               : "animate h-20 translate-y-0 opacity-100"
-          } flex items-center justify-center`}
+          } relative flex items-center justify-center`}
         >
           <input
-            type="text"
+            type={showPassword ? "text" : "password"}
             className="password-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -77,6 +81,21 @@ const Form = ({
             disabled={!locked}
             id="no-swipe"
           />
+          {showPassword ? (
+            <BsFillEyeFill
+              className="absolute right-3 cursor-pointer text-xl text-orange-500 dark:text-orange-400"
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            />
+          ) : (
+            <BsFillEyeSlashFill
+              className="absolute right-3 cursor-pointer text-xl text-orange-500 dark:text-orange-400"
+              onClick={() => {
+                setShowPassword(!showPassword);
+              }}
+            />
+          )}
         </div>
       </div>
 
