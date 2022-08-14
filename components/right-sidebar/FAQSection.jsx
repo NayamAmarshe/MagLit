@@ -29,6 +29,23 @@ const FAQSection = () => {
           hoverShadowColor="hover:shadow-green-200"
         />
         <MenuCard
+          heading="Why should I use MagLit? 🤓"
+          content={[
+            <b key={1}>
+              3 Reasons:
+              <br />
+            </b>,
+            "1 => MagLit keeps everything encrypted. This means nobody except you has access to your links, especially when you use your own password.",
+            <br />,
+            "2 => MagLit lets you password protect your links and also lets you use custom links. All without any sign-up or account registration.",
+            <br />,
+            "3 => MagLit protects your privacy. 100% Free and Open Source, Verifiable website deployments. No data mining, no data selling.",
+          ]}
+          bgColor="bg-amber-100/40 dark:bg-stone-700/40"
+          shadowColor="shadow-amber-200 dark:shadow-none"
+          hoverShadowColor="hover:shadow-amber-200"
+        />
+        <MenuCard
           heading="Is it open-source? 🌚"
           content={[
             <b key={1}>Yes 100%</b>,
