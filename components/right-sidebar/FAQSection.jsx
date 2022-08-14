@@ -63,6 +63,15 @@ const FAQSection = () => {
           hoverShadowColor="hover:shadow-red-200"
         />
         <MenuCard
+          heading="What's a 'MagLit'? 😅"
+          content={[
+            "The word MagLit is derived from Magnet and Lit. MagLit started out as a link shortener for torrent magnet links only. Later, I made MagLit available for HTTP(s) links but the name stayed :)",
+          ]}
+          bgColor="bg-green-100/40 dark:bg-stone-700/40"
+          shadowColor="shadow-green-200 dark:shadow-none"
+          hoverShadowColor="hover:shadow-green-200"
+        />
+        <MenuCard
           heading="My adblock detected a tracker! 🤥"
           content={[
             "Don't worry, MagLit uses open source and privacy respecting",
