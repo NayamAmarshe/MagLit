@@ -33,12 +33,12 @@ export default async function handler(req, res) {
       const linkData = documentSnapshot.data();
       const { link } = linkData;
       const isProtected = linkData.protected;
-      let isBlocked = null;
+      let isBlocked = false;
       isBlocked = linkData?.blocked;
 
       let decryptedLink = "";
 
-      if (isBlocked !== null && isBlocked === true) {
+      if (isBlocked === true) {
         return res.status(StatusCodes.NOT_FOUND).json({
           message: "Link doesn't exist",
           linkData: {
