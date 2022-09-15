@@ -90,9 +90,9 @@ export async function getServerSideProps(context) {
     })
     .catch((error) => {
       // save response data
-      responseData = error.response.data;
+      responseData = error?.response?.data;
       // check if link is protected
-      isProtected = error.response.data.linkData.protected;
+      isProtected = responseData?.linkData?.protected;
     });
 
   // if returned link is empty, then 404
