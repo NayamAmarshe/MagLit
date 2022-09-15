@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         message: "Link doesn't exist",
         linkData: {
           link: "",
-          protected: "false",
+          protected: false,
         },
       });
     } else {
@@ -33,7 +33,18 @@ export default async function handler(req, res) {
       const linkData = documentSnapshot.data();
       const { link } = linkData;
       const isProtected = linkData.protected;
+      const isBlocked = linkData.blocked;
       let decryptedLink = "";
+
+      if (isBlocked) {
+        return res.status(StatusCodes.NOT_FOUND).json({
+          message: "Link doesn't exist",
+          linkData: {
+            link: "",
+            protected: false,
+          },
+        });
+      }
 
       // set passwords
       const withPassword = process.env.SECRET_KEY + password;
