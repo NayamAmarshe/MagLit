@@ -75,7 +75,7 @@ export default RedirectPage;
 
 export async function getServerSideProps(context) {
   const slug = context.params.slug;
-  let responseData;
+  let responseData = null;
   let isProtected = false;
 
   // get axios response, verify slug
@@ -96,7 +96,7 @@ export async function getServerSideProps(context) {
     });
 
   // if returned link is empty, then 404
-  if (responseData.linkData.link.length < 1) {
+  if (!responseData || responseData?.linkData?.link?.length < 1) {
     return {
       notFound: true,
     };
