@@ -2,6 +2,7 @@ import { navbarState } from "../../atoms/navbarAtom";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
 import { FaGithub } from "react-icons/fa";
+import { SiBuymeacoffee } from "react-icons/si";
 import { ImMail4 } from "react-icons/im";
 import { useRecoilState } from "recoil";
 import React, { useState } from "react";
@@ -50,6 +51,15 @@ const Navbar = () => {
         >
           <FaGithub className="text-3xl" />
           <p className="font-medium">GitHub</p>
+        </a>
+        <a
+          href="https://buymeacoffee.com/fossisthefuture"
+          className="animate flex flex-col items-center justify-center hover:text-black/50 dark:hover:text-stone-500"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <SiBuymeacoffee className="text-3xl" />
+          <p className="break-before-all font-medium">Donate</p>
         </a>
       </div>
       {/* FOOTER */}
