@@ -1,6 +1,13 @@
 <div align="center"><a href="https://vercel.com/?utm_source=mag-lit&utm_campaign=oss"><img src="https://user-images.githubusercontent.com/25067102/178521042-fc564081-9b44-4988-aa80-eb53f57642d5.svg" /></a>
 
-MagLit has been sponsored by Vercel. Many thanks to Vercel!
+MagLit has been sponsored by Vercel. Many thanks!
+
+
+**For updates and more:**   
+<a href="https://t.me/iamnayam">
+<img src="https://user-images.githubusercontent.com/25067102/209297095-a3db856f-b760-40bb-a68e-f3a3086e18c7.png" height="150px" />
+</a>
+
 </div>
 <div align="center"><img src="https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg" />
 </div>
