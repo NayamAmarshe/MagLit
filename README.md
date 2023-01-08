@@ -2,12 +2,6 @@
 
 MagLit has been sponsored by Vercel. Many thanks!
 
-
-**For updates and more:**   
-<a href="https://t.me/iamnayam">
-<img src="https://user-images.githubusercontent.com/25067102/209297095-a3db856f-b760-40bb-a68e-f3a3086e18c7.png" height="150px" />
-</a>
-
 </div>
 <div align="center"><img src="https://user-images.githubusercontent.com/25067102/165503689-d1d9eb36-7f00-423b-bf38-89698deb9d3e.jpg" />
 </div>
