@@ -66,6 +66,4 @@ MagLit uses Firebase Firestore as a database. You must first create a new Fireba
 <img alt="bmc-button" src="https://user-images.githubusercontent.com/25067102/154570688-9e143f2b-fee3-4b05-a9d2-a7a3013b2b51.png" />
 </a>
 
-<img width="240" src="https://user-images.githubusercontent.com/25067102/154571600-a0d030db-341d-4b21-b688-f3b6c5e7cd2e.jpg" />
-
 ### 🔥 https://maglit.me 🔥
