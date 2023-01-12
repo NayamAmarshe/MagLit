@@ -9,7 +9,7 @@ import { BASE_URL } from "../utils/config";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { useState } from "react";
-import axios from "axios";
+import { StatusCodes } from "http-status-codes";
 
 const RedirectPage = ({ slug }) => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
@@ -24,13 +24,29 @@ const RedirectPage = ({ slug }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post(BASE_URL + "/api/verify", { slug, password })
+
+    await fetch(BASE_URL + "/api/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ slug, password }),
+    })
       .then((response) => {
-        router.push(response.data.linkData.link);
+        if (!response.ok) {
+          return response.json().then((response) => {
+            throw new Error(response.message);
+          });
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        router.push(data?.linkData?.link);
       })
       .catch((error) => {
-        toast.error("Wrong Password");
+        console.log("🚀 => file: [slug].jsx:61 => error", error);
+        toast.error(error.message);
       });
   };
 
@@ -75,34 +91,42 @@ export default RedirectPage;
 
 export async function getServerSideProps(context) {
   const slug = context.params.slug;
-  let responseData = null;
   let isProtected = false;
+  let notFound = false;
+  let link = "";
 
-  // get axios response, verify slug
-  await axios
-    .post(BASE_URL + "/api/verify", {
+  await fetch(BASE_URL + "/api/verify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       slug: slug,
       password: "",
-    })
+    }),
+  })
     .then((response) => {
-      // save response data
-      responseData = response.data;
-      console.log(responseData);
+      if (!response.ok) {
+        switch (response.status) {
+          case StatusCodes.NOT_FOUND:
+            notFound = true;
+            break;
+          case StatusCodes.UNAUTHORIZED:
+            isProtected = true;
+            break;
+        }
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      link = data?.linkData?.link;
     })
     .catch((error) => {
-      // save response data
-      responseData = error?.response?.data;
-      console.error(responseData);
-      // check if link is protected
-      isProtected = responseData?.linkData?.protected;
+      console.log("🚀 => file: [slug].jsx:137 => error", error);
     });
 
-  if (!responseData) {
-    return {
-      notFound: true,
-    };
-  }
-  if (responseData?.linkData?.link?.length < 1) {
+  if (notFound) {
     return {
       notFound: true,
     };
@@ -118,10 +142,10 @@ export async function getServerSideProps(context) {
     };
   } else {
     // if link isn't protected, redirect
-    context.res.setHeader("Cache-Control", "s-maxage=86400");
+    context.res.setHeader("Cache-Control", "s-maxage=176400");
     return {
       redirect: {
-        destination: responseData.linkData.link,
+        destination: link,
         permanent: false,
       },
     };

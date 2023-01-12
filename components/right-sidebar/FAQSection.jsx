@@ -55,7 +55,7 @@ const FAQSection = () => {
           </div>
         </a>
 
-        <a
+        {/* <a
           href="https://github.com/NayamAmarshe/please"
           target="_blank"
           rel="noreferrer"
@@ -72,7 +72,7 @@ const FAQSection = () => {
               A beautiful New Tab Page and Todo List Manager for your Terminal
             </p>
           </div>
-        </a>
+        </a> */}
 
         <MenuCard
           heading="The hell is this? 🤔"
@@ -86,6 +86,15 @@ const FAQSection = () => {
                 encrypt them using your own secret key.
               </b>
             </i>,
+          ]}
+          bgColor="bg-green-100/40 dark:bg-stone-700/40"
+          shadowColor="shadow-green-200 dark:shadow-none"
+          hoverShadowColor="hover:shadow-green-200"
+        />
+        <MenuCard
+          heading="What's a 'MagLit'? 😅"
+          content={[
+            "The word MagLit is derived from Magnet and Lit. MagLit started out as a link shortener for torrent magnet links. Later, I made MagLit available for HTTP(s) links but the name stayed :)",
           ]}
           bgColor="bg-green-100/40 dark:bg-stone-700/40"
           shadowColor="shadow-green-200 dark:shadow-none"
@@ -124,9 +133,7 @@ const FAQSection = () => {
           content={[
             "1. You can submit PRs on GitHub to improve MagLit's codebase or ",
             <br key={0}></br>,
-            "2. You can buy me a coffee by tipping some",
-            <b key={1}> BATs </b>,
-            "from your Brave Browser or use",
+            "2. You can donate here:",
             <a
               key={2}
               target="_blank"
@@ -141,15 +148,6 @@ const FAQSection = () => {
           bgColor="bg-red-100/40 dark:bg-stone-700/40"
           shadowColor="shadow-red-200 dark:shadow-none"
           hoverShadowColor="hover:shadow-red-200"
-        />
-        <MenuCard
-          heading="What's a 'MagLit'? 😅"
-          content={[
-            "The word MagLit is derived from Magnet and Lit. MagLit started out as a link shortener for torrent magnet links only. Later, I made MagLit available for HTTP(s) links but the name stayed :)",
-          ]}
-          bgColor="bg-green-100/40 dark:bg-stone-700/40"
-          shadowColor="shadow-green-200 dark:shadow-none"
-          hoverShadowColor="hover:shadow-green-200"
         />
         <MenuCard
           heading="My adblock detected a tracker! 🤥"

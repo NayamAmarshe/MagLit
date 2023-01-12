@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`animate absolute z-30 flex h-full w-screen flex-col items-center justify-center overflow-x-hidden ${
+      className={`animate absolute z-30 flex h-full w-screen flex-col items-center justify-center overflow-x-hidden bg-opacity-50 ${
         navbarOpen ? "translate-x-0" : "translate-x-full"
       } `}
       {...handlers}
