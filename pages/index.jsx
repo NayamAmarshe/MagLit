@@ -21,7 +21,6 @@ import { useTheme } from "next-themes";
 import Form from "../components/home/Form";
 import { useEffect } from "react";
 import { useState } from "react";
-import wretch from "wretch";
 
 export default function Home() {
   // !GLOBAL
