@@ -58,18 +58,22 @@ export default async function handler(req, res) {
           isProtected ? withPassword : withoutPassword
         ).toString(crypto.enc.Utf8);
       } catch (error) {
-        console.log(error);
+        console.warn("Error decrypting, possibly wrong password");
       }
 
       // check protected link
       if (decryptedLink.length < 1) {
-        return res
-          .status(StatusCodes.FORBIDDEN)
-          .json({ message: "Wrong Password!", linkData });
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+          message: "Wrong Password!",
+          linkData: {
+            ...linkData,
+            link: "",
+          },
+        });
       }
 
       // if password is correct
-      res.setHeader("Cache-Control", "s-maxage=86400");
+      res.setHeader("Cache-Control", "s-maxage=176400");
       return res.status(StatusCodes.OK).json({
         message: "Link found!",
         linkData: JSON.parse(decryptedLink),

@@ -8,7 +8,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^0.24.0",
     "crypto-js": "^4.1.1",
     "firebase": "^9.6.2",
     "framer-motion": "^6.3.3",
@@ -23,8 +22,7 @@
     "react-spinners": "^0.11.0",
     "react-swipeable": "^6.2.0",
     "react-toastify": "^8.1.0",
-    "recoil": "^0.6.1",
-    "sharp": "^0.30.7"
+    "recoil": "^0.6.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",

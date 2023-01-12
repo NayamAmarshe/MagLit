@@ -49,7 +49,7 @@ export default async function handler(req, res) {
 
     if (documentSnapshot.exists()) {
       // return 401 if slug exists
-      res.setHeader("Cache-Control", "s-maxage=86400");
+      res.setHeader("Cache-Control", "s-maxage=176400");
       return res
         .status(StatusCodes.FORBIDDEN)
         .json({ message: "Slug already exists" });
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
         protected: !(password === ""),
       });
 
-      res.setHeader("Cache-Control", "s-maxage=86400");
+      res.setHeader("Cache-Control", "s-maxage=176400");
       return res.status(StatusCodes.OK).json({
         message: "Link lit successfully",
         maglitLink: slug,

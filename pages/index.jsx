@@ -21,7 +21,6 @@ import { useTheme } from "next-themes";
 import Form from "../components/home/Form";
 import { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
 
 export default function Home() {
   // !GLOBAL
@@ -52,12 +51,21 @@ export default function Home() {
   // !FUNCTIONS
   const generateSlug = async () => {
     let slug = Monkey.word();
-    await axios
-      .post(BASE_URL + "/api/available", { slug: slug })
+    // Create a fetch API post request to /api/available
+    await fetch(BASE_URL + "/api/available", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ slug: slug }),
+    })
       .then((response) => {
         if (response.status !== 200) {
           return generateSlug();
         }
+      })
+      .catch((error) => {
+        console.log("🚀 => file: index.jsx:73 => err", error);
       });
 
     return slug;
@@ -141,14 +149,31 @@ export default function Home() {
     }
 
     const loadingToast = toast.loading("Hold on, lighting up your link...");
-    await axios
-      .post(BASE_URL + "/api/create", {
+
+    await fetch(BASE_URL + "/api/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         slug: customOrDefaultSlug,
         password: locked ? password : "",
         link: magnetLink,
+      }),
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          return response.json().then((response) => {
+            throw new Error(response.message);
+          });
+        } else {
+          return response.json();
+        }
       })
       .then((response) => {
         setOutputLink(BASE_URL + "/" + customOrDefaultSlug);
+
+        console.log("🚀 => file: index.jsx:175 => response", response);
 
         // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
@@ -162,7 +187,7 @@ export default function Home() {
         setLinks(linksInStorage);
         // SHOW TOAST
         toast.update(loadingToast, {
-          render: response.data.message,
+          render: response.message,
           type: "success",
           isLoading: false,
           position: "top-center",
@@ -178,8 +203,10 @@ export default function Home() {
         copyToClipboard();
       })
       .catch((error) => {
+        console.log("🚀 => file: index.jsx:206 => error", error);
+
         toast.update(loadingToast, {
-          render: error.response.data.message,
+          render: error.message,
           type: "error",
           isLoading: false,
           position: "top-center",

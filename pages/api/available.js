@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const documentSnapshot = await getDoc(documentRef);
 
     if (documentSnapshot.exists()) {
-      res.setHeader("Cache-Control", "s-maxage=86400");
+      res.setHeader("Cache-Control", "s-maxage=176400");
       // return 401 if slug exists
       return res
         .status(StatusCodes.FORBIDDEN)
@@ -25,6 +25,8 @@ export default async function handler(req, res) {
     }
   } catch (err) {
     console.log("Database Error", err);
-    throw err;
+    return res
+      .status(StatusCodes.BAD_GATEWAY)
+      .json({ message: "Database Error, Please try again..." });
   }
 }
