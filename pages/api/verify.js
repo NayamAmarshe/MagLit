@@ -39,7 +39,6 @@ export default async function handler(req, res) {
       let decryptedLink = "";
 
       if (isBlocked === true) {
-        // res.setHeader("Cache-Control", "s-maxage=176400");
         return res.status(StatusCodes.NOT_FOUND).json({
           message: "Link doesn't exist",
           linkData: {
@@ -74,7 +73,7 @@ export default async function handler(req, res) {
       }
 
       // if password is correct
-      res.setHeader("Cache-Control", "s-maxage=86400");
+      res.setHeader("Cache-Control", "s-maxage=176400");
       return res.status(StatusCodes.OK).json({
         message: "Link found!",
         linkData: JSON.parse(decryptedLink),

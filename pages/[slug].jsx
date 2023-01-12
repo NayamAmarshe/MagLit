@@ -134,7 +134,7 @@ export async function getServerSideProps(context) {
 
   // if link is protected, input password
   if (isProtected) {
-    context.res.setHeader("Cache-Control", "s-maxage=86400");
+    context.res.setHeader("Cache-Control", "s-maxage=176400");
     return {
       props: {
         slug,
