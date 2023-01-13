@@ -25,8 +25,8 @@ MagLit has been sponsored by Vercel. Many thanks!
 ✅ 100% Private\
 ✅ 0% Personal Data stored
 
-New Features
-🆕 MagLit now supports custom links!
+New Features   
+🆕 MagLit now supports custom links!   
 🆕 MagLit now lets you generate QR Codes for your lit links!
 
 **WYSIWYG:** [MagLit builds are fully verifiable: The code in this repository is the same code that's deployed on MagLit.me, Nothing added, nothing ripped, so you know it's 100% trusted ;) ](https://github.com/NayamAmarshe/MagLit/deployments)
@@ -37,8 +37,6 @@ Clone the project and install dependencies using:
 
 ```bash
 npm install
-# or
-yarn install
 ```
 You need npm or yarn installed for this.
 
@@ -46,8 +44,6 @@ Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -58,7 +54,7 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Read more about [API routes](https://nextjs.org/docs/api-routes/introduction).
 
-MagLit uses Firebase Firestore as a database. You must first create a new Firebase project, then a file with the name `.env.local` in root directory of the project and fill the details as mentioned in `.ENV.LOCAL_EXAMPLE`.
+MagLit uses Firebase Firestore as a database. You must first create a new Firebase project, then a file with the name `.env.local` in root directory of the project and fill the details as mentioned in `.env.local.example`.
 
 ## If you like the project
 
