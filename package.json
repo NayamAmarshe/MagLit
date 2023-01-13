@@ -5,7 +5,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-docker-image": "sudo docker build -t maglit .",
+    "start-docker-image": "sudo docker run -p 3000:3000 maglit"
   },
   "dependencies": {
     "crypto-js": "^4.1.1",
@@ -22,7 +24,8 @@
     "react-spinners": "^0.11.0",
     "react-swipeable": "^6.2.0",
     "react-toastify": "^8.1.0",
-    "recoil": "^0.6.1"
+    "recoil": "^0.6.1",
+    "sharp": "^0.31.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",

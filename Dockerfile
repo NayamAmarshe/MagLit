@@ -20,7 +20,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN yarn build
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
