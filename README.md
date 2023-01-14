@@ -25,8 +25,8 @@ MagLit has been sponsored by Vercel. Many thanks!
 ✅ 100% Private\
 ✅ 0% Personal Data stored
 
-New Features   
-🆕 MagLit now supports custom links!   
+New Features  
+🆕 MagLit now supports custom links!  
 🆕 MagLit now lets you generate QR Codes for your lit links!
 
 **WYSIWYG:** [MagLit builds are fully verifiable: The code in this repository is the same code that's deployed on MagLit.me, Nothing added, nothing ripped, so you know it's 100% trusted ;) ](https://github.com/NayamAmarshe/MagLit/deployments)
@@ -38,6 +38,7 @@ Clone the project and install dependencies using:
 ```bash
 npm install
 ```
+
 You need npm or yarn installed for this.
 
 Then, run the development server:
@@ -46,13 +47,20 @@ Then, run the development server:
 npm run dev
 ```
 
-**DOCKER:**   
+**DOCKER:**
+
 ```
 # TO BUILD IMAGE
 npm run build-docker-image
 
 # TO START THE DOCKER IMAGE SERVER
 npm run start-docker-image
+```
+
+You can also use a pre-built image, which contains the code that resides on `main`:
+
+```
+docker pull ghcr.io/nayamamarshe/maglit:main
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
