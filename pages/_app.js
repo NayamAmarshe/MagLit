@@ -5,6 +5,7 @@ import { RecoilRoot } from "recoil";
 import dynamic from "next/dynamic";
 import "../styles/globals.css";
 import Head from "next/head";
+import { BASE_URL } from "../utils/config";
 
 const CounterAnalytics = dynamic(
   () => import("../components/CounterAnalytics"),
@@ -29,10 +30,10 @@ function MyApp({ Component, pageProps }) {
           content="A Free and Open Source Encrypted Privacy Respecting Magnet/HTTP(s) Link Shortener"
         />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta property="og:url" content="https://maglit.me/" />
+        <meta property="og:url" content={BASE_URL} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://maglit.me/og-image.jpg" />
-        <meta property="og:image" content="https://maglit.me/og-image.jpg" />
+        <meta property="og:image" content={BASE_URL + "og-image.jpg"} />
+        <meta property="og:image" content={BASE_URL + "og-image.jpg"} />
         <meta name="twitter:card" content="summary" />
         <meta
           property="twitter:title"
@@ -42,11 +43,8 @@ function MyApp({ Component, pageProps }) {
           property="twitter:description"
           content="A Free and Open Source Encrypted Privacy Respecting Magnet/HTTP(s) Link Shortener"
         />
-        <meta property="twitter:url" content="https://maglit.me/" />
-        <meta
-          property="twitter:image"
-          content="https://maglit.me/og-image.jpg"
-        />
+        <meta property="twitter:url" content={BASE_URL} />
+        <meta property="twitter:image" content={BASE_URL + "og-image.jpg"} />
         <meta name="theme-color" content="#fcd34d" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

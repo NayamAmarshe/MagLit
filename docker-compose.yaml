@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  maglit:
+    image: ghcr.io/nayamamarshe/maglit:main
+    ports:
+      - "3000:3000"
+    environment:
+      BASE_URL: "http://localhost.com:3000/"
+      #Firebase configs below
+      API_KEY: ""
+      AUTH_DOMAIN: ""
+      PROJECT_ID: ""
+      STORAGE_BUCKET: ""
+      MESSAGING_SENDER_ID: ""
+      APP_ID: ""
+      MEASUREMENT_ID: ""
+

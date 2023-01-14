@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
+import { BASE_URL } from "../../utils/config";
 
 const qrCode = new QRCodeStyling({
   width: 200,
   height: 200,
-  image: "https://maglit.me/fire.png",
+  image: BASE_URL + "fire.png",
   dotsOptions: {
     color: "#1c1917",
     type: "rounded",

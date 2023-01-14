@@ -57,10 +57,16 @@ npm run build-docker-image
 npm run start-docker-image
 ```
 
-You can also use a pre-built image, which contains the code that resides on `main`:
+You can also use a pre-built image (supports amd64 and arm64), which contains the code that resides on `main`:
 
 ```
 docker pull ghcr.io/nayamamarshe/maglit:main
+```
+
+The `docker-compose` file is setup to use the remote image. Just remember to fill the firebase environment variables. You can start using docker compose with:
+
+```
+docker compose up -d
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
