@@ -33,6 +33,38 @@ New Features
 
 ## Self Hosting
 
+### Firebase Setup
+
+MagLit uses Firebase Firestore as a database. You must first create a new Firebase project as described below. 
+
+1. Navigate to the [Firebase Console](https://console.firebase.google.com/) (requires Google Sign-in)
+2. You should see a _Welcome to Firebase!_ screen with a button to _Create a project_ - this launches the 3-step wizard:
+    1. Name your project, e.g. `maglit`
+    2. Enable Google Analytics for the project
+    3. Select an existing GA account or create a new one (likely) - name it something useful, like `maglit`.
+3. Google will now create your project, click _Continue_ when ready.
+4. In the Firebase project console, add a "Web" app by clicking the appropriate icon (looks like `</>`)
+5. Give it a name ... `maglit` seems appropriate!
+    1. _Firebase Hosting_ is _*not*_ required for this.
+6. Click _Register app_
+7. Firebase will now display all the keys and other configuration variables you need to run MagLit, copy everything provided in `firebaseConfig` - this will go in your `.env.local` or in your `docker-compose.yml`.
+8. Before Firebase | Firestore can be used, the Firestore API in the new project needs to be enabled
+    1. Visit `https://console.developers.google.com/apis/api/firestore.googleapis.com/overview?project=<messagingSenderId>` - replace `<messagingSenderId>` with the appropriate value, or navigate to the _Google Cloud Firestore API_ in the [GCP console](https://console.cloud.google.com).
+    2. Click _Enable_.
+9. You'll also need to create your Firestore DB or you'll get an error like `The database (default) does not exist for project <projectId>`
+    1. Visit `https://console.cloud.google.com/datastore/setup?project=<projectId>` - replace `<projectId>` with the appropriate, e.g. `maglit-aaaaa`
+    2. On the _Select a Cloud Firestore mode_ page, click _Select Native Mode_, then select an appropriate location (e.g. `us-east-4` for N. Virginia).
+10. Finally, you'll need to setup Firebase Rules to allow access to your Firestore - navigate to `https://console.firebase.google.com/u/0/project/<projectId>/firestore/rules` or:
+    1. In the [Firebase Console](https://console.firebase.google.com/) for your project, expand the _Build_ left navigation and click _Firestore Database_
+    2. In the tab navigation, click _Rules_
+11. Change `if false` to `if true` (TODO: this doesn't seem secure), click Publish to activate the change.
+
+That's it, your Firebase | Firestore DB is now setup and ready to use.
+
+Now, create a file with the name `.env.local` in root directory of the project and fill the details as mentioned in `.env.local.example`. Alternatively, fill out the `docker-compose.yml` ENV vars accordingly.
+
+### Build and Deploy
+
 Clone the project and install dependencies using:
 
 ```bash
@@ -62,8 +94,6 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/xxxxxx](http://localhost:3000/api/xxxxxx). This endpoint can be edited in `pages/api/xxxxxx.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Read more about [API routes](https://nextjs.org/docs/api-routes/introduction).
-
-MagLit uses Firebase Firestore as a database. You must first create a new Firebase project, then a file with the name `.env.local` in root directory of the project and fill the details as mentioned in `.env.local.example`.
 
 ## If you like the project
 

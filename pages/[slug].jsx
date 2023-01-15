@@ -5,13 +5,13 @@ import { navbarState } from "../atoms/navbarAtom";
 import { BsFillGridFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
 import MainLogo from "../components/home/MainLogo";
-import { BASE_URL } from "../utils/config";
+import { getBaseUrl } from "../utils/config";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { useState } from "react";
 import { StatusCodes } from "http-status-codes";
 
-const RedirectPage = ({ slug }) => {
+const RedirectPage = ({ slug, BASE_URL }) => {
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const handlers = useSwipeable({
     onSwipedLeft: (e) => {
@@ -94,6 +94,7 @@ export async function getServerSideProps(context) {
   let isProtected = false;
   let notFound = false;
   let link = "";
+  const BASE_URL = getBaseUrl();
 
   await fetch(BASE_URL + "/api/verify", {
     method: "POST",
@@ -138,6 +139,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         slug,
+        BASE_URL,
       },
     };
   } else {
