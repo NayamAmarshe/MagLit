@@ -81,6 +81,8 @@ MagLit uses Firebase Firestore as a database. You must first create a new Fireba
 
 ## If you like the project
 
+ETH (ERC-20) Wallet: **0x14858f5334ea1014e68212c2d4b32792d137f256**
+
 <a href="https://www.buymeacoffee.com/fossisthefuture">
 <img alt="bmc-button" src="https://user-images.githubusercontent.com/25067102/154570688-9e143f2b-fee3-4b05-a9d2-a7a3013b2b51.png" />
 </a>
