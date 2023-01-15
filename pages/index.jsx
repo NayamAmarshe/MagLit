@@ -14,15 +14,15 @@ import { useSwipeable } from "react-swipeable";
 import { BsArchiveFill } from "react-icons/bs";
 import MainLogo from "../components/home/MainLogo";
 import * as Monkey from "monkey-typewriter";
-import { BASE_URL } from "../utils/config";
 import { FiCopy } from "react-icons/fi";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
 import Form from "../components/home/Form";
 import { useEffect } from "react";
 import { useState } from "react";
+import { getBaseUrl } from "../utils/config";
 
-export default function Home() {
+export default function Home({ BASE_URL }) {
   // !GLOBAL
   const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
   const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
@@ -320,4 +320,8 @@ export default function Home() {
       />
     </div>
   );
+}
+
+Home.getInitialProps = async (ctx) => {
+  return { BASE_URL: getBaseUrl() };
 }

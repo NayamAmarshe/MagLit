@@ -3,7 +3,6 @@ FROM node:16-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY . ./
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
 	if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
@@ -38,6 +37,15 @@ COPY --from=builder /app/package.json ./package.json
 # Automatically leverage output traces to reduce image size
 COPY --from=builder --chown=maglit:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=maglit:nodejs /app/.next/static ./.next/static
+
+COPY entrypoint.sh .
+COPY .env.production .
+
+# Execute script
+RUN apk add --no-cache --upgrade bash
+RUN ["chmod", "+x", "./entrypoint.sh"]
+RUN ["chown", "maglit:nodejs", "."]
+ENTRYPOINT ["./entrypoint.sh"]
 
 USER maglit
 
