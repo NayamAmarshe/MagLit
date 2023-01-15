@@ -1,10 +1,9 @@
-const env = process.env.NODE_ENV;
 let BASE_URL;
 
-if (env == "development") {
-  BASE_URL = "http://localhost:3000";
-} else if (env == "production") {
-  BASE_URL = "https://maglit.me";
+if (process.env.BASE_URL) {
+  BASE_URL = process.env.BASE_URL;
+} else {
+  BASE_URL = "http://localhost:3000/";
 }
 
 export { BASE_URL };

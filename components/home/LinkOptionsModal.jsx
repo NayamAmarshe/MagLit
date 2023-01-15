@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 import { Backdrop } from "../Backdrop";
 import React from "react";
+import { BASE_URL } from "../../utils/config";
 
 const LinkOptionsModal = ({
   customSlug,
@@ -42,8 +43,8 @@ const LinkOptionsModal = ({
         <div className="mt-2 flex h-full w-full flex-col items-center justify-center space-y-5 p-5">
           <p className="w-52 truncate text-slate-400 dark:text-stone-400">
             {customSlug.length < 1
-              ? "https://maglit.me/example"
-              : "https://maglit.me/"}
+              ? BASE_URL + "example"
+              : BASE_URL}
             <span className="text-green-500">{customSlug.toLowerCase()}</span>
           </p>
           <input

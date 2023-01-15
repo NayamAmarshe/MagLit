@@ -52,7 +52,7 @@ export default function Home() {
   const generateSlug = async () => {
     let slug = Monkey.word();
     // Create a fetch API post request to /api/available
-    await fetch(BASE_URL + "/api/available", {
+    await fetch(BASE_URL + "api/available", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Home() {
 
     const loadingToast = toast.loading("Hold on, lighting up your link...");
 
-    await fetch(BASE_URL + "/api/create", {
+    await fetch(BASE_URL + "api/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -171,14 +171,14 @@ export default function Home() {
         }
       })
       .then((response) => {
-        setOutputLink(BASE_URL + "/" + customOrDefaultSlug);
+        setOutputLink(BASE_URL + customOrDefaultSlug);
 
         console.log("🚀 => file: index.jsx:175 => response", response);
 
         // SAVE LINK IN LOCAL STORAGE
         const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
         linksInStorage.push({
-          link: BASE_URL + "/" + customOrDefaultSlug,
+          link: BASE_URL + customOrDefaultSlug,
           password: locked ? password : "",
         });
         localStorage.setItem("links", JSON.stringify(linksInStorage));

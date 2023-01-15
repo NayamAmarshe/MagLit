@@ -25,7 +25,7 @@ const RedirectPage = ({ slug }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch(BASE_URL + "/api/verify", {
+    await fetch(BASE_URL + "api/verify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export async function getServerSideProps(context) {
   let notFound = false;
   let link = "";
 
-  await fetch(BASE_URL + "/api/verify", {
+  await fetch(BASE_URL + "api/verify", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
