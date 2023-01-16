@@ -1,9 +1,14 @@
-let BASE_URL;
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
-if (process.env.NEXT_PUBLIC_BASE_URL) {
-  BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-} else {
-  BASE_URL = "http://localhost:3000/";
+const env = process.env.NODE_ENV;
+
+const getBaseUrl = () => {
+  if (env == "development") {
+    return "http://localhost:3000";
+  } else if (env == "production") {
+    return publicRuntimeConfig.app.baseUrl;
+  }  
 }
 
-export { BASE_URL };
+export { getBaseUrl };
