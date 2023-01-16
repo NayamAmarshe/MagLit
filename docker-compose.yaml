@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-    - MAGLIT_BASE_URL: "[http|https]://<your-ip-or-hostname-here>"
+    - MAGLIT_BASE_URL: "[http|https]://<your-ip-or-hostname-here>/" # don't forget the trailing-slash!
     - SECRET_KEY: "<CAN BE ANYTHING, THIS IS FOR BLOCKING API>"
     - RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: false
     # Firebase configs below
