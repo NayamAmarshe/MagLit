@@ -5,13 +5,15 @@ services:
     ports:
       - "3000:3000"
     environment:
-      NEXT_PUBLIC_BASE_URL: "http://localhost.com:3000/"
-      #Firebase configs below
-      API_KEY: ""
-      AUTH_DOMAIN: ""
-      PROJECT_ID: ""
-      STORAGE_BUCKET: ""
-      MESSAGING_SENDER_ID: ""
-      APP_ID: ""
-      MEASUREMENT_ID: ""
+    - MAGLIT_BASE_URL: "[http|https]://<your-ip-or-hostname-here>"
+    - SECRET_KEY: "<CAN BE ANYTHING, THIS IS FOR BLOCKING API>"
+    - RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: false
+    # Firebase configs below
+    - API_KEY: <firebase-apiKey>
+    - AUTH_DOMAIN: <firebase-authDomain>
+    - PROJECT_ID: <firebase-projectId>
+    - STORAGE_BUCKET: <firebase-storageBucket>
+    - MESSAGING_SENDER_ID: <firebase-messagingSenderId>
+    - APP_ID: <firebase-appId>
+    - MEASUREMENT_ID: <firebase-google-analytics-measurementId>
 
