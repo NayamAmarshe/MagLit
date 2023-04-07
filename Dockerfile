@@ -15,34 +15,28 @@ RUN \
 
 FROM node:16-alpine AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
+COPY --from=deps /app/node_modules ./node_modules
 RUN npm run build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 maglit
-
-# COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
+COPY --chown=node --from=builder /app/next.config.js ./
+COPY --chown=node --from=builder /app/public ./public
+COPY --chown=node --from=builder /app/.next ./.next
+COPY --chown=node --from=builder /app/package.json ./package.json
+COPY --chown=node --from=builder /app/package-lock.json ./package-lock.json
+COPY --chown=node --from=builder /app/node_modules ./node_modules
 
 # Automatically leverage output traces to reduce image size
-COPY --from=builder --chown=maglit:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=maglit:nodejs /app/.next/static ./.next/static
+# COPY --from=builder --chown=maglit:nodejs /app/.next/standalone ./
+# COPY --from=builder --chown=maglit:nodejs /app/.next/static ./.next/static
 
-USER maglit
-
+USER node
 EXPOSE 3000
 
-ENV PORT 3000
-
-CMD ["node", "server.js"]
+CMD ["npm run", "start"]
