@@ -6,8 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build-docker-image": "sudo docker build -t maglit .",
-    "start-docker-image": "sudo docker run -p 3000:3000 maglit"
+    "docker": "sudo docker-compose build && sudo docker-compose up -d"
   },
   "dependencies": {
     "crypto-js": "^4.1.1",
