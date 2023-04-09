@@ -3,7 +3,6 @@ FROM node:16-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY . ./
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
 	if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
@@ -38,5 +37,6 @@ COPY --chown=node --from=builder /app/node_modules ./node_modules
 
 USER node
 EXPOSE 3000
+ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["npm run", "start"]
+CMD ["npm", "run", "start"]
