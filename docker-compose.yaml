@@ -1,17 +1,12 @@
 version: "3.9"
 services:
   maglit:
-    image: ghcr.io/nayamamarshe/maglit:main
+    image: local/maglit:latest 
+    build:
+      context: .
+      target: runner
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    environment:
-      NEXT_PUBLIC_BASE_URL: "http://localhost.com:3000/"
-      #Firebase configs below
-      API_KEY: ""
-      AUTH_DOMAIN: ""
-      PROJECT_ID: ""
-      STORAGE_BUCKET: ""
-      MESSAGING_SENDER_ID: ""
-      APP_ID: ""
-      MEASUREMENT_ID: ""
-
+    env_file:
+      - .env.local
