@@ -1,11 +1,8 @@
 import { doc, getDoc, collection, setDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
+import { slugRegex } from "../../utils/regex";
 import CryptoJS from "crypto-js";
 import { StatusCodes } from "http-status-codes";
-
-const regex =
-  /(magnet:\?xt=urn:btih:[a-zA-Z0-9]*)|(^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,8}(:[0-9]{1,5})?(\/.*)?$)/;
-const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
 export default async function handler(req, res) {
   const { slug, link, password } = req.body;

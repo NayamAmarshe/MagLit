@@ -15,6 +15,7 @@ import { BsArchiveFill } from "react-icons/bs";
 import MainLogo from "../components/home/MainLogo";
 import * as Monkey from "monkey-typewriter";
 import { BASE_URL } from "../utils/config";
+import { linkRegex, slugRegex } from "../utils/regex";
 import { FiCopy } from "react-icons/fi";
 import { useRecoilState } from "recoil";
 import { useTheme } from "next-themes";
@@ -39,9 +40,6 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [locked, setLocked] = useState(false);
   const [customSlug, setCustomSlug] = useState("");
-  const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
-  const linkRegex =
-    /(magnet:\?xt=urn:btih:[a-zA-Z0-9]*)|(^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,8}(:[0-9]{1,5})?(\/.*)?$)/;
 
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
