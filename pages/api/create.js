@@ -52,43 +52,48 @@ export default async function handler(req, res) {
     });
   }
 
-  try {
-    const response = await fetch(
-      "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=" + apiKey,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+  if (process.env.SKIP_SAFE_BROWSING === "true") {
+    console.log("Skipping safe browsing check");
+  } else {
+    try {
+      const response = await fetch(
+        "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=" +
+          apiKey,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            client: {
+              clientId: "maglit-website",
+              clientVersion: "1.0.0",
+            },
+            threatInfo: {
+              threatTypes: [
+                "MALWARE",
+                "SOCIAL_ENGINEERING",
+                "UNWANTED_SOFTWARE",
+                "POTENTIALLY_HARMFUL_APPLICATION",
+              ],
+              platformTypes: ["ANY_PLATFORM"],
+              threatEntryTypes: ["URL"],
+              threatEntries: [{ url: `${link}` }],
+            },
+          }),
         },
-        body: JSON.stringify({
-          client: {
-            clientId: "maglit-website",
-            clientVersion: "1.0.0",
-          },
-          threatInfo: {
-            threatTypes: [
-              "MALWARE",
-              "SOCIAL_ENGINEERING",
-              "UNWANTED_SOFTWARE",
-              "POTENTIALLY_HARMFUL_APPLICATION",
-            ],
-            platformTypes: ["ANY_PLATFORM"],
-            threatEntryTypes: ["URL"],
-            threatEntries: [{ url: `${link}` }],
-          },
-        }),
-      },
-    );
+      );
 
-    const data = await response.json();
-    console.log("🚀 => data:", data);
+      const data = await response.json();
+      console.log("🚀 => data:", data);
 
-    if (data && data?.matches?.length > 0) {
-      // Handle error cases where the URL might not be checked by Safe Browsing
-      res.status(401).json({ message: "Malicious link entered!" });
+      if (data && data?.matches?.length > 0) {
+        // Handle error cases where the URL might not be checked by Safe Browsing
+        res.status(401).json({ message: "Malicious link entered!" });
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Failed to check the URL." });
     }
-  } catch (error) {
-    res.status(500).json({ error: "Failed to check the URL." });
   }
 
   try {

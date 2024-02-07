@@ -55,17 +55,16 @@ npm run dev
 
 **DOCKER:**
 
-```
+> [!IMPORTANT]
+> Make sure the .env.local file is available before the build.
+
+```bash
 #  BUILD AND RUN IMAGE USING NPM
+npm run docker:build
+# RUN IMAGE
 npm run docker
-```
-
-OR
-
-```
-# MANUALLY BUILD AND RUN IMAGE USING COMPOSE
-sudo docker-compose build
-sudo docker-compose up -d
+# OR RUN IN DETACHED MODE
+npm run docker:d
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

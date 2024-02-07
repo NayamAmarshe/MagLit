@@ -6,7 +6,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "docker": "docker-compose build && docker-compose up -d"
+    "docker:build": "docker-compose build",
+    "docker": "docker-compose up",
+    "docker:d": "docker-compose up -d"
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
