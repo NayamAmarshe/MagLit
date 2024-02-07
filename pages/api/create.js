@@ -53,7 +53,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = new URL(link).hostname;
     const response = await fetch(
       "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=" + apiKey,
       {
@@ -75,17 +74,18 @@ export default async function handler(req, res) {
             ],
             platformTypes: ["ANY_PLATFORM"],
             threatEntryTypes: ["URL"],
-            threatEntries: [{ url: `${url}` }],
+            threatEntries: [{ url: `${link}` }],
           },
         }),
-      }
+      },
     );
 
     const data = await response.json();
+    console.log("🚀 => data:", data);
 
     if (data && data?.matches?.length > 0) {
       // Handle error cases where the URL might not be checked by Safe Browsing
-      res.status(200).json({ message: "Malicious link entered!" });
+      res.status(401).json({ message: "Malicious link entered!" });
     }
   } catch (error) {
     res.status(500).json({ error: "Failed to check the URL." });
@@ -113,7 +113,7 @@ export default async function handler(req, res) {
         JSON.stringify({ link }),
         password === ""
           ? process.env.SECRET_KEY
-          : process.env.SECRET_KEY + password
+          : process.env.SECRET_KEY + password,
       ).toString();
 
       const docRef = setDoc(doc(collection(db, collectionName), slug), {
