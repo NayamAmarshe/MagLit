@@ -9,32 +9,32 @@
     "docker": "sudo docker-compose build && sudo docker-compose up -d"
   },
   "dependencies": {
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
+    "eslint-config-next": "^14.1.0",
     "firebase": "^10.8.0",
     "framer-motion": "^6.3.3",
-    "http-status-codes": "^2.2.0",
+    "http-status-codes": "^2.3.0",
     "jotai": "^2.6.4",
     "monkey-typewriter": "^1.0.14",
-    "next": "12.1.0",
-    "next-themes": "^0.1.1",
+    "next": "^14.1.0",
+    "next-themes": "^0.2.1",
     "qr-code-styling": "^1.6.0-rc.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-icons": "^4.3.1",
-    "react-spinners": "^0.11.0",
-    "react-swipeable": "^6.2.0",
-    "react-toastify": "^8.1.0",
-    "sharp": "^0.31.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "react-spinners": "^0.13.8",
+    "react-swipeable": "^7.0.1",
+    "react-toastify": "^10.0.4"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.5",
-    "prettier": "^2.6.2",
-    "prettier-plugin-sort-imports": "^1.6.0",
-    "prettier-plugin-tailwindcss": "^0.1.10",
-    "tailwindcss": "^3.0.13"
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "prettier": "^3.2.5",
+    "prettier-plugin-sort-imports": "^1.8.3",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "tailwindcss": "^3.4.1"
   },
   "volta": {
-    "node": "16.15.0"
+    "node": "18.19.0"
   }
 }

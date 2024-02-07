@@ -8,6 +8,7 @@ import { useSwipeable } from "react-swipeable";
 import { useAtom } from "jotai";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
+import Card from "./Card";
 
 const QRCode = dynamic(() => import("./QRCode"), {
   ssr: false,
@@ -49,7 +50,7 @@ const ScrollingCards = () => {
       id="parent"
     >
       <button
-        className="animate close-button absolute top-5 right-5 z-30 bg-transparent text-xl md:text-3xl"
+        className="animate close-button absolute right-5 top-5 z-30 bg-transparent text-xl md:text-3xl"
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
@@ -65,54 +66,14 @@ const ScrollingCards = () => {
           rounded-xl p-2 pb-10 text-center sm:w-auto"
         >
           {links.map((link, linkIndex) => {
-            let color = Math.floor(Math.random() * colorsList.length);
             return (
-              <div
+              <Card
                 key={linkIndex}
-                className={`animate mx-auto my-5 flex max-w-md flex-col items-center justify-between gap-5 rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-cyan-100/40 hover:shadow-cyan-200 dark:hover:bg-stone-600 sm:flex-row ${
-                  theme === "light" && colorsList[color]
-                } ${theme === "dark" && "bg-stone-700/40"} ${
-                  theme === "light" && shadowList[color]
-                } ${theme === "dark" && "shadow-none"} `}
-              >
-                <div className="flex w-full flex-col">
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-full truncate text-slate-700 dark:text-stone-200"
-                    href={typeof link === "string" ? link : link.link}
-                    id="no-swipe"
-                  >
-                    {typeof link === "string" ? link : link.link}
-                  </a>
-                  {link?.password?.length > 0 ? (
-                    <p
-                      className="break-all	text-black/50 dark:text-stone-500"
-                      id="no-swipe"
-                    >
-                      Password:{" "}
-                      <span className="select-all">{link?.password}</span>
-                    </p>
-                  ) : null}
-                  {qrCodeIndex === linkIndex && (
-                    <QRCode
-                      qrCodeLink={typeof link === "string" ? link : link.link}
-                    />
-                  )}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (qrCodeIndex === null) {
-                      setQRCodeIndex(linkIndex);
-                    } else {
-                      setQRCodeIndex(null);
-                    }
-                  }}
-                >
-                  <HiOutlineQrcode />
-                </button>
-              </div>
+                link={link}
+                linkIndex={linkIndex}
+                qrCodeIndex={qrCodeIndex}
+                setQRCodeIndex={setQRCodeIndex}
+              />
             );
           })}
         </div>

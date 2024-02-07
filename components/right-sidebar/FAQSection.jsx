@@ -49,7 +49,7 @@ const FAQSection = () => {
               Pashword
             </h5>
             <p className="dark:text-stone-300">
-              Generate passwords that you don't need to remember and cannot ever
+              Generate passwords that you don&apos;t need to remember and cannot ever
               forget
             </p>
           </div>

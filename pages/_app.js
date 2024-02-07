@@ -6,15 +6,34 @@ import "../styles/globals.css";
 import Head from "next/head";
 import { BASE_URL } from "../utils/config";
 import { Provider } from "jotai";
+import { useEffect } from "react";
 
 const CounterAnalytics = dynamic(
   () => import("../components/CounterAnalytics"),
   {
     ssr: false,
-  }
+  },
 );
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    if (
+      !sessionStorage.getItem("_swa") &&
+      document.referrer.indexOf(location.protocol + "//" + location.host) !== 0
+    ) {
+      fetch(
+        "https://counter.dev/track?" +
+          new URLSearchParams({
+            referrer: document.referrer,
+            screen: screen.width + "x" + screen.height,
+            user: "maglit-admin@protonmail.com",
+            utcoffset: "6",
+          }),
+      );
+    }
+    sessionStorage.setItem("_swa", "1");
+  }, []);
+
   return (
     <>
       <Head>
@@ -48,7 +67,6 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#fcd34d" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <CounterAnalytics />
       <Provider>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Layout>
