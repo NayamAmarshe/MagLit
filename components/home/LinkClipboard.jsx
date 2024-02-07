@@ -1,6 +1,6 @@
 import { downloadQRCodeState } from "../../atoms/downloadQRCodeState";
 import { FiCopy } from "react-icons/fi";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -9,8 +9,7 @@ const QRCode = dynamic(() => import("../bottom-sidebar/QRCode"), {
 });
 
 const LinkClipboard = ({ copyToClipboard, outputLink }) => {
-  const [downloadQRCode, setDownloadQRCode] =
-    useRecoilState(downloadQRCodeState);
+  const [downloadQRCode, setDownloadQRCode] = useAtom(downloadQRCodeState);
 
   return (
     <>

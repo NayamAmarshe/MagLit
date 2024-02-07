@@ -10,6 +10,8 @@ const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
 export default async function handler(req, res) {
   const { slug, link, password } = req.body;
+  console.log("🚀 => body:", req.body);
+
   const apiKey = process.env.SAFE_BROWSING_API_KEY;
 
   if (!apiKey) {
@@ -102,6 +104,11 @@ export default async function handler(req, res) {
         .json({ message: "Slug already exists" });
     } else {
       // create a new link
+      if (!process.env.SECRET_KEY) {
+        return res
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: "Server error" });
+      }
       const encryptedLink = CryptoJS.AES.encrypt(
         JSON.stringify({ link }),
         password === ""
@@ -112,7 +119,6 @@ export default async function handler(req, res) {
       const docRef = setDoc(doc(collection(db, collectionName), slug), {
         link: encryptedLink,
         slug: slug,
-        created: new Date(),
         protected: !(password === ""),
       });
 
@@ -126,6 +132,6 @@ export default async function handler(req, res) {
     console.log("Error", err);
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Network Error, Please try again..." });
+      .json({ message: "Server Error, Please try again..." });
   }
 }

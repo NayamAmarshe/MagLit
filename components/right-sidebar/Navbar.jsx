@@ -4,12 +4,12 @@ import { useSwipeable } from "react-swipeable";
 import { FaGithub } from "react-icons/fa";
 import { SiBuymeacoffee } from "react-icons/si";
 import { ImMail4 } from "react-icons/im";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import React, { useState } from "react";
 import FAQSection from "./FAQSection";
 
 const Navbar = () => {
-  const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
+  const [navbarOpen, setNavbarOpen] = useAtom(navbarState);
 
   const handlers = useSwipeable({
     onSwipedRight: (e) => {

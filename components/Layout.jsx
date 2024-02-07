@@ -3,10 +3,10 @@ import GridLoader from "react-spinners/GridLoader";
 import React, { useEffect, useState } from "react";
 import { navbarState } from "../atoms/navbarAtom";
 import Navbar from "./right-sidebar/Navbar";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 
 const Layout = ({ children }) => {
-  const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
+  const [navbarOpen, setNavbarOpen] = useAtom(navbarState);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

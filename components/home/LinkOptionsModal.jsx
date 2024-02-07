@@ -1,6 +1,6 @@
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { downloadQRCodeState } from "../../atoms/downloadQRCodeState";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import { Backdrop } from "../Backdrop";
 import React from "react";
@@ -12,8 +12,7 @@ const LinkOptionsModal = ({
   setLinkSettingsOpen,
   linkSettingsOpen,
 }) => {
-  const [downloadQRCode, setDownloadQRCode] =
-    useRecoilState(downloadQRCodeState);
+  const [downloadQRCode, setDownloadQRCode] = useAtom(downloadQRCodeState);
 
   return (
     <Backdrop
@@ -42,9 +41,7 @@ const LinkOptionsModal = ({
         </h4>
         <div className="mt-2 flex h-full w-full flex-col items-center justify-center space-y-5 p-5">
           <p className="w-52 truncate text-slate-400 dark:text-stone-400">
-            {customSlug.length < 1
-              ? BASE_URL + "example"
-              : BASE_URL}
+            {customSlug.length < 1 ? BASE_URL + "example" : BASE_URL}
             <span className="text-green-500">{customSlug.toLowerCase()}</span>
           </p>
           <input

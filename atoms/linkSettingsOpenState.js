@@ -1,6 +1,3 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
-export const linkSettingsOpenState = atom({
-  key: "linkSettingsOpenState",
-  default: false,
-});
+export const linkSettingsOpenState = atom(false);

@@ -1,6 +1,3 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
-export const cardsOpenState = atom({
-  key: "cardsOpenState",
-  default: false,
-});
+export const cardsOpenState = atom(false);

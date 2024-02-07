@@ -1,11 +1,11 @@
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "next-themes";
 import Layout from "../components/Layout";
-import { RecoilRoot } from "recoil";
 import dynamic from "next/dynamic";
 import "../styles/globals.css";
 import Head from "next/head";
 import { BASE_URL } from "../utils/config";
+import { Provider } from "jotai";
 
 const CounterAnalytics = dynamic(
   () => import("../components/CounterAnalytics"),
@@ -49,13 +49,13 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CounterAnalytics />
-      <RecoilRoot>
+      <Provider>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </ThemeProvider>
-      </RecoilRoot>
+      </Provider>
     </>
   );
 }

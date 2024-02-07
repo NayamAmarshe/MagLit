@@ -13,17 +13,17 @@ import { BsArchiveFill } from "react-icons/bs";
 import MainLogo from "../components/home/MainLogo";
 import * as Monkey from "monkey-typewriter";
 import { BASE_URL } from "../utils/config";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import Form from "../components/home/Form";
 import { useEffect } from "react";
 import { useState } from "react";
 
 export default function Home() {
   // !GLOBAL
-  const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
-  const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
-  const [links, setLinks] = useRecoilState(linksState);
-  const [linkSettingsOpen, setLinkSettingsOpen] = useRecoilState(
+  const [navbarOpen, setNavbarOpen] = useAtom(navbarState);
+  const [cardsOpen, setCardsOpen] = useAtom(cardsOpenState);
+  const [links, setLinks] = useAtom(linksState);
+  const [linkSettingsOpen, setLinkSettingsOpen] = useAtom(
     linkSettingsOpenState
   );
 
@@ -57,6 +57,8 @@ export default function Home() {
       body: JSON.stringify({ slug: slug }),
     })
       .then((response) => {
+        console.log("🚀 => response:", response);
+
         if (response.status !== 200) {
           return generateSlug();
         }

@@ -2,17 +2,16 @@ import TopRightButtons from "../components/home/TopRightButtons";
 import { toast, ToastContainer } from "react-toastify";
 import PasswordForm from "../components/home/PasswordForm";
 import { navbarState } from "../atoms/navbarAtom";
-import { BsFillGridFill } from "react-icons/bs";
 import { useSwipeable } from "react-swipeable";
 import MainLogo from "../components/home/MainLogo";
 import { BASE_URL } from "../utils/config";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { StatusCodes } from "http-status-codes";
 
 const RedirectPage = ({ slug }) => {
-  const [navbarOpen, setNavbarOpen] = useRecoilState(navbarState);
+  const [navbarOpen, setNavbarOpen] = useAtom(navbarState);
   const handlers = useSwipeable({
     onSwipedLeft: (e) => {
       setNavbarOpen(true);
@@ -145,7 +144,7 @@ export async function getServerSideProps(context) {
     context.res.setHeader("Cache-Control", "s-maxage=176400");
     return {
       redirect: {
-        destination: link,
+        destination: link || "",
         permanent: false,
       },
     };

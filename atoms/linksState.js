@@ -1,6 +1,3 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
-export const linksState = atom({
-  key: "linksState",
-  default: [],
-});
+export const linksState = atom([]);

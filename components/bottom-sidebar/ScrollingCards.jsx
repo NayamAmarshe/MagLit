@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { HiOutlineQrcode } from "react-icons/hi";
 import { useSwipeable } from "react-swipeable";
-import { useRecoilState } from "recoil";
+import { useAtom } from "jotai";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
@@ -18,8 +18,8 @@ const ScrollingCards = () => {
   const { theme, setTheme } = useTheme();
 
   // !GLOBAL
-  const [cardsOpen, setCardsOpen] = useRecoilState(cardsOpenState);
-  const [links, setLinks] = useRecoilState(linksState);
+  const [cardsOpen, setCardsOpen] = useAtom(cardsOpenState);
+  const [links, setLinks] = useAtom(linksState);
   const [qrCodeIndex, setQRCodeIndex] = useState(null);
 
   const handlers = useSwipeable({

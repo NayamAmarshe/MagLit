@@ -1,6 +1,3 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
-export const downloadQRCodeState = atom({
-  key: "downloadQRCode",
-  default: false,
-});
+export const downloadQRCodeState = atom(false);

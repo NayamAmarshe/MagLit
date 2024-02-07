@@ -1,6 +1,3 @@
-import { atom } from "recoil";
+import { atom } from "jotai";
 
-export const navbarState = atom({
-  key: "navbarState",
-  default: false,
-});
+export const navbarState = atom(false);
