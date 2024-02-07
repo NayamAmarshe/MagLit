@@ -49,8 +49,8 @@ const FAQSection = () => {
               Pashword
             </h5>
             <p className="dark:text-stone-300">
-              Generate passwords that you don&apos;t need to remember and cannot ever
-              forget
+              Generate passwords that you don&apos;t need to remember and cannot
+              ever forget
             </p>
           </div>
         </a>
@@ -108,9 +108,9 @@ const FAQSection = () => {
               <br />
             </b>,
             "1 => MagLit keeps everything encrypted. This means nobody except you has access to your links, especially when you use your own password.",
-            <br />,
+            <br key={2} />,
             "2 => MagLit lets you password protect your links and also lets you use custom links. All without any sign-up or account registration.",
-            <br />,
+            <br key={3} />,
             "3 => MagLit protects your privacy. 100% Free and Open Source, Verifiable website deployments. No data mining, no data selling.",
           ]}
           bgColor="bg-amber-100/40 dark:bg-stone-700/40"
