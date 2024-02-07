@@ -3,10 +3,8 @@ import LinkOptionsModal from "../components/home/LinkOptionsModal";
 import TopRightButtons from "../components/home/TopRightButtons";
 import { cardsOpenState } from "../atoms/cardsOpenState";
 import LinkClipboard from "../components/home/LinkClipboard";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { Backdrop } from "../components/Backdrop";
 import { navbarState } from "../atoms/navbarAtom";
 import { linksState } from "../atoms/linksState";
 import { RiArrowUpSLine } from "react-icons/ri";
@@ -15,9 +13,7 @@ import { BsArchiveFill } from "react-icons/bs";
 import MainLogo from "../components/home/MainLogo";
 import * as Monkey from "monkey-typewriter";
 import { BASE_URL } from "../utils/config";
-import { FiCopy } from "react-icons/fi";
 import { useRecoilState } from "recoil";
-import { useTheme } from "next-themes";
 import Form from "../components/home/Form";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -40,8 +36,9 @@ export default function Home() {
   const [locked, setLocked] = useState(false);
   const [customSlug, setCustomSlug] = useState("");
   const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
+
   const linkRegex =
-    /(magnet:\?xt=urn:btih:[a-zA-Z0-9]*)|(^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,8}(:[0-9]{1,5})?(\/.*)?$)/;
+    /^(\S+:\/\/)[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,16}(:[0-9]{1,5})?(\/.*)?$/;
 
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
@@ -120,10 +117,6 @@ export default function Home() {
       setPassword("");
     }
 
-    const slug = await generateSlug();
-
-    const customOrDefaultSlug = customSlug.length == 0 ? slug : customSlug;
-
     if (magnetLink.length < 1) {
       toast.error("You entered an invalid link");
       return;
@@ -135,6 +128,10 @@ export default function Home() {
       );
       return;
     }
+
+    const slug = await generateSlug();
+
+    const customOrDefaultSlug = customSlug.length == 0 ? slug : customSlug;
 
     if (slug.length < 1) {
       toast.error("Invalid Slug!");
