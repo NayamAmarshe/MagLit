@@ -25,11 +25,11 @@ const LinkOptionsModal = ({
         animate={{ y: 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         exit={{ y: -50 }}
-        className="max-w-mid relative flex flex-col items-center justify-start rounded-xl bg-slate-50 ring-8 ring-slate-200/70 dark:bg-stone-900 dark:ring-stone-700/70"
+        className="relative flex w-full max-w-96 flex-col items-center justify-start rounded-xl bg-slate-50 ring-8 ring-slate-200/70 dark:bg-stone-900 dark:ring-stone-700/70"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="animate close-button absolute top-2 right-2 text-2xl"
+          className="animate close-button absolute right-2 top-2 text-2xl"
           onClick={() => {
             setLinkSettingsOpen(false);
           }}
@@ -40,7 +40,7 @@ const LinkOptionsModal = ({
           Link Options
         </h4>
         <div className="mt-2 flex h-full w-full flex-col items-center justify-center space-y-5 p-5">
-          <p className="w-52 truncate text-slate-400 dark:text-stone-400">
+          <p className="w-full max-w-72 truncate text-center text-slate-400 dark:text-stone-400">
             {customSlug.length < 1 ? BASE_URL + "example" : BASE_URL}
             <span className="text-green-500">{customSlug.toLowerCase()}</span>
           </p>

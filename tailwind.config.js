@@ -5,12 +5,12 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  safelist: [
-    {
-      pattern: /bg-|shadow-|opacity-/,
-      variants: ["hover"],
-    },
-  ],
+  // safelist: [
+  //   {
+  //     pattern: /bg-|shadow-|opacity-/,
+  //     variants: ["hover"],
+  //   },
+  // ],
   theme: {
     extend: {
       screens: {

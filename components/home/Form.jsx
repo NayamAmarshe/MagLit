@@ -23,11 +23,11 @@ const Form = ({
       onSubmit={handleSubmit}
       className="flex h-full flex-col items-center justify-center"
     >
-      <div className="flex flex-col items-center justify-center gap-y-4">
+      <div className="flex w-full flex-col items-center justify-center gap-y-4">
         {/* LINK INPUT */}
         <input
           type="text"
-          className="text-input"
+          className="text-input max-w-80"
           value={magnetLink}
           onChange={(e) => setMagnetLink(e.target.value)}
           placeholder="Enter your link"
@@ -70,11 +70,11 @@ const Form = ({
             !locked
               ? "animate h-0 -translate-y-7 opacity-0"
               : "animate h-20 translate-y-0 opacity-100"
-          } relative flex items-center justify-center`}
+          } relative flex w-full items-center justify-center`}
         >
           <input
             type={showPassword ? "text" : "password"}
-            className="password-input"
+            className="password-input max-w-80"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"

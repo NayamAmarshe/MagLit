@@ -16,10 +16,10 @@ const Card = ({ link, linkIndex, qrCodeIndex, setQRCodeIndex }) => {
   return (
     <div
       key={linkIndex}
-      className={`animate mx-auto my-5 flex max-w-md flex-col items-center justify-between gap-5 rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-cyan-100/40 hover:shadow-cyan-200 dark:hover:bg-stone-600 sm:flex-row ${
-        theme === "light" && colorsList[color]
+      className={`animate mx-auto my-5 flex max-w-md flex-col items-center justify-between gap-5 rounded-xl bg-opacity-40 p-5 shadow-lg hover:bg-amber-300/40 hover:shadow-amber-500/50 dark:hover:bg-stone-600 sm:flex-row ${
+        theme === "light" && "bg-slate-200/20"
       } ${theme === "dark" && "bg-stone-700/40"} ${
-        theme === "light" && shadowList[color]
+        theme === "light" && "shadow-stone-500/20"
       } ${theme === "dark" && "shadow-none"} `}
     >
       <div className="flex w-full flex-col">

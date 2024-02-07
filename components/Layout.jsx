@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { navbarState } from "../atoms/navbarAtom";
 import Navbar from "./right-sidebar/Navbar";
 import { useAtom } from "jotai";
+import Background from "./Background";
 
 const Layout = ({ children }) => {
   const [navbarOpen, setNavbarOpen] = useAtom(navbarState);
@@ -20,12 +21,12 @@ const Layout = ({ children }) => {
           <GridLoader loading={loading} size={15} color={"#ff8100"} />
         </div>
       ) : (
-        <div className="animate relative overflow-hidden bg-slate-50">
+        <div className="animate relative overflow-hidden bg-slate-50 dark:bg-stone-900">
           <Navbar />
           {/* LINKS CARDS */}
           <ScrollingCards />
-
-          <main className="dom-background">{children}</main>
+          <Background className="pointer-events-none fixed z-50 h-full w-full opacity-20 mix-blend-hard-light" />
+          <main className="">{children}</main>
           <script
             defer
             data-name="BMC-Widget"

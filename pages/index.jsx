@@ -17,6 +17,7 @@ import { useAtom } from "jotai";
 import Form from "../components/home/Form";
 import { useEffect } from "react";
 import { useState } from "react";
+import Background from "../components/Background";
 
 export default function Home() {
   // !GLOBAL
@@ -24,7 +25,7 @@ export default function Home() {
   const [cardsOpen, setCardsOpen] = useAtom(cardsOpenState);
   const [links, setLinks] = useAtom(linksState);
   const [linkSettingsOpen, setLinkSettingsOpen] = useAtom(
-    linkSettingsOpenState
+    linkSettingsOpenState,
   );
 
   // !LOCAL
@@ -126,7 +127,7 @@ export default function Home() {
 
     if (!linkRegex.test(magnetLink)) {
       toast.warn(
-        "Please make sure your link starts with 'http://' or 'https://' or 'magnet://'"
+        "Please make sure your link starts with 'http://' or 'https://' or 'magnet://'",
       );
       return;
     }
@@ -142,7 +143,7 @@ export default function Home() {
 
     if (!slugRegex.test(customOrDefaultSlug)) {
       toast.error(
-        "The slug should only contain lowercase alphabets, numbers and hyphen"
+        "The slug should only contain lowercase alphabets, numbers and hyphen",
       );
       return;
     }
@@ -225,7 +226,7 @@ export default function Home() {
     <div
       className={`${
         navbarOpen || cardsOpen ? "scale-90 blur-3xl" : "scale-100 blur-none"
-      } animate flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-stone-900`}
+      } animate relative flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-stone-900`}
       onWheel={handleScroll}
       {...handlers}
     >
@@ -246,7 +247,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* MAIN CONTENT */}
-      <div className="flex h-screen flex-col items-center justify-center">
+      <div className="z-10 flex h-screen flex-col items-center justify-center">
         <div className="flex w-full flex-col gap-y-10 ">
           <MainLogo />
           <Form
@@ -284,7 +285,7 @@ export default function Home() {
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate visible absolute top-5 left-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 sm:invisible md:text-3xl`}
+        } animate visible absolute left-5 top-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 sm:invisible md:text-3xl`}
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
@@ -300,7 +301,7 @@ export default function Home() {
         <img
           src="/powered-by-vercel.svg"
           alt="Powered by Vercel"
-          className="absolute right-5 bottom-5 w-52 mix-blend-exclusion"
+          className="absolute bottom-5 right-5 w-52 mix-blend-exclusion"
         />
       </a>
 
