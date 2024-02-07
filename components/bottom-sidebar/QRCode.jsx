@@ -2,23 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { BASE_URL } from "../../utils/config";
 
-const qrCode = new QRCodeStyling({
-  width: 200,
-  height: 200,
-  image: BASE_URL + "fire.png",
-  dotsOptions: {
-    color: "#1c1917",
-    type: "rounded",
-  },
-  imageOptions: {
-    crossOrigin: "anonymous",
-    margin: 5,
-  },
-});
-
 const QRCode = ({ qrCodeLink, instantDownload }) => {
   const [fileExt, setFileExt] = useState("png");
   const ref = useRef(null);
+
+  const qrCode = new QRCodeStyling({
+    width: 200,
+    height: 200,
+    image: BASE_URL + "fire.png",
+    dotsOptions: {
+      color: "#1c1917",
+      type: "rounded",
+    },
+    imageOptions: {
+      crossOrigin: "anonymous",
+      margin: 5,
+    },
+  });
 
   useEffect(() => {
     qrCode.append(ref.current);

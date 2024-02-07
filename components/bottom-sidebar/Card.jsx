@@ -2,8 +2,12 @@ import React from "react";
 import { HiOutlineQrcode } from "react-icons/hi";
 import { colorsList, shadowList } from "../../utils/bgColors";
 import { useTheme } from "next-themes";
-import QRCode from "./QRCode";
 import { RiCloseFill } from "react-icons/ri";
+import dynamic from "next/dynamic";
+
+const QRCode = dynamic(() => import("./QRCode"), {
+  ssr: false,
+});
 
 const Card = ({ link, linkIndex, qrCodeIndex, setQRCodeIndex }) => {
   const { theme, setTheme } = useTheme();

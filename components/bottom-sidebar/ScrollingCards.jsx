@@ -1,18 +1,11 @@
-import { colorsList, shadowList } from "../../utils/bgColors";
 import { cardsOpenState } from "../../atoms/cardsOpenState";
 import { linksState } from "../../atoms/linksState";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BsFillXCircleFill } from "react-icons/bs";
-import { HiOutlineQrcode } from "react-icons/hi";
 import { useSwipeable } from "react-swipeable";
 import { useAtom } from "jotai";
 import { useTheme } from "next-themes";
-import dynamic from "next/dynamic";
 import Card from "./Card";
-
-const QRCode = dynamic(() => import("./QRCode"), {
-  ssr: false,
-});
 
 const ScrollingCards = () => {
   // !THIRD PARTY HOOKS
