@@ -246,9 +246,11 @@ export default function Home() {
         )}
       </AnimatePresence>
 
+      <div className="fixed top-0 z-20 h-24 w-full bg-gradient-to-b from-black/90 to-black/10 sm:hidden"></div>
+
       {/* MAIN CONTENT */}
       <div className="z-10 flex h-screen flex-col items-center justify-center">
-        <div className="flex w-full flex-col gap-y-10 ">
+        <div className="flex w-full flex-col gap-y-4 xs:gap-y-10">
           <MainLogo />
           <Form
             locked={locked}
@@ -285,7 +287,7 @@ export default function Home() {
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate visible absolute left-5 top-5 z-10 rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 sm:invisible md:text-3xl`}
+        } animate visible absolute left-5 top-5 z-10 z-50 rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 sm:invisible md:text-3xl`}
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}

@@ -70,11 +70,11 @@ const Form = ({
             !locked
               ? "animate h-0 -translate-y-7 opacity-0"
               : "animate h-20 translate-y-0 opacity-100"
-          } relative flex w-full items-center justify-center`}
+          } relative flex w-full max-w-80 items-center justify-center`}
         >
           <input
             type={showPassword ? "text" : "password"}
-            className="password-input max-w-80"
+            className="password-input relative"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
@@ -83,14 +83,14 @@ const Form = ({
           />
           {showPassword ? (
             <BsFillEyeFill
-              className="absolute right-3 cursor-pointer text-xl text-orange-500 dark:text-orange-400"
+              className="absolute right-6 cursor-pointer text-xl text-orange-500 dark:text-orange-400 xs:right-3"
               onClick={() => {
                 setShowPassword(!showPassword);
               }}
             />
           ) : (
             <BsFillEyeSlashFill
-              className="absolute right-3 cursor-pointer text-xl text-orange-500 dark:text-orange-400"
+              className="absolute right-6 cursor-pointer text-xl text-orange-500 dark:text-orange-400 xs:right-3"
               onClick={() => {
                 setShowPassword(!showPassword);
               }}
