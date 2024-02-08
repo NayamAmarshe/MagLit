@@ -226,7 +226,7 @@ export default function Home() {
     <div
       className={`${
         navbarOpen || cardsOpen ? "scale-90 blur-3xl" : "scale-100 blur-none"
-      } animate relative flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-stone-900`}
+      } animate relative z-10 flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-stone-900`}
       onWheel={handleScroll}
       {...handlers}
     >

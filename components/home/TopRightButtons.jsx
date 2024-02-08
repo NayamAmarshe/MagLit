@@ -7,7 +7,7 @@ const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="absolute top-5 right-5 z-10 flex flex-row-reverse gap-5">
+    <div className="absolute right-5 top-5 z-50 flex flex-row-reverse gap-5">
       {/* MENU LINK */}
       <button
         className={`${
