@@ -24,7 +24,7 @@ const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
 
       {/* THEME TOGGLE */}
       <button
-        className={`animate animate relative flex h-[20px] w-12 items-center justify-center gap-2 rounded-full bg-slate-400 dark:bg-stone-400 md:h-[30px] md:w-14 ${
+        className={`animate animate relative flex h-[23px] w-10 items-center justify-center gap-2 rounded-full bg-slate-400 dark:bg-stone-400 md:h-[30px] md:w-14 ${
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
@@ -36,8 +36,8 @@ const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
         <div
           className={`${
             theme === "dark"
-              ? "animate -translate-x-3 bg-slate-50"
-              : "animate translate-x-3 bg-slate-50"
+              ? "animate -translate-x-2 bg-slate-50 md:-translate-x-3"
+              : "animate translate-x-2 bg-slate-50 md:translate-x-3"
           } animate absolute z-10 h-4 w-4 rounded-full md:h-6 md:w-6`}
         ></div>
         <div className="absolute left-1 text-xs md:text-base">🌞</div>

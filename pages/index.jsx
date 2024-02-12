@@ -246,7 +246,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <div className="fixed top-0 z-20 h-24 w-full bg-gradient-to-b from-black/90 to-black/10 sm:hidden"></div>
+      <div className="pointer-events-none fixed top-0 z-20 h-20 w-full bg-gradient-to-b from-black/30 to-transparent xs:hidden"></div>
 
       {/* MAIN CONTENT */}
       <div className="z-10 flex h-screen flex-col items-center justify-center">
