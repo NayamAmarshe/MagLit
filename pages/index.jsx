@@ -296,6 +296,24 @@ export default function Home() {
       </button>
 
       <a
+        href="https://www.netlify.com"
+        rel="noreferrer"
+        target="_blank"
+        className="absolute bottom-5 right-5"
+      >
+        <img
+          src="https://www.netlify.com/v3/img/components/netlify-light.svg"
+          alt="Deploys by Netlify"
+          className="mix-blend-darken dark:hidden"
+        />
+        <img
+          src="https://www.netlify.com/v3/img/components/netlify-dark.svg"
+          alt="Deploys by Netlify"
+          className="hidden mix-blend-lighten dark:block"
+        />
+      </a>
+
+      {/* <a
         href="https://vercel.com/?utm_source=mag-lit&utm_campaign=oss"
         rel="noreferrer"
         target="_blank"
@@ -305,7 +323,7 @@ export default function Home() {
           alt="Powered by Vercel"
           className="absolute bottom-5 right-5 w-52 mix-blend-exclusion"
         />
-      </a>
+      </a> */}
 
       {/* TOASTIFY */}
       <ToastContainer

@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
           <Navbar />
           {/* LINKS CARDS */}
           <ScrollingCards />
-          <Background className="pointer-events-none fixed z-50 h-full w-full object-cover opacity-20 mix-blend-hard-light" />
+          {/* <Background className="pointer-events-none fixed z-50 h-full w-full object-cover opacity-20 mix-blend-hard-light" /> */}
           {children}
           <script
             defer
