@@ -295,7 +295,7 @@ export default function Home() {
         <BsArchiveFill />
       </button>
 
-      <a
+{/*       <a
         href="https://www.netlify.com"
         rel="noreferrer"
         target="_blank"
@@ -311,7 +311,7 @@ export default function Home() {
           alt="Deploys by Netlify"
           className="hidden mix-blend-lighten dark:block"
         />
-      </a>
+      </a> */}
 
       {/* <a
         href="https://vercel.com/?utm_source=mag-lit&utm_campaign=oss"
