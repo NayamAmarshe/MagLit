@@ -38,6 +38,10 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>MagLit🔥 - Privacy Respecting Encrypted Link Shortener</title>
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-8844413928625246"
+        ></meta>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           name="description"
