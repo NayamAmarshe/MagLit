@@ -8,7 +8,9 @@ import { BASE_URL } from "../utils/config";
 import { useRouter } from "next/router";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { StatusCodes } from "http-status-codes";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../utils/firebase";
+import crypto from "crypto-js";
 
 const RedirectPage = ({ slug }) => {
   const [navbarOpen, setNavbarOpen] = useAtom(navbarState);
@@ -91,62 +93,82 @@ export default RedirectPage;
 export async function getServerSideProps(context) {
   const slug = context.params.slug;
   let isProtected = false;
-  let notFound = false;
-  let link = "";
 
-  await fetch(BASE_URL + "api/verify", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      slug: slug,
-      password: "",
-    }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        switch (response.status) {
-          case StatusCodes.NOT_FOUND:
-            notFound = true;
-            break;
-          case StatusCodes.UNAUTHORIZED:
-            isProtected = true;
-            break;
-        }
-      } else {
-        return response.json();
-      }
-    })
-    .then((data) => {
-      link = data?.linkData?.link;
-    })
-    .catch((error) => {
-      console.log("🚀 => file: [slug].jsx:137 => error", error);
-    });
-
-  if (notFound) {
+  if (slug.length < 1) {
     return {
       notFound: true,
     };
   }
 
-  // if link is protected, input password
-  if (isProtected) {
-    context.res.setHeader("Cache-Control", "s-maxage=176400");
+  const collectionName =
+    process.env.NODE_ENV === "production" ? "links" : "testLinks";
+
+  try {
+    // check firebase if slug exists
+    const documentRef = doc(db, collectionName, slug);
+    const documentSnapshot = await getDoc(documentRef);
+
+    if (!documentSnapshot.exists()) {
+      // return 404 if slug doesn't exist
+      context.res.setHeader("Cache-Control", "s-maxage=31536000, immutable");
+      return {
+        notFound: true,
+      };
+    } else {
+      // get link details
+      let isBlocked = false;
+      const linkData = documentSnapshot.data();
+      const { link } = linkData;
+      isProtected = linkData.protected;
+      isBlocked = linkData?.blocked;
+      let decryptedLink = "";
+
+      if (isBlocked === true) {
+        context.res.setHeader("Cache-Control", "s-maxage=31536000, immutable");
+        return {
+          notFound: true,
+        };
+      }
+
+      if (!isProtected) {
+        const withoutPassword = process.env.SECRET_KEY;
+
+        decryptedLink = crypto.AES.decrypt(link, withoutPassword).toString(
+          crypto.enc.Utf8,
+        );
+
+        // check protected link
+        if (decryptedLink.length < 1) {
+          return {
+            notFound: true,
+          };
+        }
+
+        context.res.setHeader("Cache-Control", "s-maxage=31536000, immutable");
+        return {
+          redirect: {
+            destination:
+              (
+                JSON.parse(decryptedLink) as {
+                  link: string;
+                }
+              ).link || "",
+            permanent: false,
+          },
+        };
+      } else if (isProtected) {
+        context.res.setHeader("Cache-Control", "s-maxage=31536000, immutable");
+        return {
+          props: {
+            slug,
+          },
+        };
+      }
+    }
+  } catch (error) {
+    console.log("🚀 => file: [slug].jsx:137 => error", error);
     return {
-      props: {
-        slug,
-      },
-    };
-  } else {
-    // if link isn't protected, redirect
-    context.res.setHeader("Cache-Control", "s-maxage=176400");
-    return {
-      redirect: {
-        destination: link || "",
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 }

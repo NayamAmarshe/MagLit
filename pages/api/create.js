@@ -97,42 +97,30 @@ export default async function handler(req, res) {
   }
 
   try {
-    // check firebase if slug exists
-    const documentRef = doc(db, collectionName, slug);
-    const documentSnapshot = await getDoc(documentRef);
-
-    if (documentSnapshot.exists()) {
-      // return 401 if slug exists
-      res.setHeader("Cache-Control", "s-maxage=176400");
+    // create a new link
+    if (!process.env.SECRET_KEY) {
       return res
-        .status(StatusCodes.FORBIDDEN)
-        .json({ message: "Slug already exists" });
-    } else {
-      // create a new link
-      if (!process.env.SECRET_KEY) {
-        return res
-          .status(StatusCodes.INTERNAL_SERVER_ERROR)
-          .json({ message: "Server error" });
-      }
-      const encryptedLink = CryptoJS.AES.encrypt(
-        JSON.stringify({ link }),
-        password === ""
-          ? process.env.SECRET_KEY
-          : process.env.SECRET_KEY + password,
-      ).toString();
-
-      const docRef = setDoc(doc(collection(db, collectionName), slug), {
-        link: encryptedLink,
-        slug: slug,
-        protected: !(password === ""),
-      });
-
-      res.setHeader("Cache-Control", "s-maxage=176400");
-      return res.status(StatusCodes.OK).json({
-        message: "Link lit successfully",
-        maglitLink: slug,
-      });
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "Server error..." });
     }
+    const encryptedLink = CryptoJS.AES.encrypt(
+      JSON.stringify({ link }),
+      password === ""
+        ? process.env.SECRET_KEY
+        : process.env.SECRET_KEY + password,
+    ).toString();
+
+    await setDoc(doc(db, collectionName, slug), {
+      link: encryptedLink,
+      slug: slug,
+      protected: !(password === ""),
+    });
+
+    res.setHeader("Cache-Control", "s-maxage=176400");
+    return res.status(StatusCodes.OK).json({
+      message: "Link lit successfully",
+      maglitLink: slug,
+    });
   } catch (err) {
     console.log("Error", err);
     return res

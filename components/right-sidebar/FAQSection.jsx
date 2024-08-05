@@ -14,52 +14,57 @@ const FAQSection = () => {
         <h3 className="text-lg font-semibold dark:text-stone-400">
           Checkout my other projects
         </h3>
-        <a
-          href="https://github.com/upscayl/upscayl/"
-          className="animate m-4 flex max-w-full flex-col items-center justify-center gap-4 rounded-lg bg-green-100/40 p-4 shadow-lg shadow-green-200 hover:shadow-xl hover:shadow-green-200 dark:bg-stone-700/40 dark:shadow-none md:m-0 md:w-1/2 lg:w-2/6"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src="/upscayl.jpg"
-            alt="Upscayl Screenshot"
-            className="h-full w-full rounded-lg"
-          />
-          <div className="text-center">
-            <h5 className="text-lg font-medium dark:text-stone-200">Upscayl</h5>
-            <p className="dark:text-stone-300">
-              Free and Open Source AI Image Upscaler
-            </p>
-          </div>
-        </a>
 
-        <a
-          href="https://pashword.app"
-          className="animate m-4 flex max-w-full flex-col items-center justify-center gap-4 rounded-lg bg-green-100/40 p-4 shadow-lg shadow-green-200 hover:shadow-xl hover:shadow-green-200 dark:bg-stone-700/40 dark:shadow-none md:m-0 md:w-1/2 lg:w-2/6"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src="/pashword.jpg"
-            alt="Pashword Screenshot"
-            className="h-full w-full rounded-lg"
-          />
-          <div className="text-center">
-            <h5 className="text-lg font-medium dark:text-stone-200">
-              Pashword
-            </h5>
-            <p className="dark:text-stone-300">
-              Generate passwords that you don&apos;t need to remember and cannot
-              ever forget
-            </p>
-          </div>
-        </a>
+        <div className="grid grid-cols-2 md:gap-4">
+          <a
+            href="https://github.com/upscayl/upscayl/"
+            className="animate m-4 flex h-full w-fit basis-1/2 flex-col items-center justify-start gap-4 rounded-lg bg-green-100/70 p-4 shadow-lg shadow-green-200 hover:shadow-xl hover:shadow-green-200 dark:bg-stone-700/70 dark:shadow-none md:m-0 md:max-w-xs"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://upscayl.org/og-image.png"
+              alt="Upscayl Screenshot"
+              className="h-36 w-64 rounded-lg object-cover"
+            />
+            <div className="text-center">
+              <h5 className="text-lg font-medium dark:text-stone-200">
+                Upscayl
+              </h5>
+              <p className="mt-2 text-sm dark:text-stone-300">
+                Free and Open Source AI Image Upscaler
+              </p>
+            </div>
+          </a>
+
+          <a
+            href="https://pashword.app"
+            className="animate m-4 flex h-full w-fit basis-1/2 flex-col items-center justify-start gap-4 rounded-lg bg-green-100/70 p-4 shadow-lg shadow-green-200 hover:shadow-xl hover:shadow-green-200 dark:bg-stone-700/70 dark:shadow-none md:m-0 md:max-w-xs"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="/pashword.jpg"
+              alt="Pashword Screenshot"
+              className="h-36 w-64 rounded-lg object-cover"
+            />
+            <div className="text-center">
+              <h5 className="text-lg font-medium dark:text-stone-200">
+                Pashword
+              </h5>
+              <p className="mt-2 text-sm dark:text-stone-300">
+                Generate passwords that you don&apos;t need to remember and
+                cannot ever forget
+              </p>
+            </div>
+          </a>
+        </div>
 
         {/* <a
           href="https://github.com/NayamAmarshe/please"
           target="_blank"
           rel="noreferrer"
-          className="animate m-4 flex max-w-full flex-col items-center justify-center gap-4 rounded-lg bg-green-100/40 p-4 shadow-lg shadow-green-200 hover:shadow-xl hover:shadow-green-200 dark:bg-stone-700/40 dark:shadow-none md:m-0 md:w-1/2 lg:w-2/6"
+          className="animate m-4 flex max-w-full flex-col items-center justify-center gap-4 rounded-lg bg-green-100/70 p-4 shadow-lg shadow-green-200 hover:shadow-xl hover:shadow-green-200 dark:bg-stone-700/70 dark:shadow-none md:m-0 md:w-1/2 lg:w-2/6"
         >
           <img
             src="/please.jpg"
@@ -75,7 +80,7 @@ const FAQSection = () => {
         </a> */}
 
         <MenuCard
-          heading="The hell is this? 🤔"
+          heading="What's this about? 🤔"
           content={[
             "MagLit is an encrypted and privacy respecting Link Shortener service that supports not only your regular website links but also Magnet Links which are extensively used to download and share torrents.",
             <br key={1}></br>,
@@ -87,7 +92,7 @@ const FAQSection = () => {
               </b>
             </i>,
           ]}
-          bgColor="bg-green-100/40 dark:bg-stone-700/40"
+          bgColor="bg-green-100/70 dark:bg-stone-700/70"
           shadowColor="shadow-green-200 dark:shadow-none"
           hoverShadowColor="hover:shadow-green-200"
         />
@@ -96,7 +101,7 @@ const FAQSection = () => {
           content={[
             "The word MagLit is derived from Magnet and Lit. MagLit started out as a link shortener for torrent magnet links. Later, I made MagLit available for HTTP(s) links but the name stayed :)",
           ]}
-          bgColor="bg-green-100/40 dark:bg-stone-700/40"
+          bgColor="bg-green-100/70 dark:bg-stone-700/70"
           shadowColor="shadow-green-200 dark:shadow-none"
           hoverShadowColor="hover:shadow-green-200"
         />
@@ -113,7 +118,7 @@ const FAQSection = () => {
             <br key={3} />,
             "3 => MagLit protects your privacy. 100% Free and Open Source, Verifiable website deployments. No data mining, no data selling.",
           ]}
-          bgColor="bg-amber-100/40 dark:bg-stone-700/40"
+          bgColor="bg-amber-100/70 dark:bg-stone-700/70"
           shadowColor="shadow-amber-200 dark:shadow-none"
           hoverShadowColor="hover:shadow-amber-200"
         />
@@ -124,7 +129,7 @@ const FAQSection = () => {
             <br key={2}></br>,
             "MagLit is a totally free and open source service licensed under AGPLv3. All your requests are proxied through a server and no personal data is ever stored. You can check out the source code on GitHub if you want 😉",
           ]}
-          bgColor="bg-purple-100/40 dark:bg-stone-700/40"
+          bgColor="bg-purple-100/70 dark:bg-stone-700/70"
           shadowColor="shadow-purple-200 dark:shadow-none"
           hoverShadowColor="hover:shadow-purple-200"
         />
@@ -145,7 +150,7 @@ const FAQSection = () => {
               Buy Me A Coffee{" "}
             </a>,
           ]}
-          bgColor="bg-red-100/40 dark:bg-stone-700/40"
+          bgColor="bg-red-100/70 dark:bg-stone-700/70"
           shadowColor="shadow-red-200 dark:shadow-none"
           hoverShadowColor="hover:shadow-red-200"
         />
@@ -165,7 +170,7 @@ const FAQSection = () => {
             </a>,
             "Your IP is not logged, no cookies are stored, no fingerprinting data is used to spy on you. It just helps us know what countries are accessing maglit.me and what different screen sizes are accessing this website. It can help us optimize the website layout better. Still, if you don't want to share your screen size and country, please feel free to block the script using your adblocker.",
           ]}
-          bgColor="bg-cyan-100 dark:bg-stone-700/40"
+          bgColor="bg-cyan-100 dark:bg-stone-700/70"
           shadowColor="shadow-cyan-200 dark:shadow-none"
           hoverShadowColor="hover:shadow-cyan-200"
         />

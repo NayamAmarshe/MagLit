@@ -39,6 +39,7 @@ export default async function handler(req, res) {
       let decryptedLink = "";
 
       if (isBlocked === true) {
+        res.setHeader("Cache-Control", "s-maxage=31536000, immutable");
         return res.status(StatusCodes.NOT_FOUND).json({
           message: "Link doesn't exist",
           linkData: {
@@ -55,7 +56,7 @@ export default async function handler(req, res) {
       try {
         decryptedLink = crypto.AES.decrypt(
           link,
-          isProtected ? withPassword : withoutPassword
+          isProtected ? withPassword : withoutPassword,
         ).toString(crypto.enc.Utf8);
       } catch (error) {
         console.warn("Error decrypting, possibly wrong password");

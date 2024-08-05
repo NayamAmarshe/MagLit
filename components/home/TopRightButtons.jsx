@@ -40,8 +40,8 @@ const TopRightButtons = ({ cardsOpen, navbarOpen, setNavbarOpen }) => {
               : "animate translate-x-2 bg-slate-50 md:translate-x-3"
           } animate absolute z-10 h-4 w-4 rounded-full md:h-6 md:w-6`}
         ></div>
-        <div className="absolute left-1 text-xs md:text-base">🌞</div>
-        <div className="absolute right-1 text-xs md:text-base">🌚</div>
+        <div className="absolute left-1 text-xs md:text-base">🌚</div>
+        <div className="absolute right-1 text-xs md:text-base">🌞</div>
       </button>
     </div>
   );

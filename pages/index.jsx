@@ -48,26 +48,7 @@ export default function Home() {
 
   // !FUNCTIONS
   const generateSlug = async () => {
-    let slug = Monkey.word();
-    // Create a fetch API post request to /api/available
-    await fetch(BASE_URL + "api/available", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ slug: slug }),
-    })
-      .then((response) => {
-        console.log("🚀 => response:", response);
-
-        if (response.status !== 200) {
-          return generateSlug();
-        }
-      })
-      .catch((error) => {
-        console.log("🚀 => file: index.jsx:73 => err", error);
-      });
-
+    let slug = Monkey.slug(2);
     return slug;
   };
 
@@ -295,7 +276,7 @@ export default function Home() {
         <BsArchiveFill />
       </button>
 
-{/*       <a
+      {/*       <a
         href="https://www.netlify.com"
         rel="noreferrer"
         target="_blank"
