@@ -226,7 +226,7 @@ export default function Home() {
     <div
       className={`${
         navbarOpen || cardsOpen ? "scale-90 blur-3xl" : "scale-100 blur-none"
-      } animate relative z-10 flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden bg-slate-50 dark:bg-stone-900`}
+      } animate relative z-10 flex h-screen flex-col items-center justify-center gap-y-10 overflow-hidden`}
       onWheel={handleScroll}
       {...handlers}
     >
@@ -287,7 +287,7 @@ export default function Home() {
           navbarOpen || cardsOpen
             ? "scale-0 opacity-0"
             : "scale-100 opacity-100"
-        } animate visible absolute left-5 top-5 z-10 z-50 rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 sm:invisible md:text-3xl`}
+        } animate visible absolute left-5 top-5 z-50 rounded-sm text-xl text-slate-400 hover:text-blue-500 dark:text-stone-400 sm:invisible md:text-3xl`}
         onClick={() => {
           setCardsOpen(!cardsOpen);
         }}
