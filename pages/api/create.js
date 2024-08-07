@@ -4,7 +4,7 @@ import CryptoJS from "crypto-js";
 import { StatusCodes } from "http-status-codes";
 
 const regex =
-  /\b((?:(?:https?|ftp|ftps|mailto|file|data|irc|magnet|ws):\/\/)[^\s/$.?#].[^\s]*)\b/;
+  /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
 
 const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
