@@ -39,7 +39,7 @@ export default function Home() {
   const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
   const linkRegex =
-    /\b((?:(?:https?|ftp|ftps|mailto|file|data|irc|magnet|ws):\/\/)[^\s/$.?#].[^\s]*)\b/;
+    /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
 
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
