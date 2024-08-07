@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       slug,
       message:
-        "Please make sure your link starts with http:// or https:// or magnet://",
+        "Please make sure your link starts with http://, https://, ftp://, or magnet:",
     });
   }
 
