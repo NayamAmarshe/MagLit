@@ -4,7 +4,7 @@ import CryptoJS from "crypto-js";
 import { StatusCodes } from "http-status-codes";
 
 const regex =
-  /^(\S+:\/\/)[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,16}(:[0-9]{1,5})?(\/.*)?$/;
+  /\b((?:(?:https?|ftp|ftps|mailto|file|data|irc|magnet|ws):\/\/)[^\s/$.?#].[^\s]*)\b/;
 
 const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
@@ -50,6 +50,10 @@ export default async function handler(req, res) {
       message:
         "The slug should only contain lowercase alphabets, numbers and hyphen",
     });
+  }
+
+  if (link.includes(".eu.org/")) {
+    return res.status(401).json({ message: "Malicious link entered!" });
   }
 
   if (process.env.SKIP_SAFE_BROWSING === "true") {
