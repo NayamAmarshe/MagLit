@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: "Malicious link entered!" });
   }
 
-  if (process.env.SKIP_SAFE_BROWSING === "true") {
+  if (process.env.SKIP_SAFE_BROWSING === "true" || link.startsWith("magnet:") || link.startsWith("ftp:")) {
     console.log("Skipping safe browsing check");
   } else {
     try {
