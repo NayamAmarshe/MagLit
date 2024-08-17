@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     });
   }
 
-  if (link.includes(".eu.org/")) {
+  if (link.includes(".eu.org")) {
     return res.status(401).json({ message: "Malicious link entered!" });
   }
 
