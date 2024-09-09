@@ -3,8 +3,7 @@ import { db } from "../../utils/firebase";
 import CryptoJS from "crypto-js";
 import { StatusCodes } from "http-status-codes";
 
-const regex =
-  /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
+const regex = /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
 
 const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
@@ -52,11 +51,15 @@ export default async function handler(req, res) {
     });
   }
 
-  if (link.includes(".eu.org")) {
+  if (link.includes(".eu.org") || link.includes("nakula.fun")) {
     return res.status(401).json({ message: "Malicious link entered!" });
   }
 
-  if (process.env.SKIP_SAFE_BROWSING === "true" || link.startsWith("magnet:") || link.startsWith("ftp:")) {
+  if (
+    process.env.SKIP_SAFE_BROWSING === "true" ||
+    link.startsWith("magnet:") ||
+    link.startsWith("ftp:")
+  ) {
     console.log("Skipping safe browsing check");
   } else {
     try {
@@ -85,7 +88,7 @@ export default async function handler(req, res) {
               threatEntries: [{ url: `${link}` }],
             },
           }),
-        },
+        }
       );
 
       const data = await response.json();
@@ -111,7 +114,7 @@ export default async function handler(req, res) {
       JSON.stringify({ link }),
       password === ""
         ? process.env.SECRET_KEY
-        : process.env.SECRET_KEY + password,
+        : process.env.SECRET_KEY + password
     ).toString();
 
     await setDoc(doc(db, collectionName, slug), {

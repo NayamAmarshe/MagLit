@@ -15,6 +15,9 @@ export default async function handler(req, res) {
   const collectionName = "links";
 
   try {
+    if (slug.includes("maglit.me")) {
+      slug.replace("maglit.me/", "");
+    }
     // check firebase if slug exists
     const documentRef = doc(db, collectionName, slug);
     const documentSnapshot = await getDoc(documentRef);
