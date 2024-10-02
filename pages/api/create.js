@@ -1,4 +1,4 @@
-import { doc, getDoc, collection, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import CryptoJS from "crypto-js";
 import { StatusCodes } from "http-status-codes";
@@ -6,6 +6,77 @@ import { StatusCodes } from "http-status-codes";
 const regex = /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
 
 const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
+
+const MAX_REDIRECTS = 2; // Maximum allowed redirects
+
+// Helper function to check JavaScript-based or meta redirects in page content
+function checkForJSRedirect(content) {
+  const jsRedirectRegex = /window\.location\.href\s*=\s*['"]([^'"]+)['"]/;
+  const metaRedirectRegex =
+    /<meta[^>]+http-equiv=["']refresh["'][^>]+url=([^'"]+)/i;
+
+  const jsMatch = content.match(jsRedirectRegex);
+  const metaMatch = content.match(metaRedirectRegex);
+
+  if (jsMatch && jsMatch[1]) {
+    return jsMatch[1];
+  }
+
+  if (metaMatch && metaMatch[1]) {
+    return metaMatch[1];
+  }
+
+  return null;
+}
+
+async function fetchWithRedirects(url, maxRedirects) {
+  let currentUrl = url;
+  console.log("🚀 => currentUrl:", currentUrl);
+
+  let redirectCount = 0;
+  console.log("🚀 => redirectCount:", redirectCount);
+
+  while (redirectCount < maxRedirects) {
+    const response = await fetch(currentUrl, {
+      redirect: "follow", // Follow redirects
+    });
+
+    if (response.redirected && response.url !== currentUrl) {
+      // Check if the response was a redirect
+      currentUrl = response.url;
+      redirectCount++;
+      console.log(`HTTP Redirect ${redirectCount} to: ${currentUrl}`);
+      // const redirectCount = response.url;
+      // console.log("🚀 => redirectCount:", redirectCount);
+      // if (redirectCount > MAX_REDIRECTS) {
+      //   return res.status(StatusCodes.BAD_REQUEST).json({
+      //     slug,
+      //     message: "Link has too many redirects and may be suspicious.",
+      //   });
+      // } else {
+      //   break;
+      // }
+    } else {
+      // No HTTP redirect, return the response to check page content
+      const pageContent = await response.text();
+      console.log("🚀 => pageContent:", pageContent);
+
+      const jsRedirect = checkForJSRedirect(pageContent);
+      console.log("🚀 => jsRedirect:", jsRedirect);
+
+      if (jsRedirect) {
+        redirectCount++;
+        console.log(`JS Redirect ${redirectCount} to: ${currentUrl}`);
+      } else {
+        // No further redirects, return the final response
+        return { response, redirectCount };
+      }
+    }
+  }
+
+  // Return the final response after redirect threshold or no more redirects
+  return { response: await fetch(currentUrl), redirectCount };
+}
 
 export default async function handler(req, res) {
   const { slug, link, password } = req.body;
@@ -55,6 +126,26 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: "Malicious link entered!" });
   }
 
+  // Redirection check
+  try {
+    // Step 1: Check for HTTP redirects using fetch
+    const { response, redirectCount } = await fetchWithRedirects(
+      link,
+      MAX_REDIRECTS,
+    );
+
+    if (redirectCount >= MAX_REDIRECTS) {
+      return res.status(400).json({
+        message: `Suspcious URL detected. If this is a valid URL, please report this issue.`,
+      });
+    }
+  } catch (error) {
+    console.error("Error checking link:", error);
+    return res.status(500).json({
+      message: "Error checking the link.",
+    });
+  }
+
   if (
     process.env.SKIP_SAFE_BROWSING === "true" ||
     link.startsWith("magnet:") ||
@@ -88,7 +179,7 @@ export default async function handler(req, res) {
               threatEntries: [{ url: `${link}` }],
             },
           }),
-        }
+        },
       );
 
       const data = await response.json();
@@ -114,7 +205,7 @@ export default async function handler(req, res) {
       JSON.stringify({ link }),
       password === ""
         ? process.env.SECRET_KEY
-        : process.env.SECRET_KEY + password
+        : process.env.SECRET_KEY + password,
     ).toString();
 
     await setDoc(doc(db, collectionName, slug), {
