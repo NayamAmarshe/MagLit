@@ -3,7 +3,7 @@ import { db } from "../../utils/firebase";
 import CryptoJS from "crypto-js";
 import { StatusCodes } from "http-status-codes";
 
-const regex = /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
+const regex = /^(?:(http)s?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
 
 const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
@@ -91,7 +91,8 @@ export default async function handler(req, res) {
   }
 
   const collectionName =
-    process.env.NODE_ENV === "production" ? "links" : "testLinks";
+      process.env.NODE_ENV === "production" ? "links" : "testLinks",
+    URI = regex.exec(link);
 
   // check if link is valid
   if (link.length < 1) {
@@ -100,7 +101,7 @@ export default async function handler(req, res) {
       .json({ slug, message: "You entered an invalid link" });
   }
 
-  if (!regex.test(link)) {
+  if (URI === null) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       slug,
       message:
@@ -126,71 +127,69 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: "Malicious link entered!" });
   }
 
-  // Redirection check
-  try {
-    // Step 1: Check for HTTP redirects using fetch
-    const { response, redirectCount } = await fetchWithRedirects(
-      link,
-      MAX_REDIRECTS,
-    );
-
-    if (redirectCount >= MAX_REDIRECTS) {
-      return res.status(400).json({
-        message: `Suspcious URL detected. If this is a valid URL, please report this issue.`,
-      });
-    }
-  } catch (error) {
-    console.error("Error checking link:", error);
-    return res.status(500).json({
-      message: "Error checking the link.",
-    });
-  }
-
-  if (
-    process.env.SKIP_SAFE_BROWSING === "true" ||
-    link.startsWith("magnet:") ||
-    link.startsWith("ftp:")
-  ) {
-    console.log("Skipping safe browsing check");
-  } else {
+  if (URI[1]) {
+    // Redirection check
     try {
-      const response = await fetch(
-        "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=" +
-          apiKey,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            client: {
-              clientId: "maglit-website",
-              clientVersion: "1.0.0",
-            },
-            threatInfo: {
-              threatTypes: [
-                "MALWARE",
-                "SOCIAL_ENGINEERING",
-                "UNWANTED_SOFTWARE",
-                "POTENTIALLY_HARMFUL_APPLICATION",
-              ],
-              platformTypes: ["ANY_PLATFORM"],
-              threatEntryTypes: ["URL"],
-              threatEntries: [{ url: `${link}` }],
-            },
-          }),
-        },
+      // Step 1: Check for HTTP redirects using fetch
+      const { response, redirectCount } = await fetchWithRedirects(
+        link,
+        MAX_REDIRECTS,
       );
 
-      const data = await response.json();
-      console.log("🚀 => data:", data);
-
-      if (data && data?.matches?.length > 0) {
-        // Handle error cases where the URL might not be checked by Safe Browsing
-        res.status(401).json({ message: "Malicious link entered!" });
+      if (redirectCount >= MAX_REDIRECTS) {
+        return res.status(400).json({
+          message: `Suspcious URL detected. If this is a valid URL, please report this issue.`,
+        });
       }
     } catch (error) {
-      res.status(500).json({ error: "Failed to check the URL." });
+      console.error("Error checking link:", error);
+      return res.status(500).json({
+        message: "Error checking the link.",
+      });
+    }
+
+    if (process.env.SKIP_SAFE_BROWSING === "true") {
+      console.log("Skipping safe browsing check");
+    } else {
+      try {
+        const response = await fetch(
+          "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=" +
+            apiKey,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              client: {
+                clientId: "maglit-website",
+                clientVersion: "1.0.0",
+              },
+              threatInfo: {
+                threatTypes: [
+                  "MALWARE",
+                  "SOCIAL_ENGINEERING",
+                  "UNWANTED_SOFTWARE",
+                  "POTENTIALLY_HARMFUL_APPLICATION",
+                ],
+                platformTypes: ["ANY_PLATFORM"],
+                threatEntryTypes: ["URL"],
+                threatEntries: [{ url: `${link}` }],
+              },
+            }),
+          },
+        );
+
+        const data = await response.json();
+        console.log("🚀 => data:", data);
+
+        if (data && data?.matches?.length > 0) {
+          // Handle error cases where the URL might not be checked by Safe Browsing
+          res.status(401).json({ message: "Malicious link entered!" });
+        }
+      } catch (error) {
+        res.status(500).json({ error: "Failed to check the URL." });
+      }
     }
   }
 
