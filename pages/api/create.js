@@ -9,7 +9,12 @@ const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
 const MAX_REDIRECTS = 1; // Maximum allowed redirects
 
-const maliciousDomains = [".eu.org", "nakula.fun", "ixg.llc"];
+const maliciousDomains = [
+  ".eu.org",
+  "nakula.fun",
+  "ixg.llc",
+  "datingflirt.click",
+];
 
 // Helper function to check JavaScript-based or meta redirects in page content
 function checkForJSRedirect(content) {
@@ -45,7 +50,7 @@ async function fetchWithRedirects(url, maxRedirects) {
       console.log(`JS Redirect ${redirectCount} to: ${currentUrl}`);
     } else {
       // No further redirects, return the final response
-      return { response, redirectCount };
+      return { response, redirectCount, currentUrl };
     }
   }
 
@@ -106,11 +111,14 @@ export default async function handler(req, res) {
     // Redirection check
     try {
       // Step 1: Check for HTTP redirects using fetch
-      const { response, redirectCount } = await fetchWithRedirects(
+      const { redirectCount, currentUrl } = await fetchWithRedirects(
         link,
         MAX_REDIRECTS,
       );
 
+      if (maliciousDomains.some((domain) => currentUrl.includes(domain))) {
+        return res.status(401).json({ message: "Malicious link entered!" });
+      }
       if (redirectCount >= MAX_REDIRECTS) {
         console.log("🚀 => redirectCount:", redirectCount);
         return res.status(400).json({
