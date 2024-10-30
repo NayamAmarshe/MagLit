@@ -7,70 +7,45 @@ const regex = /^(?:(http)s?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
 
 const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
-const MAX_REDIRECTS = 2; // Maximum allowed redirects
+const MAX_REDIRECTS = 1; // Maximum allowed redirects
+
+const maliciousDomains = [".eu.org", "nakula.fun", "ixg.llc"];
 
 // Helper function to check JavaScript-based or meta redirects in page content
 function checkForJSRedirect(content) {
-  const jsRedirectRegex = /window\.location\.href\s*=\s*['"]([^'"]+)['"]/;
+  // Regex patterns to detect JavaScript and meta tag redirects
+  const jsRedirectRegex =
+    /(?:window\.location\.(?:href|assign|replace)\s*=\s*['"]([^'"]+)['"]|window\.opener\s*=\s*null;\s*location\.(?:replace|href|assign)\(['"]([^'"]+)['"]\))/;
   const metaRedirectRegex =
     /<meta[^>]+http-equiv=["']refresh["'][^>]+url=([^'"]+)/i;
 
+  // Check for JavaScript-based redirects
   const jsMatch = content.match(jsRedirectRegex);
   const metaMatch = content.match(metaRedirectRegex);
 
-  if (jsMatch && jsMatch[1]) {
-    return jsMatch[1];
-  }
-
-  if (metaMatch && metaMatch[1]) {
-    return metaMatch[1];
-  }
-
-  return null;
+  // Return the URL if found in any match
+  return jsMatch?.[1] || jsMatch?.[2] || metaMatch?.[1] || null;
 }
 
 async function fetchWithRedirects(url, maxRedirects) {
   let currentUrl = url;
-  console.log("🚀 => currentUrl:", currentUrl);
-
   let redirectCount = 0;
-  console.log("🚀 => redirectCount:", redirectCount);
 
   while (redirectCount < maxRedirects) {
     const response = await fetch(currentUrl, {
-      redirect: "follow", // Follow redirects
+      redirect: "manual", // Do not follow redirects
     });
 
-    if (response.redirected && response.url !== currentUrl) {
-      // Check if the response was a redirect
-      currentUrl = response.url;
+    const pageContent = await response.text();
+    const jsRedirect = checkForJSRedirect(pageContent);
+
+    if (jsRedirect) {
+      currentUrl = jsRedirect;
       redirectCount++;
-      console.log(`HTTP Redirect ${redirectCount} to: ${currentUrl}`);
-      // const redirectCount = response.url;
-      // console.log("🚀 => redirectCount:", redirectCount);
-      // if (redirectCount > MAX_REDIRECTS) {
-      //   return res.status(StatusCodes.BAD_REQUEST).json({
-      //     slug,
-      //     message: "Link has too many redirects and may be suspicious.",
-      //   });
-      // } else {
-      //   break;
-      // }
+      console.log(`JS Redirect ${redirectCount} to: ${currentUrl}`);
     } else {
-      // No HTTP redirect, return the response to check page content
-      const pageContent = await response.text();
-      console.log("🚀 => pageContent:", pageContent);
-
-      const jsRedirect = checkForJSRedirect(pageContent);
-      console.log("🚀 => jsRedirect:", jsRedirect);
-
-      if (jsRedirect) {
-        redirectCount++;
-        console.log(`JS Redirect ${redirectCount} to: ${currentUrl}`);
-      } else {
-        // No further redirects, return the final response
-        return { response, redirectCount };
-      }
+      // No further redirects, return the final response
+      return { response, redirectCount };
     }
   }
 
@@ -123,7 +98,7 @@ export default async function handler(req, res) {
     });
   }
 
-  if (link.includes(".eu.org") || link.includes("nakula.fun")) {
+  if (maliciousDomains.some((domain) => link.includes(domain))) {
     return res.status(401).json({ message: "Malicious link entered!" });
   }
 
@@ -137,6 +112,7 @@ export default async function handler(req, res) {
       );
 
       if (redirectCount >= MAX_REDIRECTS) {
+        console.log("🚀 => redirectCount:", redirectCount);
         return res.status(400).json({
           message: `Suspcious URL detected. If this is a valid URL, please report this issue.`,
         });
