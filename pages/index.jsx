@@ -108,7 +108,7 @@ export default function Home() {
 
     if (!linkRegex.test(magnetLink)) {
       toast.warn(
-        "Please make sure your link starts with 'http://' or 'https://' or 'magnet://'",
+        "Please make sure your link starts with 'http://' or 'https://' or 'magnet:'",
       );
       return;
     }
