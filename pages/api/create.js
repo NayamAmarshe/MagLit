@@ -14,6 +14,7 @@ const maliciousDomains = [
   "nakula.fun",
   "ixg.llc",
   "datingflirt.click",
+  "wahyucakep.org",
 ];
 
 // Helper function to check JavaScript-based or meta redirects in page content
