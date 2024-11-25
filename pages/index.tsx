@@ -17,7 +17,6 @@ import { useAtom } from "jotai";
 import Form from "../components/home/Form";
 import { useEffect } from "react";
 import { useState } from "react";
-import Background from "../components/Background";
 
 export default function Home() {
   // !GLOBAL
@@ -38,8 +37,7 @@ export default function Home() {
   const [customSlug, setCustomSlug] = useState("");
   const slugRegex = /^[a-z0-9](-?[a-z0-9])*$/;
 
-  const linkRegex =
-    /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
+  const linkRegex = /^(https?|ftp|magnet):(?:\/\/[^\s/$.?#].[^\s]*|[^\s]*)$/;
 
   useEffect(() => {
     const linksInStorage = JSON.parse(localStorage.getItem("links")) || [];
@@ -57,9 +55,8 @@ export default function Home() {
     if (outputLink.length > 1) {
       toast.info("Copied link to clipboard, happy pasting :)", {
         position: "top-center",
-        autoClose: "10000",
+        autoClose: 10000,
         hideProgressBar: false,
-        newestOnTop: true,
         closeOnClick: true,
         theme: "colored",
         pauseOnFocusLoss: true,
@@ -172,9 +169,8 @@ export default function Home() {
           type: "success",
           isLoading: false,
           position: "top-center",
-          autoClose: "3000",
+          autoClose: 3000,
           hideProgressBar: true,
-          newestOnTop: true,
           closeOnClick: true,
           theme: "colored",
           pauseOnFocusLoss: true,
@@ -191,9 +187,8 @@ export default function Home() {
           type: "error",
           isLoading: false,
           position: "top-center",
-          autoClose: "3000",
+          autoClose: 3000,
           hideProgressBar: true,
-          newestOnTop: true,
           closeOnClick: true,
           theme: "colored",
           pauseOnFocusLoss: true,
@@ -275,36 +270,6 @@ export default function Home() {
       >
         <BsArchiveFill />
       </button>
-
-      {/*       <a
-        href="https://www.netlify.com"
-        rel="noreferrer"
-        target="_blank"
-        className="absolute bottom-5 right-5"
-      >
-        <img
-          src="https://www.netlify.com/v3/img/components/netlify-light.svg"
-          alt="Deploys by Netlify"
-          className="mix-blend-darken dark:hidden"
-        />
-        <img
-          src="https://www.netlify.com/v3/img/components/netlify-dark.svg"
-          alt="Deploys by Netlify"
-          className="hidden mix-blend-lighten dark:block"
-        />
-      </a> */}
-
-      {/* <a
-        href="https://vercel.com/?utm_source=mag-lit&utm_campaign=oss"
-        rel="noreferrer"
-        target="_blank"
-      >
-        <img
-          src="/powered-by-vercel.svg"
-          alt="Powered by Vercel"
-          className="absolute bottom-5 right-5 w-52 mix-blend-exclusion"
-        />
-      </a> */}
 
       {/* TOASTIFY */}
       <ToastContainer
