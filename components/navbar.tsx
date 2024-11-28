@@ -46,7 +46,7 @@ const Navbar = () => {
 
   return (
     <nav className="dark:border-darkNavBorder m500:h-16 fixed left-0 top-0 z-20 mx-auto flex h-[88px] w-full items-center border-b-4 border-border bg-white/80 px-5 backdrop-blur-3xl dark:bg-secondaryBlack ">
-      <div className="mx-auto flex w-[1300px] max-w-full items-center justify-between text-text dark:text-darkText">
+      <div className="mx-auto flex w-[1500px] max-w-full items-center justify-between text-text dark:text-darkText">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center">
             <span className="m900:w-[unset] m500:text-xl text-[33px] font-heading">

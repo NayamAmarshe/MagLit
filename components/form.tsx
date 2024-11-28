@@ -4,14 +4,29 @@ import { FaHandPointRight, FaLock, FaUnlock, FaWrench } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "motion/react";
 import { popInAnimation } from "@/lib/motion";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "./ui/toast";
 
 const LinkForm = () => {
   const [url, setUrl] = useState("");
+  const { toast } = useToast();
   const [password, setPassword] = useState("");
   const [isLocked, setIsLocked] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const urlRegex = /^(https?:\/\/|ftp:\/\/|magnet:\?).+/i;
+    if (!urlRegex.test(url)) {
+      toast({
+        title: "Invalid URL",
+        description:
+          "URL must start with http://, https://, ftp://, or magnet:?",
+        action: <ToastAction altText="Got it">Got it</ToastAction>,
+      });
+      return;
+    }
+
     console.log("Shortening URL:", url);
   };
 
@@ -74,6 +89,7 @@ const LinkForm = () => {
           </Button>
           <Button
             variant="neutral"
+            type="button"
             size="lg"
             className="h-12 text-base font-heading md:text-lg lg:h-14 lg:text-xl"
           >

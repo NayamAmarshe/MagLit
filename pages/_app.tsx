@@ -5,6 +5,7 @@ import Head from "next/head";
 import { Provider } from "jotai";
 import { useEffect } from "react";
 import { BASE_URL } from "@/lib/config";
+import { Toaster } from "@/components/ui/toaster";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -66,6 +67,7 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Component {...pageProps} />
         </ThemeProvider>
+        <Toaster />
       </Provider>
     </>
   );
