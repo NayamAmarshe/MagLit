@@ -1,5 +1,5 @@
 {
-  "name": "maglit",
+  "name": "thiss.link",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +11,6 @@
     "docker:d": "docker-compose up -d"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.2.0",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
@@ -20,8 +19,7 @@
     "eslint-config-next": "^15.0.3",
     "faker": "^6.6.6",
     "faker-js": "^1.0.0",
-    "firebase": "^10.8.0",
-    "http-status-codes": "^2.3.0",
+    "firebase": "^10.14.1",
     "jotai": "^2.6.4",
     "lucide-react": "^0.460.0",
     "monkey-typewriter": "^1.0.14",
@@ -33,8 +31,6 @@
     "react-dom": "^18.3.1",
     "react-fast-marquee": "^1.6.5",
     "react-icons": "^5.0.1",
-    "react-spinners": "^0.13.8",
-    "react-swipeable": "^7.0.1",
     "react-toastify": "^10.0.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"

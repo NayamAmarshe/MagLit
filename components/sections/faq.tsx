@@ -17,35 +17,28 @@ export default function Faq() {
         <div className="mx-auto grid w-[700px] max-w-full px-5">
           <Accordion className="text-base sm:text-lg" type="single" collapsible>
             <AccordionItem className="mb-2" value="item-1">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
+              <AccordionTrigger>What's this all about?</AccordionTrigger>
               <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
+                thiss.link is a free and open source an encrypted link
+                shortening service that supports HTTP, HTTPs, FTP, and Torrent
+                Magnet links.
               </AccordionContent>
             </AccordionItem>
+
             <AccordionItem className="mb-2" value="item-2">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
+              <AccordionTrigger>Why should I use this?</AccordionTrigger>
               <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem className="mb-2" value="item-3">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
-              <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-4">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
-              <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
+                1. MagLit keeps everything encrypted. This means nobody except
+                you has access to your links when you use your own password.
+                <br />
+                <br />
+                2. MagLit lets you password protect your links and also lets you
+                use custom links. All without any sign-up or account
+                registration.
+                <br />
+                <br />
+                3. MagLit protects your privacy. 100% free and open source,
+                verifiable website deployments. No data mining, no data selling.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -62,7 +55,7 @@ export default function Faq() {
               return (
                 <div className="flex items-center" key={id}>
                   <span className="mx-8 text-xl font-heading sm:text-2xl lg:text-4xl">
-                    Neobrutalism components
+                    thiss.link
                   </span>
                 </div>
               );

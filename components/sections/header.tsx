@@ -8,7 +8,7 @@ export default function Header() {
       variants={popInAnimation}
       initial="hidden"
       animate="visible"
-      className="inset-0 flex h-screen w-full snap-start snap-always flex-col items-center justify-center gap-4 bg-white bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px] dark:bg-secondaryBlack"
+      className="flex h-screen w-full snap-start snap-always flex-col items-center justify-center gap-4 bg-white bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px] dark:bg-secondaryBlack"
     >
       <motion.div className="flex flex-col items-center justify-center gap-6 text-center">
         <motion.img
