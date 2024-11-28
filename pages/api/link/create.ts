@@ -1,5 +1,5 @@
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "@/utils/firebase";
+import { db } from "@/lib/firebase";
 import CryptoJS from "crypto-js";
 import { StatusCodes } from "http-status-codes";
 import { NextApiRequest, NextApiResponse } from "next";

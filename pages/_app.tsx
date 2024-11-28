@@ -1,19 +1,10 @@
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "next-themes";
-import Layout from "../components/Layout";
-import dynamic from "next/dynamic";
 import "../styles/globals.css";
 import Head from "next/head";
-import { BASE_URL } from "../utils/config";
 import { Provider } from "jotai";
 import { useEffect } from "react";
-
-const CounterAnalytics = dynamic(
-  () => import("../components/CounterAnalytics"),
-  {
-    ssr: false,
-  },
-);
+import { BASE_URL } from "@/lib/config";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -73,9 +64,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Provider>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </ThemeProvider>
       </Provider>
     </>
