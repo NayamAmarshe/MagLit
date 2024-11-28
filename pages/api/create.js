@@ -65,6 +65,11 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.SAFE_BROWSING_API_KEY;
 
+  return res.status(StatusCodes.BAD_REQUEST).json({
+    message:
+      "Due to constant abuse by scammers and phishers, MagLit has decided to stop accepting new links. We are working on a new version of MagLit that will be more secure and user-friendly. We apologize for the inconvenience.",
+  });
+
   if (!apiKey) {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
