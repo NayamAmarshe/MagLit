@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { firebaseApp } from "@/lib/firebase";
 import { Button } from "./ui/button";

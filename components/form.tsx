@@ -1,21 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FaHandPointRight, FaLock, FaUnlock, FaWrench } from "react-icons/fa";
+import {
+  FaHandPointRight,
+  FaLock,
+  FaSpinner,
+  FaUnlock,
+  FaWrench,
+} from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "motion/react";
 import { popInAnimation } from "@/lib/motion";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
+import type { CreateLinkResponse } from "../pages/api/link/create/index";
+import { auth } from "@/lib/firebase";
+import { cn } from "@/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Label } from "./ui/label";
 
-const LinkForm = () => {
+const LinkForm = ({
+  creatingLink,
+  setCreatingLink,
+}: {
+  creatingLink: boolean;
+  setCreatingLink: (value: boolean) => void;
+}) => {
   const [url, setUrl] = useState("");
+  const [customSlug, setCustomSlug] = useState("");
   const { toast } = useToast();
   const [password, setPassword] = useState("");
   const [isLocked, setIsLocked] = useState(false);
 
+  // Get firebase userId
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    if (auth.currentUser) {
+      setUserId(auth.currentUser.uid);
+    }
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setCreatingLink(true);
     const urlRegex = /^(https?:\/\/|ftp:\/\/|magnet:\?).+/i;
     if (!urlRegex.test(url)) {
       toast({
@@ -26,21 +61,52 @@ const LinkForm = () => {
       });
       return;
     }
+    // Add artificial delay
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch("/api/link/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url, password, userId, slug: customSlug }),
+      });
+      const responseData: CreateLinkResponse = await response.json();
 
-    console.log("Shortening URL:", url);
+      toast({
+        title: "Success",
+        description: "Link has been created",
+        action: <ToastAction altText="Got it">Got it</ToastAction>,
+      });
+      console.log("🚀 => responseData:", responseData);
+      if (responseData.status === "error") {
+        throw new Error(responseData.message);
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        action: <ToastAction altText="Got it">Got it</ToastAction>,
+      });
+    } finally {
+      setCreatingLink(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="w-full max-w-[900px]">
       <motion.div
-        className="flex flex-col gap-3"
+        className="flex w-full flex-col gap-3"
         variants={popInAnimation}
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="z-10 flex gap-2" variants={popInAnimation}>
+        <motion.div
+          className="z-10 flex w-full gap-2"
+          variants={popInAnimation}
+        >
           <Input
-            className="h-12 text-base font-heading md:text-lg lg:h-14 lg:text-xl"
+            className="h-12 w-full text-base font-heading md:text-lg lg:h-14 lg:text-xl"
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
@@ -82,19 +148,64 @@ const LinkForm = () => {
         <motion.div variants={popInAnimation} className="z-10 flex gap-2">
           <Button
             type="submit"
-            className="starfield-origin h-12 w-full text-base font-heading md:text-lg lg:h-14 lg:text-xl"
+            className={cn(
+              "h-12 w-full text-base font-heading md:text-lg lg:h-14 lg:text-xl",
+              creatingLink &&
+                "pointer-events-none translate-x-boxShadowX translate-y-boxShadowY shadow-none dark:shadow-none",
+            )}
             size="lg"
+            disabled={creatingLink}
           >
-            <FaHandPointRight className="mr-2" /> squish thiss link
+            {creatingLink ? (
+              <FaSpinner className="mr-2 animate-spin" />
+            ) : (
+              <FaHandPointRight className="mr-2" />
+            )}{" "}
+            {!creatingLink ? "squish thiss link" : "squishing"}
           </Button>
-          <Button
-            variant="neutral"
-            type="button"
-            size="lg"
-            className="h-12 text-base font-heading md:text-lg lg:h-14 lg:text-xl"
-          >
-            <FaWrench />
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                type="button"
+                variant="neutral"
+                className="h-12 text-base font-heading md:text-lg lg:h-14 lg:text-xl"
+              >
+                <FaWrench />
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Link Options</DialogTitle>
+                <DialogDescription>
+                  Make changes to your link here.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex w-full flex-col gap-4">
+                <div className="flex flex-col items-start gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Custom Link
+                  </Label>
+                  <Input
+                    id="name"
+                    value={`https://thiss.link/${customSlug}`}
+                    onChange={(e) => {
+                      const input = e.target.value;
+                      const prefix = "https://thiss.link/";
+                      if (input.startsWith(prefix)) {
+                        setCustomSlug(input.slice(prefix.length));
+                      }
+                    }}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button type="submit">Save changes</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
           <Button
             size="lg"
             type="button"
