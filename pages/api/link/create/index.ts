@@ -16,14 +16,14 @@ export interface CreateLinkRequest extends NextApiRequest {
 export type CreateLinkResponse = {
   status: string;
   message: string;
-  maglitLink?: string;
+  generatedLink?: string;
   slug?: string;
   userId?: string;
 };
 
 export default async function handler(
   req: CreateLinkRequest,
-  res: NextApiResponse,
+  res: NextApiResponse<CreateLinkResponse>,
 ) {
   const { url, password, userId } = req.body;
   let slug = req.body.slug || "";

@@ -31,6 +31,7 @@ export default function Pricing() {
               "Password protection",
               "Analytics",
             ]}
+            planId={process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID || ""}
           />
         </div>
       </div>

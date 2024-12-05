@@ -1,32 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-} from "firebase/auth";
-import { firebaseApp } from "@/lib/firebase";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 import { Button } from "./ui/button";
+import useUser from "./hooks/use-user";
 
 const Navbar = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isAuthChecked, setIsAuthChecked] = useState(false);
-  const auth = getAuth(firebaseApp);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsAuthChecked(true);
-    });
-
-    return () => unsubscribe();
-  }, [auth]);
+  const { isLoggedIn, user } = useUser();
 
   const handleLogin = async () => {
     setIsLoading(true);
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const signInData = await signInWithPopup(auth, provider);
+      await fetch("/api/user/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: signInData.user }),
+      });
     } catch (error) {
       console.error("Error signing in:", error);
     } finally {
@@ -37,6 +31,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
+      window.location.reload();
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -53,17 +48,17 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          {!isAuthChecked ? null : auth.currentUser ? (
+          {isLoggedIn ? (
             <div className="flex items-center gap-4">
               <Button
                 onClick={handleLogout}
                 className="bg-destructive text-destructive-foreground hover:bg-destructive/90 gap-2 rounded-lg px-2 py-2 transition-colors"
               >
                 Sign Out
-                {auth.currentUser.photoURL && (
+                {user?.photoURL && (
                   <img
                     referrerPolicy="no-referrer"
-                    src={auth.currentUser.photoURL}
+                    src={user.photoURL}
                     alt="Profile"
                     className="h-6 w-6 rounded-full"
                   />

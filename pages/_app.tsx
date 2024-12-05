@@ -6,6 +6,9 @@ import { Provider } from "jotai";
 import { useEffect } from "react";
 import { BASE_URL } from "@/lib/config";
 import { Toaster } from "@/components/ui/toaster";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
+// Remove the emulator connection code
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -64,8 +67,15 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Provider>
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <Component {...pageProps} />
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <PayPalScriptProvider
+            options={{
+              clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "",
+              vault: true,
+            }}
+          >
+            <Component {...pageProps} />
+          </PayPalScriptProvider>
         </ThemeProvider>
         <Toaster />
       </Provider>

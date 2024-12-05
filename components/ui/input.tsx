@@ -31,9 +31,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className="absolute right-2 top-1 text-border dark:text-darkText lg:top-2"
           >
             {showPassword ? (
-              <FaEyeSlash className="h-5 w-5" />
+              <FaEyeSlash className="h-5 w-5 dark:text-text" />
             ) : (
-              <FaEye className="h-5 w-5" />
+              <FaEye className="h-5 w-5 dark:text-text" />
             )}
           </Button>
         )}
