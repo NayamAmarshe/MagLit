@@ -38,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="dark:border-darkNavBorder m500:h-16 fixed left-0 top-0 z-20 mx-auto flex h-[88px] w-full items-center border-b-4 border-border bg-white/80 px-5 backdrop-blur-3xl dark:bg-secondaryBlack ">
+    <nav className="dark:border-darkNavBorder m500:h-16 fixed left-0 top-0 z-20 mx-auto flex h-[88px] w-full items-center border-b-4 border-border bg-white/80 px-5 backdrop-blur-3xl dark:bg-secondaryBlack">
       <div className="mx-auto flex w-[1500px] max-w-full items-center justify-between text-text dark:text-darkText">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center">
@@ -52,7 +52,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <Button
                 onClick={handleLogout}
-                className="bg-destructive text-destructive-foreground hover:bg-destructive/90 gap-2 rounded-lg px-2 py-2 transition-colors"
+                className="bg-destructive text-destructive-foreground hover:bg-destructive/90 animate gap-2 rounded-lg px-2 py-2 transition-colors !duration-200"
               >
                 Sign Out
                 {user?.photoURL && (

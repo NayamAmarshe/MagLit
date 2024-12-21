@@ -17,3 +17,19 @@ export type UserDocument = {
     planId: string;
   };
 };
+
+export type UserLinksDocument = {
+  createdAt: string;
+  expiresAt?: string;
+  slug: string;
+};
+
+export type LinkDocument = {
+  link: string;
+  slug: string;
+  createdAt: string;
+  userId?: string;
+  ip?: string;
+  isProtected?: boolean;
+  expiresAt?: Date | null;
+};

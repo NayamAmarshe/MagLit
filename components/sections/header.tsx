@@ -18,15 +18,22 @@ export default function Header() {
     >
       {/* Content */}
       <motion.div className="relative z-10 flex max-w-[500px] flex-col items-center justify-center gap-6 text-center">
-        <motion.div className="flex flex-col items-center justify-center gap-2">
-          <motion.img
-            src="/logo.svg"
-            alt="logo"
-            className={cn(
-              "w-full transition-transform duration-500 ease-in-out dark:opacity-95 dark:invert",
-              creatingLink && "scale-95",
-            )}
-          />
+        <motion.div
+          className="flex flex-col items-center justify-center gap-2"
+          variants={popInAnimation}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="relative h-full w-full">
+            <motion.img
+              src="/logo.svg"
+              alt="logo"
+              className={cn(
+                "w-full transition-transform duration-500 ease-in-out dark:opacity-95 dark:invert",
+                creatingLink && "scale-95",
+              )}
+            />
+          </motion.div>
           <motion.span className="inline-block -rotate-1 bg-mainAccent px-2">
             <motion.p
               className={cn(

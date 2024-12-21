@@ -1,33 +1,21 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  FaHandPointRight,
-  FaLock,
-  FaSave,
-  FaSpinner,
-  FaUnlock,
-  FaWrench,
-} from "react-icons/fa";
+import { FaHandPointRight, FaLock, FaSpinner, FaUnlock } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "motion/react";
 import { popInAnimation } from "@/lib/motion";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
-import type { CreateLinkResponse } from "../pages/api/link/create/index";
+import type {
+  CreateLinkRequest,
+  CreateLinkResponse,
+} from "../pages/api/link/create/index";
 import { auth } from "@/lib/firebase";
 import { cn } from "@/lib/utils";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
-import { Label } from "./ui/label";
-import { Switch } from "./ui/switch";
+import LinkOptionsDialog from "./header/link-options";
+import { useAtomValue } from "jotai";
+import { linkExpiryAtom } from "./atoms/user-settings";
+import useUser from "./hooks/use-user";
 
 const LinkForm = ({
   creatingLink,
@@ -37,13 +25,15 @@ const LinkForm = ({
   setCreatingLink: (value: boolean) => void;
 }) => {
   const [url, setUrl] = useState("");
-  const [customSlug, setCustomSlug] = useState("");
+  const [slug, setSlug] = useState("");
   const { toast } = useToast();
   const [password, setPassword] = useState("");
   const [isLocked, setIsLocked] = useState(false);
+  const linkExpiry = useAtomValue(linkExpiryAtom);
 
   // Get firebase userId
   const [userId, setUserId] = useState("");
+  const { user } = useUser();
 
   useEffect(() => {
     if (auth.currentUser) {
@@ -72,7 +62,13 @@ const LinkForm = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url, password, userId, slug: customSlug }),
+        body: JSON.stringify({
+          url,
+          password,
+          userId: user?.uid,
+          slug: slug,
+          expiry: linkExpiry,
+        } as CreateLinkRequest["body"]),
       });
       const responseData: CreateLinkResponse = await response.json();
 
@@ -166,56 +162,8 @@ const LinkForm = ({
             )}{" "}
             {!creatingLink ? "squish thiss link" : "squishing"}
           </Button>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                size="lg"
-                type="button"
-                variant="neutral"
-                className="h-12 text-base font-heading md:text-lg lg:h-14 lg:text-xl"
-              >
-                <FaWrench />
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Link Options</DialogTitle>
-                <DialogDescription>
-                  Make changes to your link here.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="flex w-full flex-col gap-4">
-                <div className="flex flex-col items-start gap-2">
-                  <Label htmlFor="name" className="text-right">
-                    Custom Link
-                  </Label>
-                  <div className="relative flex w-full items-center">
-                    <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-sm text-text text-opacity-50 dark:text-darkText">
-                      https://thiss.link/
-                    </span>
-                    <Input
-                      value={customSlug}
-                      onChange={(e) => setCustomSlug(e.target.value)}
-                      className="w-full pl-[118px] font-semibold"
-                    />
-                  </div>
-                </div>
 
-                <div className="flex flex-col items-start gap-2">
-                  <Label htmlFor="download-qr-code">Download QR Code</Label>
-                  <Switch id="download-qr-code" />
-                </div>
-              </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="submit">
-                    <FaSave className="mr-2 h-4 w-4" />
-                    Save changes
-                  </Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          <LinkOptionsDialog slug={slug} setSlug={setSlug} />
 
           <Button
             size="lg"

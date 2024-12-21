@@ -4,6 +4,8 @@ import { encryptUrl } from "./encrypt-url";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import Monkey from "monkey-typewriter";
+import { LinkDocument } from "@/types/documents";
+import type { LinkExpiry } from "@/components/atoms/user-settings";
 
 export interface CreateLinkRequest extends NextApiRequest {
   body: {
@@ -11,6 +13,7 @@ export interface CreateLinkRequest extends NextApiRequest {
     url: string;
     password: string;
     userId?: string;
+    expiry?: LinkExpiry | "never";
   };
 }
 export type CreateLinkResponse = {
@@ -18,7 +21,6 @@ export type CreateLinkResponse = {
   message: string;
   generatedLink?: string;
   slug?: string;
-  userId?: string;
 };
 
 export default async function handler(
@@ -26,10 +28,18 @@ export default async function handler(
   res: NextApiResponse<CreateLinkResponse>,
 ) {
   const { url, password, userId } = req.body;
+
   let slug = req.body.slug || "";
+  let expiry = req.body.expiry;
+  if (!userId) {
+    expiry = undefined;
+  }
+
+  console.log("🚀 => userId:", userId);
   console.log("🚀 => url:", url);
   console.log("🚀 => password:", password);
   console.log("🚀 => slug:", slug);
+  console.log("🚀 => expiry:", expiry);
 
   if (!url) {
     return res.status(400).json({
@@ -56,6 +66,30 @@ export default async function handler(
     });
   }
 
+  let expiresAt: Date | null = null;
+  if (expiry && userId) {
+    expiresAt = new Date();
+    switch (expiry) {
+      case "24-hours":
+        expiresAt.setDate(expiresAt.getDate() + 1);
+        break;
+      case "2-days":
+        expiresAt.setDate(expiresAt.getDate() + 2);
+        break;
+      case "1-week":
+        expiresAt.setDate(expiresAt.getDate() + 7);
+        break;
+      case "1-month":
+        expiresAt.setMonth(expiresAt.getMonth() + 1);
+        break;
+      case "never":
+        expiresAt = null;
+        break;
+    }
+  } else if (!expiry && !userId) {
+    expiresAt = new Date(new Date().setMonth(new Date().getMonth() + 6));
+  }
+
   try {
     if ((slug && !userId) || !slug) {
       slug = Monkey.word();
@@ -66,26 +100,34 @@ export default async function handler(
       const encryptUrlResponse = await encryptUrl(url, password);
       encryptedUrl = btoa(String.fromCharCode(...encryptUrlResponse));
     }
+
     const forwarded = req.headers["x-forwarded-for"];
     // Store IP Address of potential scammers
     const ip = forwarded
       ? (forwarded as string).split(/, /)[0]
       : req.socket.remoteAddress;
-    const setDocPromises = [
-      setDoc(doc(db, `new-links/${slug}`), {
-        link: isProtected ? encryptedUrl : url,
-        slug: slug,
-        isProtected: isProtected,
-        ...(userId && { userId: userId }), // Store user ID if available
-        ...(!userId && ip && { ip: ip }), // Store IP address if not logged in
-        createdAt: new Date().toISOString(),
+
+    const linkData: LinkDocument = {
+      link: isProtected ? encryptedUrl : url,
+      slug: slug,
+      isProtected: isProtected,
+      ...(userId && { userId }),
+      ...(!userId && {
+        ip,
       }),
-    ];
+      createdAt: new Date().toISOString(),
+      expiresAt,
+    };
+
+    const setDocPromises = [setDoc(doc(db, `new-links/${slug}`), linkData)];
 
     if (userId) {
       setDocPromises.push(
         setDoc(doc(db, `users/${userId}/links/${slug}`), {
           createdAt: new Date().toISOString(),
+          ...(!userId && {
+            expiresAt,
+          }),
           slug: slug,
         }),
       );

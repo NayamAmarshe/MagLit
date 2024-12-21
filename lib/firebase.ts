@@ -1,10 +1,6 @@
-import {
-  Firestore,
-  getFirestore,
-  connectFirestoreEmulator,
-} from "firebase/firestore";
-import { initializeApp, getApps, FirebaseApp } from "firebase/app";
-import { Auth, getAuth, connectAuthEmulator } from "firebase/auth";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -16,30 +12,21 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-let firebaseApp: FirebaseApp;
-export let auth: Auth;
-export let db: Firestore;
+const firebaseApp =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 
 // Add emulator connection before initialization
 if (process.env.NODE_ENV === "development") {
-  const firestoreEmulatorHost = "localhost";
-  const firestoreEmulatorPort = 8080;
-  const authEmulatorHost = "http://localhost:9099";
-
-  if (!getApps().length) {
-    firebaseApp = initializeApp(firebaseConfig);
-    db = getFirestore(firebaseApp);
-    auth = getAuth(firebaseApp);
-
-    connectFirestoreEmulator(db, firestoreEmulatorHost, firestoreEmulatorPort);
-    connectAuthEmulator(auth, authEmulatorHost);
+  try {
+    connectFirestoreEmulator(db, "localhost", 8080);
+    connectAuthEmulator(auth, "http://localhost:9099");
+  } catch (error) {
+    console.error("Error connecting to emulators:", error);
   }
-} else {
-  if (!getApps().length) {
-    firebaseApp = initializeApp(firebaseConfig);
-  } else {
-    firebaseApp = getApps()[0];
-  }
-  auth = getAuth(firebaseApp);
-  db = getFirestore(firebaseApp);
 }
+
+export { auth, db };
+export default firebaseApp;

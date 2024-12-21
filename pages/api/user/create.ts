@@ -1,7 +1,7 @@
 import { db } from "@/lib/firebase";
-import { UserDocument } from "@/types/user-document";
+import { UserDocument } from "@/types/documents";
 import { User } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export interface CreateUserRequest extends NextApiRequest {
@@ -19,7 +19,6 @@ export default async function handler(
   res: NextApiResponse<CreateUserResponse>,
 ) {
   const { user } = req.body;
-  console.log("🚀 => user:", user);
 
   if (!user?.uid) {
     console.error("No user found");
@@ -29,9 +28,10 @@ export default async function handler(
     });
   }
 
-  // Check if the user already exists in the database
   try {
-    const userDoc = doc(db, "users", user.uid);
+    const usersRef = collection(db, "users");
+
+    const userDoc = doc(usersRef, user.uid);
     const userDocSnapshot = await getDoc(userDoc);
     if (userDocSnapshot.exists()) {
       console.log("User already exists");
@@ -40,16 +40,6 @@ export default async function handler(
         message: "User already exists",
       });
     }
-  } catch (error) {
-    console.error("Error checking user existence:", error);
-    return res.status(500).json({
-      status: "error",
-      message: "Error checking user existence",
-    });
-  }
-
-  try {
-    const userDoc = doc(db, "users", user.uid);
     await setDoc(userDoc, {
       createdAt: new Date().toISOString(),
       name: user?.displayName,

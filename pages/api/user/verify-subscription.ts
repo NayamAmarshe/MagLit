@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebase";
-import { UserDocument } from "@/types/user-document";
+import { UserDocument } from "@/types/documents";
 import { doc, Timestamp, updateDoc } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 import { generateAccessToken } from "./generate-acces-token";
